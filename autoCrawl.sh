@@ -1,6 +1,10 @@
 #!/bin/sh
 
-nutch inject crawl/crawldb urls
+if [ "$#" -ne 1 ]; then
+    echo "./autoCrawl.sh URL_FILE_NAME"
+    exit
+fi
+nutch inject crawl/crawldb $1
 
 nutch generate crawl/crawldb crawl/segments
 s1=`ls -d crawl/segments/2* | tail -1`

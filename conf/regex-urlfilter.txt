@@ -28,8 +28,9 @@
 
 # skip image and other suffixes we can't yet parse
 # for a more extensive coverage use the urlfilter-suffix plugin
+#+\.(gif|GIF|jpg|JPG|png|PNG|ico|ICO|jpeg|JPEG|bmp|BMP)$
 #-\.(gif|GIF|jpg|JPG|png|PNG|ico|ICO|css|CSS|sit|SIT|eps|EPS|wmf|WMF|zip|ZIP|ppt|PPT|mpg|MPG|xls|XLS|gz|GZ|rpm|RPM|tgz|TGZ|mov|MOV|exe|EXE|jpeg|JPEG|bmp|BMP|js|JS|mp4|MP4|mp3|MP3)$
-+\.(gif|GIF|jpg|JPG|png|PNG|ico|ICO|jpeg|JPEG|bmp|BMP)$
+-\.(css|CSS|sit|SIT|eps|EPS|wmf|WMF|zip|ZIP|ppt|PPT|mpg|MPG|xls|XLS|gz|GZ|rpm|RPM|tgz|TGZ|mov|MOV|exe|EXE|js|JS|mp4|MP4|mp3|MP3)$
 
 # skip URLs containing certain characters as probable queries, etc.
 -[?*!@=]

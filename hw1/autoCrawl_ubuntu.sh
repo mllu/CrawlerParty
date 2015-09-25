@@ -6,7 +6,7 @@ if [ "$#" -ne 1 ]; then
 fi
 nutch inject crawl/crawldb $1
 
-for i in `seq 1 30`;
+for i in `seq 1 20`;
 do
   echo "round $i"
   nutch generate crawl/crawldb crawl/segments

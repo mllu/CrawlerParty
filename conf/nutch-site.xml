@@ -5,42 +5,64 @@
 
 <configuration>
 
-<property>
-  <name>http.agent.name</name>
-  <value>NutchCralwerPartyBot</value>
-  <description>HTTP 'User-Agent' request header. MUST NOT be empty - 
-  please set this to a single word uniquely related to your organization.
+  <property>
+    <name>http.agent.name</name>
+    <value>NutchCralwerPartyBot</value>
+    <description>HTTP 'User-Agent' request header. MUST NOT be empty - 
+    please set this to a single word uniquely related to your organization.
+  
+    NOTE: You should also check other related properties:
+  
+      http.robots.agents
+      http.agent.description
+      http.agent.url
+      http.agent.email
+      http.agent.version
+  
+    and set their values appropriately.
+  
+    </description>
+  </property>
 
-  NOTE: You should also check other related properties:
+  <property>
+    <name>http.agent.rotate</name>
+    <value>true</value>
+    <description>
+      If true, instead of http.agent.name, alternating agent names are
+      chosen from a list provided via http.agent.rotate.file.
+    </description>
+  </property>
+  
+  <property>
+    <name>http.agent.rotate.file</name>
+    <value>agents.txt</value>
+    <description>
+      File containing alternative user agent names to be used instead of
+      http.agent.name on a rotating basis if http.agent.rotate is true.
+      Each line of the file should contain exactly one agent
+      specification including name, version, description, URL, etc.
+    </description>
+  </property>
 
-    http.robots.agents
-    http.agent.description
-    http.agent.url
-    http.agent.email
-    http.agent.version
+  <property>
+    <name>robot.rules.whitelist</name>
+    <value>*.com,*.org,*.net</value>
+    <description>Comma separated list of hostnames or IP addresses to ignore robot rules parsing for.
+    </description>
+  </property>
 
-  and set their values appropriately.
-
-  </description>
-</property>
-
-<property>
-  <name>http.agent.rotate</name>
-  <value>true</value>
-  <description>
-    If true, instead of http.agent.name, alternating agent names are
-    chosen from a list provided via http.agent.rotate.file.
-  </description>
-</property>
-
-<property>
-  <name>http.agent.rotate.file</name>
-  <value>agents.txt</value>
-  <description>
-    File containing alternative user agent names to be used instead of
-    http.agent.name on a rotating basis if http.agent.rotate is true.
-    Each line of the file should contain exactly one agent
-    specification including name, version, description, URL, etc.
-  </description>
-</property>
+<!--
+  <property>
+    <name>plugin.includes</name>
+    <value>protocol-selenium|urlfilter-regex|parse-(html|tika)|index-(basic|anchor)|urlnormalizer-(pass|regex|basic)|scoring-opic</value>
+    <description>Regular expression naming plugin directory names to
+    include.  Any plugin not matching this expression is excluded.
+    In any case you need at least include the nutch-extensionpoints plugin. By
+    default Nutch includes crawling just HTML and plain text via HTTP,
+    and basic indexing and search plugins. In order to use HTTPS please enable 
+    protocol-httpclient, but be aware of possible intermittent problems with the 
+    underlying commons-httpclient library.
+    </description>
+  </property>
+-->
 </configuration>

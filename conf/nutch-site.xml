@@ -44,17 +44,64 @@
     </description>
   </property>
 
-  <property>
-    <name>robot.rules.whitelist</name>
-    <value>*.com,*.org,*.net</value>
-    <description>Comma separated list of hostnames or IP addresses to ignore robot rules parsing for.
-    </description>
-  </property>
+<property>
+  <name>fetcher.server.delay</name>
+  <value>0.2</value>
+  <description>The number of seconds the fetcher will delay between 
+   successive requests to the same server. Note that this might get
+   overriden by a Crawl-Delay from a robots.txt and is used ONLY if 
+   fetcher.threads.per.queue is set to 1.
+   </description>
+</property>
 
+<property>
+  <name>fetcher.server.min.delay</name>
+  <value>0.2</value>
+  <description>The minimum number of seconds the fetcher will delay between 
+  successive requests to the same server. This value is applicable ONLY
+  if fetcher.threads.per.queue is greater than 1 (i.e. the host blocking
+  is turned off).</description>
+</property>
+
+<property>
+  <name>fetcher.threads.per.queue</name>
+  <value>10</value>
+  <description>This number is the maximum number of threads that
+    should be allowed to access a queue at one time. Setting it to 
+    a value > 1 will cause the Crawl-Delay value from robots.txt to
+    be ignored and the value of fetcher.server.min.delay to be used
+    as a delay between successive requests to the same server instead 
+    of fetcher.server.delay.
+   </description>
+</property>
+
+<property>
+  <name>robot.rules.whitelist</name>
+  <value>*.com, *.org, *.net</value>
+  <!--<value>127.0.0.1,*.com, *.org, *.net</value>-->
+  <description>Comma separated list of hostnames or IP addresses to ignore robot rules parsing for.
+  </description>
+</property>
+
+<property>
+  <name>protocol.plugin.check.robots</name>
+  <value>false</value>
+  <description>
+    ignore robots.txt
+  </description>
+</property>
+
+<property>
+  <name>Protocol.CHECK_ROBOTS</name>
+  <value>false</value>
+  <description>
+    ignore robots.txt
+  </description>
+</property>
 <!--
-  <property>
+<property>
     <name>plugin.includes</name>
-    <value>protocol-selenium|urlfilter-regex|parse-(html|tika)|index-(basic|anchor)|urlnormalizer-(pass|regex|basic)|scoring-opic</value>
+    <value>protocol-selenium|protocol-interactiveselenium|urlfilter-regex|parse-(html|tika)|index-(basic|anchor)|urlnormalizer-(pass|regex|basic)|scoring-opic</value>
     <description>Regular expression naming plugin directory names to
     include.  Any plugin not matching this expression is excluded.
     In any case you need at least include the nutch-extensionpoints plugin. By

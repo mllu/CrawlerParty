@@ -33,8 +33,8 @@ iteration = count / cnt + 1;
 print("Total Run: %d" % iteration)
 f.write("Total Run: %d\n" % iteration)
 for i in range(0,iteration):
-    print("\nprocess data from %d to %d" % (i*cnt, (i+1)*cnt-1))
-    f.write("\nprocess data from %d to %d\n" % (i*cnt, (i+1)*cnt-1))
+    print("\nround %d: from %d to %d" % (i+1, i*cnt, (i+1)*cnt-1))
+    f.write("\nround %d: from %d to %d\n" % (i+1, i*cnt, (i+1)*cnt-1))
     slice = seq_reader.slice(i*cnt, (i+1)*cnt-1, path)
     #print str(slice)
     #f.write(str(slice))

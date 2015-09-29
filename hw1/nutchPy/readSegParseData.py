@@ -4,11 +4,11 @@ import sys
 import nutchpy
 
 '''
-    :param path: system path to segmentDir/content/part-xxxxx/data 
+    :param path: system path to segmentDir/parse_data/part-xxxxx/data 
 '''
 
 if len(sys.argv) != 2:
-    print "usage: python readSegContentData.py segmentDir/content/part-xxxxx/data"
+    print "usage: python readSegParseData.py segmentDir/parse_data/part-xxxxx/data"
     sys.exit()
 
 path = sys.argv[1]
@@ -16,30 +16,30 @@ path = sys.argv[1]
 # Debug: read only two data
 seq_reader = nutchpy.sequence_reader
 #data = seq_reader.head(2,path)
-imageUrls = set()
-urlset = set()
 image_types = set()
 all_types = set()
 
-count = seq_reader.count(path)
-print("count of data: %d" % count)
-#print(seq_reader.head(1,node_path))
-f = open('temp.log','w')
+f = open('segParseData.log','w')
 print("MIME type:")
 f.write("MIME type: \n")
 
+count = seq_reader.count(path)
+print("count of data: %d" % count)
+f.write("count of data: %d\n" % count)
+#print(seq_reader.head(1,node_path))
+
 cnt = 10
-iteration = count / cnt;
-for i in range(1,iteration):
-#for i in range(1):
-    #print i
-    slice = seq_reader.slice(i*cnt, (i+1)*cnt, path)
+iteration = count / cnt + 1;
+print("Total Run: %d" % iteration)
+f.write("Total Run: %d\n" % iteration)
+for i in range(0,iteration):
+    print("\nprocess data from %d to %d" % (i*cnt, (i+1)*cnt-1))
+    f.write("\nprocess data from %d to %d\n" % (i*cnt, (i+1)*cnt-1))
+    slice = seq_reader.slice(i*cnt, (i+1)*cnt-1, path)
     #print str(slice)
     #f.write(str(slice))
 
-    #for d in data:
     for s in slice:
-        #header = d[1]
         header = s[1]
         header_data = dict(re.findall(r"(?P<name>.*?): (?P<value>.*?)\n", header))
         #print header_data
@@ -56,11 +56,14 @@ for i in range(1,iteration):
                 image_types.add(meta_data_list['Content-Type'])
 
 print "\nAll MIME type:"
+f.write("\nAll MIME type:\n")
 for type in all_types:
     str = "\ttype: %s\n"% type
     print str
     f.write(str)
+
 print "Unique Image MIME type:"
+f.write("\nUnique Image MIME type:\n")
 for type in image_types:
     str = "\ttype: %s\n"% type
     print str

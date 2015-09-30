@@ -83,22 +83,6 @@
 </property>
 
 <property>
-  <name>robot.rules.whitelist</name>
-  <value>www.4chan.org,www.academy.com,www.accurateshooter.com,www.advanced-armanent.com,www.americanlisted.com,www.arguntrader.com,www.armslist.com,www.backpage.com,www.budsgunshop.com,www.buyusedguns.net,www.buyusedguns.net,www.cabelas.com,www.cheaperthandirt.com,www.davidsonsinc.com,www.firearmlist.com,www.firearmslist.com,www.freeclassifieds.com,www.freegunclassifieds.com,www.freegunclaXssifieds.com,www.gandermountain.com,www.gunauction.com,www.gunbroker.com,www.gunbroker.com,www.gundeals.org,www.gunlistings.org,www.gunlistings.org,www.gunsamerica.com,www.gunsinternational.com,www.guntrader.com,www.hipointfirearmsforums.com,www.impactguns.com,www.iwanna.com,www.lionseek.com,www.midwestguntrader.com,www.nationalguntrader.com,www.nationalguntrader.com,www.nextechclassifieds.com,www.oodle.com,www.recycler.com,www.shooterswap.com,www.shooting.org,www.slickguns.com,www.wantaddigest.com,www.wikiarms.com,www.abqjournal.com,www.alaskaslist.com,www.billingsthriftynickel.com,www.carolinabargaintrader.netwww.carolinabargaintrader.net,www.clasificadosphoenix.univision.com,www.classifiednc.com,www.classifieds.al.com,www.cologunmarket.com,www.comprayventadearms.com,www.dallasguns.com,www.elpasoguntrader.com,www.fhclassifieds.com,www.floridagunclassifieds.com,www.floridaguntrader.com,www.gowilkes.com,www.gunidaho.com,www.hawaiiguntrader.com,www.idahogunsforsale.com,www.iguntrade.com,www.jasonsguns.com,www.ksl.com,www.kyclassifieds.com,www.midutahradio.com/tradio,www.midwestgtrader.com,www.montanagunclassifieds.com,www.montanagunsforsale.com,www.mountaintrader.com,www.msguntrader.com,www.ncgunads.com,www.newmexicoguntrader.com,www.nextechclassifieds.com,www.sanjoseguntrader.com,www.tell-n-sell.com,www.tennesseegunexchange.com,www.theoutdoorstrader.com,www.tradesnsales.com,www.upstateguntrader.com,www.vci-classifieds.com,www.zidaho.com</value>
-  <description>Comma separated list of hostnames or IP addresses to ignore robot rules parsing for.
-  </description>
-</property>
-
-<!--
-<property>
-  <name>robot.rules.whitelist</name>
-  <value>*.com, *.org, *.net</value>
-  <description>Comma separated list of hostnames or IP addresses to ignore robot rules parsing for.
-  </description>
-</property>
--->
-
-<property>
   <name>protocol.plugin.check.robots</name>
   <value>false</value>
   <description>
@@ -106,6 +90,7 @@
   </description>
 </property>
 
+<!--
 <property>
   <name>Protocol.CHECK_ROBOTS</name>
   <value>false</value>
@@ -113,6 +98,7 @@
     ignore robots.txt
   </description>
 </property>
+-->
 
 <property>
  <name>db.ignore.external.links</name>

@@ -10,16 +10,14 @@ seq_reader = nutchpy.sequence_reader
 count = seq_reader.count(node_path)
 print("count of data: %d" % count)
 #print(seq_reader.head(1,node_path))
-f = open('temp.log','w')
+f = open('tempRead.log','w')
 cnt = 10
 iteration = count / cnt;
 slice = []
 #for i in range(1,iteration):
-for i in range(1):
-    #print i
+for i in range(9):
+    print i
     slice = seq_reader.slice(i*cnt,(i+1)*cnt,node_path)
-    #print str(slice)
-    #f.write(str(slice))
-    #print(seq_reader.slice(i*cnt,(i+1)*cnt,node_path))
-print slice[0]
+    print str(slice)
+    f.write(str(slice))
 f.close()

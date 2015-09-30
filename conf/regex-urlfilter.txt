@@ -27,12 +27,11 @@
 
 # skip image and other suffixes we can't yet parse
 # for a more extensive coverage use the urlfilter-suffix plugin
--\.(gif|GIF|jpg|JPG|png|PNG|ico|ICO|css|CSS|sit|SIT|eps|EPS|wmf|WMF|zip|ZIP|ppt|PPT|mpg|MPG|xls|XLS|gz|GZ|rpm|RPM|tgz|TGZ|mov|MOV|exe|EXE|jpeg|JPEG|bmp|BMP|js|JS|mp4|MP4|mp3|MP3)$
-#-\.(sit|SIT|eps|EPS|wmf|WMF|zip|ZIP|ppt|PPT|mpg|MPG|xls|XLS|gz|GZ|rpm|RPM|tgz|TGZ|mov|MOV|exe|EXE|js|JS|mp4|MP4|mp3|MP3)$
-
+#-\.(gif|GIF|jpg|JPG|png|PNG|ico|ICO|css|CSS|sit|SIT|eps|EPS|wmf|WMF|zip|ZIP|ppt|PPT|mpg|MPG|xls|XLS|gz|GZ|rpm|RPM|tgz|TGZ|mov|MOV|exe|EXE|jpeg|JPEG|bmp|BMP|js|JS|mp4|MP4|mp3|MP3)$
+-\.(sit|SIT|eps|EPS|wmf|WMF|zip|ZIP|ppt|PPT|mpg|MPG|xls|XLS|gz|GZ|rpm|RPM|tgz|TGZ|mov|MOV|exe|EXE|js|JS|mp4|MP4|mp3|MP3)$
 
 # skip URLs containing certain characters as probable queries, etc.
--[?*!@=]
+#-[?*!@=]
 
 # skip URLs with slash-delimited segment that repeats 3+ times, to break loops
 -.*(/[^/]+)/[^/]+\1/[^/]+\1/
@@ -40,91 +39,5 @@
 # skip URLs with slash-delimited segment that repeats 3+ times, to break loops
 -.*(/.+?)/.*?\1/.*?\1/
 
-# accept hosts in MY.DOMAIN.NAME
-+^http://([a-z0-9]*\.)*www.4chan.org/k/
-+^http://([a-z0-9]*\.)*www.academy.com
-+^http://([a-z0-9]*\.)*www.accurateshooter.com
-+^http://([a-z0-9]*\.)*www.advanced-armanent.com
-+^http://([a-z0-9]*\.)*www.americanlisted.com
-+^http://([a-z0-9]*\.)*www.arguntrader.com
-+^http://([a-z0-9]*\.)*www.armslist.com
-+^http://([a-z0-9]*\.)*www.backpage.com
-+^http://([a-z0-9]*\.)*www.budsgunshop.com
-+^http://([a-z0-9]*\.)*www.buyusedguns.net
-+^http://([a-z0-9]*\.)*www.buyusedguns.net
-+^http://([a-z0-9]*\.)*www.cabelas.com
-+^http://([a-z0-9]*\.)*www.cheaperthandirt.com
-+^http://([a-z0-9]*\.)*www.davidsonsinc.com
-+^http://([a-z0-9]*\.)*www.firearmlist.com
-+^http://([a-z0-9]*\.)*www.firearmslist.com
-+^http://([a-z0-9]*\.)*www.freeclassifieds.com
-+^http://([a-z0-9]*\.)*www.freegunclassifieds.com
-+^http://([a-z0-9]*\.)*www.freegunclaXssifieds.com
-+^http://([a-z0-9]*\.)*www.gandermountain.com
-+^http://([a-z0-9]*\.)*www.gunauction.com
-+^http://([a-z0-9]*\.)*www.gunbroker.com
-+^http://([a-z0-9]*\.)*www.gunbroker.com
-+^http://([a-z0-9]*\.)*www.gundeals.org
-+^http://([a-z0-9]*\.)*www.gunlistings.org
-+^http://([a-z0-9]*\.)*www.gunlistings.org
-+^http://([a-z0-9]*\.)*www.gunsamerica.com
-+^http://([a-z0-9]*\.)*www.gunsinternational.com
-+^http://([a-z0-9]*\.)*www.guntrader.com
-+^http://([a-z0-9]*\.)*www.hipointfirearmsforums.com
-+^http://([a-z0-9]*\.)*www.impactguns.com
-+^http://([a-z0-9]*\.)*www.iwanna.com
-+^http://([a-z0-9]*\.)*www.lionseek.com
-+^http://([a-z0-9]*\.)*www.midwestguntrader.com
-+^http://([a-z0-9]*\.)*www.nationalguntrader.com
-+^http://([a-z0-9]*\.)*www.nationalguntrader.com
-+^http://([a-z0-9]*\.)*www.nextechclassifieds.com/categories/sporting-goods/firearms
-+^http://([a-z0-9]*\.)*www.oodle.com
-+^http://([a-z0-9]*\.)*www.recycler.com
-+^http://([a-z0-9]*\.)*www.shooterswap.com
-+^http://([a-z0-9]*\.)*www.shooting.org
-+^http://([a-z0-9]*\.)*www.slickguns.com
-+^http://([a-z0-9]*\.)*www.wantaddigest.com
-+^http://([a-z0-9]*\.)*www.wikiarms.com/guns
-+^http://([a-z0-9]*\.)*www.abqjournal.com
-+^http://([a-z0-9]*\.)*www.alaskaslist.com
-+^http://([a-z0-9]*\.)*www.billingsthriftynickel.com
-+^http://([a-z0-9]*\.)*www.carolinabargaintrader.net
-+^http://([a-z0-9]*\.)*www.carolinabargaintrader.net
-+^http://([a-z0-9]*\.)*www.clasificadosphoenix.univision.com
-+^http://([a-z0-9]*\.)*www.classifiednc.com
-+^http://([a-z0-9]*\.)*www.classifieds.al.com
-+^http://([a-z0-9]*\.)*www.cologunmarket.com
-+^http://([a-z0-9]*\.)*www.comprayventadearms.com
-+^http://([a-z0-9]*\.)*www.dallasguns.com
-+^http://([a-z0-9]*\.)*www.elpasoguntrader.com
-+^http://([a-z0-9]*\.)*www.fhclassifieds.com
-+^http://([a-z0-9]*\.)*www.floridagunclassifieds.com
-+^http://([a-z0-9]*\.)*www.floridaguntrader.com
-+^http://([a-z0-9]*\.)*www.gowilkes.com
-+^http://([a-z0-9]*\.)*www.gunidaho.com
-+^http://([a-z0-9]*\.)*www.hawaiiguntrader.com
-+^http://([a-z0-9]*\.)*www.idahogunsforsale.com
-+^http://([a-z0-9]*\.)*www.iguntrade.com
-+^http://([a-z0-9]*\.)*www.jasonsguns.com
-+^http://([a-z0-9]*\.)*www.ksl.com
-+^http://([a-z0-9]*\.)*www.kyclassifieds.com
-+^http://([a-z0-9]*\.)*www.midutahradio.com/tradio
-+^http://([a-z0-9]*\.)*www.midwestgtrader.com
-+^http://([a-z0-9]*\.)*www.montanagunclassifieds.com
-+^http://([a-z0-9]*\.)*www.montanagunsforsale.com
-+^http://([a-z0-9]*\.)*www.mountaintrader.com
-+^http://([a-z0-9]*\.)*www.msguntrader.com
-+^http://([a-z0-9]*\.)*www.ncgunads.com
-+^http://([a-z0-9]*\.)*www.newmexicoguntrader.com
-+^http://([a-z0-9]*\.)*www.nextechclassifieds.com
-+^http://([a-z0-9]*\.)*www.sanjoseguntrader.com
-+^http://([a-z0-9]*\.)*www.tell-n-sell.com
-+^http://([a-z0-9]*\.)*www.tennesseegunexchange.com
-+^http://([a-z0-9]*\.)*www.theoutdoorstrader.com
-+^http://([a-z0-9]*\.)*www.tradesnsales.com
-+^http://([a-z0-9]*\.)*www.upstateguntrader.com
-+^http://([a-z0-9]*\.)*www.vci-classifieds.com
-+^http://([a-z0-9]*\.)*www.zidaho.com
-
 # skip everything else
--.
++.

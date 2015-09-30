@@ -46,7 +46,7 @@
 
 <property>
   <name>fetcher.server.delay</name>
-  <value>0.2</value>
+  <value>0.1</value>
   <description>The number of seconds the fetcher will delay between 
    successive requests to the same server. Note that this might get
    overriden by a Crawl-Delay from a robots.txt and is used ONLY if 
@@ -56,7 +56,7 @@
 
 <property>
   <name>fetcher.server.min.delay</name>
-  <value>0.2</value>
+  <value>0.1</value>
   <description>The minimum number of seconds the fetcher will delay between 
   successive requests to the same server. This value is applicable ONLY
   if fetcher.threads.per.queue is greater than 1 (i.e. the host blocking
@@ -114,6 +114,14 @@
   </description>
 </property>
 
+<property>
+ <name>db.ignore.external.links</name>
+ <value>true</value>
+ <description>If true, outlinks leading from a page to external hosts
+ will be ignored. This is an effective way to limit the crawl to include
+ only initially injected hosts, without creating complex URLFilters.
+ </description>
+</property>
 
 <property>
   <name>plugin.includes</name>

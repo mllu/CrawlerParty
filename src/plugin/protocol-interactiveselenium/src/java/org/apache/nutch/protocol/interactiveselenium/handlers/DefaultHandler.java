@@ -17,60 +17,27 @@
 
 package org.apache.nutch.protocol.interactiveselenium;
 
-import java.lang.String;
 import java.util.*;
-import java.util.StringTokenizer;
-
 import org.openqa.selenium.*;
-//import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DefaultHandler implements InteractiveSeleniumHandler {
-    /*
-    public void processDriver(WebDriver driver) {}
-    public boolean shouldProcessURL(String URL) {
-        return true;
-    }
-    */
-    public void processDriver(WebDriver driver) {
-        System.out.println("@@@@@@@@@@ The current URL is @@@@@@@@@@@: ");
-       /*
-         * Should be divide into two parts:
-         * interact with JavaScripts (click on element)
-         * submit forms (sendKeys and subimt)
-       */
+	public void processDriver(WebDriver driver) {
+		System.out.println("=========== Into Default Handler ==========");
+		driver.get(driver.getCurrentUrl()); //load a new page in the current browser windows
+		searchBarFinder(driver);
+	}
 
-        //Get the current page URL and store the value in variable 'url'
-        String url = driver.getCurrentUrl();
+	public boolean shouldProcessURL(String URL) {
+		System.out.println("Defualt Handler : " + URL);
+		return !URL.isEmpty();
+	}
 
-        //Print the value of variable in the console
-        System.out.println("@@@@@@@@@@ The current URL is @@@@@@@@@@@: " + url);
-
-        //Load a new page in the current browser windows
-        driver.get(url);
-
-        //Maximize the Browser window
-        //driver.manage().window().maximize();
-
-        By.ById id = new By.ById("pic");
-
-        List<WebElement> list = driver.findElements(id);
-        for (WebElement elem : list) {
-            System.out.print("click elem with tag: " + elem.getTagName());
-            System.out.println(" @ " + elem.toString());
-            if (elem.getSize().getWidth() != 0 && elem.getSize().getWidth() != 0 && elem.isDisplayed()) {
-//				JavascriptExecutor jse = (JavascriptExecutor)driver;
-//				jse.executeScript("document.getElementById('pic1').click();");
-                elem.click();
-            }
-        }
-    }
-
-    public boolean shouldProcessURL(String URL) {
-        System.out.println("!!!!!!!!!!URL!!!!!!!!!!!!!");
-        System.out.println(URL);
-//        return !URL.isEmpty();
-        return true;
-    }
+	private static void searchBarFinder(WebDriver driver){
+		WebElement form = driver.findElement(By.tagName("form"));
+		WebElement input = form.findElement(By.tagName("input"));
+		input.clear();
+		input.sendKeys("gun");
+		form.submit();
+	}
 }
-

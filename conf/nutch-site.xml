@@ -102,7 +102,7 @@
 
 <property>
  <name>db.ignore.external.links</name>
- <value>true</value>
+ <value>false</value>
  <description>If true, outlinks leading from a page to external hosts
  will be ignored. This is an effective way to limit the crawl to include
  only initially injected hosts, without creating complex URLFilters.

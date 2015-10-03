@@ -65,7 +65,7 @@
 
 <property>
   <name>fetcher.threads.per.queue</name>
-  <value>10</value>
+  <value>1</value>
   <description>This number is the maximum number of threads that
     should be allowed to access a queue at one time. Setting it to 
     a value > 1 will cause the Crawl-Delay value from robots.txt to
@@ -73,6 +73,17 @@
     as a delay between successive requests to the same server instead 
     of fetcher.server.delay.
    </description>
+</property>
+
+<property>
+  <name>fetcher.threads.fetch</name>
+  <value>1</value>
+  <description>The number of FetcherThreads the fetcher should use.
+  This is also determines the maximum number of requests that are
+  made at once (each FetcherThread handles one connection). The total
+  number of threads running in distributed mode will be the number of
+  fetcher threads * number of nodes as fetcher has one map task per node.
+  </description>
 </property>
 
 <property>
@@ -102,7 +113,7 @@
 
 <property>
  <name>db.ignore.external.links</name>
- <value>true</value>
+ <value>false</value>
  <description>If true, outlinks leading from a page to external hosts
  will be ignored. This is an effective way to limit the crawl to include
  only initially injected hosts, without creating complex URLFilters.
@@ -117,7 +128,7 @@
 
 <property>
   <name>plugin.includes</name>
-    <value>protocol-selenium|protocol-interactiveselenium|protocol-http|urlfilter-regex|parse-(html|tika)|index-(basic|anchor)|indexer-solr|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
+    <value>protocol-selenium|protocol-interactiveselenium|protocol-http|protocol-httpclient|urlfilter-regex|parse-(html|tika)|index-(basic|anchor)|indexer-solr|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
     <description>Regular expression naming plugin directory names to
     include.  Any plugin not matching this expression is excluded.
     In any case you need at least include the nutch-extensionpoints plugin. By

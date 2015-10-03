@@ -18,33 +18,15 @@
 package org.apache.nutch.protocol.interactiveselenium;
 
 import java.util.*;
-<<<<<<< HEAD:nutch/src/plugin/protocol-interactiveselenium/src/java/org/apache/nutch/protocol/interactiveselenium/handlers/DefaultHandler.java
-import java.util.StringTokenizer;
-
-//import org.openqa.selenium.WebDriver;
-=======
->>>>>>> 156e01b9bf05de7c79e4e5041b27214dec4f7d80:src/plugin/protocol-interactiveselenium/src/java/org/apache/nutch/protocol/interactiveselenium/handlers/DefaultHandler.java
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class DefaultHandler implements InteractiveSeleniumHandler {
-<<<<<<< HEAD:nutch/src/plugin/protocol-interactiveselenium/src/java/org/apache/nutch/protocol/interactiveselenium/handlers/DefaultHandler.java
-    /*
-    public void processDriver(WebDriver driver) {}
-    public boolean shouldProcessURL(String URL) {
-        return true;
-    }
-    */
+public class Handler_vci_classifieds implements InteractiveSeleniumHandler {
     public void processDriver(WebDriver driver) {
+        System.out.println("=========== Into Handler_vci_classifieds ==========");
         System.out.println("@@@@@@@@@@ The current URL is @@@@@@@@@@@: ");
-       /*
-         * Should be divide into two parts:
-         * interact with JavaScripts (click on element)
-         * submit forms (sendKeys and subimt)
-       */
-
         //Get the current page URL and store the value in variable 'url'
         String url = driver.getCurrentUrl();
 
@@ -75,8 +57,9 @@ public class DefaultHandler implements InteractiveSeleniumHandler {
         element.sendKeys("rifle\n"); // send also a "\n"
 
         WebElement myDynamicElement = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.id("searchlist")));// searchlist
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("searchlist")));
 
+        // wait for finsih loading webpage
         try {
             System.out.println("before sleep");
             Thread.sleep(3000);
@@ -112,28 +95,11 @@ public class DefaultHandler implements InteractiveSeleniumHandler {
 
     public boolean shouldProcessURL(String URL) {
         System.out.println("!!!!!!!!!!URL!!!!!!!!!!!!!");
-        System.out.println(URL);
-//        return !URL.isEmpty();
-        return true;
+        System.out.println("Handler_vci_classifieds URL: " + URL);
+//        String domain_url = "www.vci-classifieds.com";
+//        System.out.println(URL.indexOf(domain_url) != -1);
+        String seed_url = "http://www.vci-classifieds.com/";
+        System.out.println(URL.equals(seed_url));
+        return URL.equals(seed_url);
     }
-=======
-	public void processDriver(WebDriver driver) {
-		System.out.println("=========== Into Default Handler ==========");
-		driver.get(driver.getCurrentUrl()); //load a new page in the current browser windows
-		searchBarFinder(driver);
-	}
-
-	public boolean shouldProcessURL(String URL) {
-		System.out.println("Defualt Handler : " + URL);
-		return !URL.isEmpty();
-	}
-
-	private static void searchBarFinder(WebDriver driver){
-		WebElement form = driver.findElement(By.tagName("form"));
-		WebElement input = form.findElement(By.tagName("input"));
-		input.clear();
-		input.sendKeys("gun");
-		form.submit();
-	}
->>>>>>> 156e01b9bf05de7c79e4e5041b27214dec4f7d80:src/plugin/protocol-interactiveselenium/src/java/org/apache/nutch/protocol/interactiveselenium/handlers/DefaultHandler.java
 }

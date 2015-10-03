@@ -122,8 +122,19 @@
 
 <property>
   <name>interactiveselenium.handlers</name>
-  <value>DefaultHandler</value>
+  <value>Handler_vci_classifieds,DefaultHandler</value>
   <description></description>
+</property>
+
+<!-- lib-selenium configuration -->
+<property>
+  <name>libselenium.page.load.delay</name>
+  <value>1</value>
+  <description>
+    The delay in seconds to use when loading a page with lib-selenium. This
+    setting is used by protocol-selenium and protocol-interactiveselenium
+    since they depending on lib-selenium for fetching.
+  </description>
 </property>
 
 <property>

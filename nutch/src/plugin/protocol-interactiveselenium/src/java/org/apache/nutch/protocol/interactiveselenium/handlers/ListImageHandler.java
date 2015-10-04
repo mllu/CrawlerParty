@@ -17,8 +17,9 @@
 
 package org.apache.nutch.protocol.interactiveselenium;
 
-import java.lang.System;
+import java.io.*;
 import java.util.*;
+import java.lang.System;
 import java.util.concurrent.TimeUnit;
 
 
@@ -26,6 +27,9 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import org.apache.nutch.parse.Outlink;
+import org.apache.nutch.parse.OutlinkExtractor;
 
 public class ListImageHandler implements InteractiveSeleniumHandler {
     public static HashSet<String> urlSet = new HashSet<String>();
@@ -41,7 +45,7 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
         //Load a new page in the current browser windows
         driver.get(url);
 
-        // form-input
+        // form-input structure for search bar
         WebElement form = driver.findElement(By.tagName("form"));
         List<WebElement> inputs = null;
         if (form != null) {
@@ -57,7 +61,7 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
             }
         }
 
-        // direct input
+        // direct input html tag for search bar
         ArrayList<String> possibleName = new ArrayList<String>();
         possibleName.add("q");
         possibleName.add("searchtext");
@@ -69,8 +73,8 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
                 element = driver.findElement(By.name(possibleName.get(i)));
                 if (element != null) {
                     // send with "\n" == submit
-                    //element.sendKeys("gun\n");
-                    element.sendKeys("gun");
+                    element.sendKeys("gun\n");
+                    //element.sendKeys("gun");
                     //form.submit();
                     System.out.println("[ListImageHandler][processDriver] Submit keyword \"gun\"");
                     break;
@@ -105,6 +109,21 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
             // System.out.println(elem.toString());
         }
         System.out.println("[ListImageHandler][processDriver] " + findElements.size() + " results shown");
+
+        // log outlinks to /tmp/outlinks
+        List<WebElement> findOutlinks = driver.findElements(By.xpath("//a"));
+        try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("/tmp/outlinks", true)))) {
+            // this are all the links you like to visit
+            int count = 0;
+            for (WebElement elem : findOutlinks) {
+                out.println(elem.getAttribute("href"));
+                count++;
+            }
+            System.out.println("[ListImageHandler][processDriver] total Outlinks Logged: " + count);
+        }catch (IOException e) {
+            System.err.println(e);
+        }
+
         driver.close();
         System.out.println("[ListImageHandler][processDriver] Close Driver");
     }
@@ -129,6 +148,7 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
     }
 
     public void addAllUrlIntoSet() {
+        /*
         urlSet.add("http://www.4chan.org/k/");
         urlSet.add("http://www.academy.com/");
         urlSet.add("http://www.accurateshooter.com/");
@@ -188,10 +208,12 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
         urlSet.add("http://www.fhclassifieds.com/");
         urlSet.add("http://www.floridagunclassifieds.com/");
         urlSet.add("http://www.floridaguntrader.com/");
+        urlSet.add("http://floridaguntrader.com/");
         urlSet.add("http://www.gowilkes.com/");
         urlSet.add("http://www.gunidaho.com/");
         urlSet.add("http://www.hawaiiguntrader.com/");
         urlSet.add("http://www.idahogunsforsale.com/");
+        */
         urlSet.add("http://www.iguntrade.com/");
         urlSet.add("http://www.jasonsguns.com/");
         urlSet.add("http://www.ksl.com/");

@@ -31,8 +31,8 @@ public class DefaultHandler implements InteractiveSeleniumHandler {
 
 	public boolean shouldProcessURL(String URL) {
 		System.out.println("Defualt Handler : " + URL);
-//		return !URL.isEmpty();
-		return false;
+		return !URL.isEmpty();
+//		return false;
 	}
 
 	private static void searchBarFinder(WebDriver driver){

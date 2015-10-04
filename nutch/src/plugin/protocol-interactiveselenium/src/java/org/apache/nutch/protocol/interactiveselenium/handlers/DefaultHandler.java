@@ -24,9 +24,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class DefaultHandler implements InteractiveSeleniumHandler {
 	public void processDriver(WebDriver driver) {
 		System.out.println("=========== Into Default Handler ==========");
-		driver.get(driver.getCurrentUrl()); //load a new page in the current browser windows
-		searchBarFinder(driver);
-		driver.close();
+		//driver.get(driver.getCurrentUrl()); //load a new page in the current browser windows
+		//searchBarFinder(driver);
+		//driver.close();
 	}
 
 	public boolean shouldProcessURL(String URL) {

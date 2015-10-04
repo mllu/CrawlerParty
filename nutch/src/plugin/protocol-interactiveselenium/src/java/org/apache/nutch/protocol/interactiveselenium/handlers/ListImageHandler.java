@@ -27,6 +27,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import org.apache.nutch.parse.Outlink;
+import org.apache.nutch.parse.OutlinkExtractor;
+
 public class ListImageHandler implements InteractiveSeleniumHandler {
     public static HashSet<String> urlSet = new HashSet<String>();
 
@@ -105,6 +108,17 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
             // System.out.println(elem.toString());
         }
         System.out.println("[ListImageHandler][processDriver] " + findElements.size() + " results shown");
+
+
+        List<WebElement> findOutlinks = driver.findElements(By.xpath("//a"));
+        System.out.println("[ListImageHandler][processDriver] total Results Found: " + findOutlinks.size());
+        // this are all the links you like to visit
+        for (WebElement elem : findOutlinks) {
+            System.out.println(elem.getAttribute("href"));
+            // System.out.println(elem.toString());
+        }
+        System.out.println("[ListImageHandler][processDriver] " + findOutlinks.size() + " results shown");
+
         driver.close();
         System.out.println("[ListImageHandler][processDriver] Close Driver");
     }
@@ -188,6 +202,7 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
         urlSet.add("http://www.fhclassifieds.com/");
         urlSet.add("http://www.floridagunclassifieds.com/");
         urlSet.add("http://www.floridaguntrader.com/");
+        urlSet.add("http://floridaguntrader.com/");
         urlSet.add("http://www.gowilkes.com/");
         urlSet.add("http://www.gunidaho.com/");
         urlSet.add("http://www.hawaiiguntrader.com/");

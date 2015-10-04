@@ -122,7 +122,7 @@
 
 <property>
   <name>interactiveselenium.handlers</name>
-  <value>Handler_vci_classifieds,DefaultHandler</value>
+  <value>ListImageHandler,DefaultHandler</value>
   <description></description>
 </property>
 

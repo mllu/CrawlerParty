@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,6 +18,7 @@
 package org.apache.nutch.protocol.interactiveselenium;
 
 import java.util.*;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -26,12 +27,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Handler_vci_classifieds implements InteractiveSeleniumHandler {
     public void processDriver(WebDriver driver) {
         System.out.println("=========== Into Handler_vci_classifieds ==========");
-        System.out.println("@@@@@@@@@@ The current URL is @@@@@@@@@@@: ");
         //Get the current page URL and store the value in variable 'url'
         String url = driver.getCurrentUrl();
 
         //Print the value of variable in the console
-        System.out.println("@@@@@@@@@@ The current URL is @@@@@@@@@@@: " + url);
+        System.out.println("[Handler_vci_classifieds][processDriver] The current URL is: " + url);
 
         //Load a new page in the current browser windows
         driver.get(url);
@@ -61,18 +61,18 @@ public class Handler_vci_classifieds implements InteractiveSeleniumHandler {
 
         // wait for finsih loading webpage
         try {
-            System.out.println("before sleep");
+            System.out.println("[Handler_vci_classifieds][processDriver] before sleep");
             Thread.sleep(3000);
-            System.out.println("after sleep");
+            System.out.println("[Handler_vci_classifieds][processDriver] after sleep");
 
         } catch (Exception e) {
-            System.out.println("Exception caught");
+            System.out.println("[Handler_vci_classifieds][processDriver] Exception caught");
         }
 
         // List<WebElement> findElements = driver.findElements(By.xpath("//img"));
         List<WebElement> findElements = driver
                 .findElements(By.xpath(".//*[@id='searchlist']/center/table/tbody/tr/td/img"));
-        System.out.println("total Results Found: " + findElements.size());
+        System.out.println("[Handler_vci_classifieds][processDriver] total Results Found: " + findElements.size());
 
         // this are all the links you like to visit
         for (WebElement elem : findElements) {
@@ -90,12 +90,12 @@ public class Handler_vci_classifieds implements InteractiveSeleniumHandler {
             System.out.println(elem.getAttribute("src"));
             // System.out.println(elem.toString());
         }
+        System.out.println("[Handler_vci_classifieds][processDriver] " + findElements.size() + " results shown");
 
     }
 
     public boolean shouldProcessURL(String URL) {
-        System.out.println("!!!!!!!!!!URL!!!!!!!!!!!!!");
-        System.out.println("Handler_vci_classifieds URL: " + URL);
+        System.out.println("[Handler_vci_classifieds][shouldProcessURL] URL: " + URL);
 //        String domain_url = "www.vci-classifieds.com";
 //        System.out.println(URL.indexOf(domain_url) != -1);
         String seed_url = "http://www.vci-classifieds.com/";

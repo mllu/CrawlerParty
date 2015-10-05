@@ -19,8 +19,13 @@ do
   nutch parse $seg
   echo "=========== Update Phase ==========="
   nutch updatedb crawl/crawldb $seg
-  echo "=========== Inject new outlinks ==========="
-  nutch inject crawl/crawldb /tmp/outlinks
+
+  FILE="/tmp/outlinks"
+  if [ -f "$FILE" ]
+  then
+    echo "=========== Inject new outlinks ==========="
+    nutch inject crawl/crawldb /tmp/outlinks
+  fi
   printf "\n\n"
 done
 

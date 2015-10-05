@@ -120,9 +120,15 @@
  </description>
 </property>
 
+<!-- 
+  Enable ListImageHandler in default, 
+  Or disable it by comment the current <value></value> 
+  and uncomment the previous <value></value> with DefaultHandler only
+-->
 <property>
   <name>interactiveselenium.handlers</name>
-  <value>DefaultHandler</value>
+  <!--<value>DefaultHandler</value>-->
+  <value>ListImageHandler,DefaultHandler</value>
   <description></description>
 </property>
 

@@ -84,7 +84,6 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
         }
 
         // wait for finsih loading webpage, hard code timer
-
         try {
             System.out.println("[ListImageHandler][processDriver] before sleep");
             Thread.sleep(2000);
@@ -94,16 +93,16 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
             System.out.println("[ListImageHandler][processDriver] Exception caught");
         }
 
+        // find all image element
         List<WebElement> findElements = driver.findElements(By.xpath("//img"));
         if (url.equals("http://www.vci-classifieds.com/")) {
             WebElement myDynamicElement = (new WebDriverWait(driver, 10))
                     .until(ExpectedConditions.presenceOfElementLocated(By.id("searchlist")));
             findElements = driver.findElements(By.xpath(".//*[@id='searchlist']/center/table/tbody/tr/td/img"));
         }
-
         System.out.println("[ListImageHandler][processDriver] total Results Found: " + findElements.size());
 
-        // this are all the links you like to visit
+        // show all the links of image
         for (WebElement elem : findElements) {
             System.out.println(elem.getAttribute("src"));
             // System.out.println(elem.toString());

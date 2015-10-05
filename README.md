@@ -27,4 +27,6 @@ ps: recommend to return fasle in shouldProcessURL() in DefaultHandler.java to sa
 
 3. ant runtime
 
+4. cd hw1; ./autoCrawl.sh testURL 2
 
+5. check if /tmp/outlinks exists?

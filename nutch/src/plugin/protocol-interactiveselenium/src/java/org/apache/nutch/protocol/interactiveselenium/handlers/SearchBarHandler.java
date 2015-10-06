@@ -31,100 +31,115 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.apache.nutch.parse.Outlink;
 import org.apache.nutch.parse.OutlinkExtractor;
 
-public class ListImageHandler implements InteractiveSeleniumHandler {
+public class SearchBarHandler implements InteractiveSeleniumHandler {
     public static HashSet<String> urlSet = new HashSet<String>();
 
     public void processDriver(WebDriver driver) {
-        System.out.println("=========== Into Handler_vci_classifieds ==========");
+        System.out.println("=========== Into SearchBarHandler's processDriver ==========");
         //Get the current page URL and store the value in variable 'url'
         String url = driver.getCurrentUrl();
 
         //Print the value of variable in the console
-        System.out.println("[ListImageHandler][processDriver] The current URL is: " + url);
+        System.out.println("[SearchBarHandler][processDriver] The current URL is: " + url);
+        System.out.println("[SearchBarHandler][processDriver] is in the set?: " + urlSet.contains(url));
 
-        //Load a new page in the current browser windows
-        driver.get(url);
+        // only process the URL in set
+        if(urlSet.contains(url)) {
 
-        // form-input structure for search bar
-        WebElement form = driver.findElement(By.tagName("form"));
-        List<WebElement> inputs = null;
-        if (form != null) {
-            inputs = form.findElements(By.tagName("input"));
-            for (WebElement elem : inputs) {
-                if (elem.isDisplayed()) {
-                    elem.clear();
-                    elem.sendKeys("gun\n");
-                    System.out.println("[ListImageHandler][processDriver] Submit keyword \"gun\"");
-                    //form.submit();
-                    break;
+            //Load a new page in the current browser windows
+            driver.get(url);
+
+
+            // testing selenium functionality via google
+            ////////////////////////////////////////////////////////////////////////////////////////////
+            if (url.equals("http://www.google.com/")) {
+                WebElement element = driver.findElement(By.name("q"));
+                element.sendKeys("Gun!\n"); // send also a "\n"
+                element.submit();
+                // wait until the google page shows the result
+                WebElement myDynamicElement = (new WebDriverWait(driver, 10))
+                        .until(ExpectedConditions.presenceOfElementLocated(By.id("resultStats")));
+
+                List<WebElement> findElements = driver.findElements(By.xpath("//*[@id='rso']//h3/a"));
+
+                // this are all the links you like to visit
+                for (WebElement webElement : findElements) {
+                    System.out.println(webElement.getAttribute("href"));
                 }
             }
-        }
+            ////////////////////////////////////////////////////////////////////////////////////////////
 
-        // direct input html tag for search bar
-        ArrayList<String> possibleName = new ArrayList<String>();
-        possibleName.add("q");
-        possibleName.add("searchtext");
-        possibleName.add("txtSearch");
 
-        WebElement element;
-        if (inputs == null) {
-            for (int i = 0; i < possibleName.size(); i++) {
-                element = driver.findElement(By.name(possibleName.get(i)));
-                if (element != null) {
-                    // send with "\n" == submit
-                    element.sendKeys("gun\n");
-                    //element.sendKeys("gun");
-                    //form.submit();
-                    System.out.println("[ListImageHandler][processDriver] Submit keyword \"gun\"");
-                    break;
+            // Form-input structure for search bar
+            WebElement form = driver.findElement(By.tagName("form"));
+            List<WebElement> inputs = null;
+            if (form != null) {
+                inputs = form.findElements(By.tagName("input"));
+                for (WebElement elem : inputs) {
+                    if (elem.isDisplayed()) {
+                        elem.clear();
+                        elem.sendKeys("gun\n");
+                        //form.submit();
+                        System.out.println("[SearchBarHandler][processDriver] Submit keyword \"gun\"");
+                        break;
+                    }
                 }
             }
 
-        }
+            // direct input html tag for search bar
+            ArrayList<String> possibleName = new ArrayList<String>();
+            possibleName.add("q");
+            possibleName.add("searchtext");
+            possibleName.add("txtSearch");
 
-        // wait for finsih loading webpage, hard code timer
-        try {
-            System.out.println("[ListImageHandler][processDriver] before sleep");
-            Thread.sleep(2000);
-            System.out.println("[ListImageHandler][processDriver] after sleep");
+            if (inputs == null) {
+                for (int i = 0; i < possibleName.size(); i++) {
+                    WebElement element = driver.findElement(By.name(possibleName.get(i)));
+                    if (element != null) {
+                        element.clear();
+                        // send with "\n" == submit
+                        element.sendKeys("gun\n");
+                        //form.submit();
+                        System.out.println("[SearchBarHandler][processDriver] Submit keyword \"gun\"");
+                        break;
+                    }
+                }
 
-        } catch (Exception e) {
-            System.out.println("[ListImageHandler][processDriver] Exception caught");
-        }
-
-        // find all image element
-        List<WebElement> findElements = driver.findElements(By.xpath("//img"));
-        if (url.equals("http://www.vci-classifieds.com/")) {
-            WebElement myDynamicElement = (new WebDriverWait(driver, 10))
-                    .until(ExpectedConditions.presenceOfElementLocated(By.id("searchlist")));
-            findElements = driver.findElements(By.xpath(".//*[@id='searchlist']/center/table/tbody/tr/td/img"));
-        }
-        System.out.println("[ListImageHandler][processDriver] total Results Found: " + findElements.size());
-
-        // show all the links of image
-        for (WebElement elem : findElements) {
-            System.out.println(elem.getAttribute("src"));
-            // System.out.println(elem.toString());
-        }
-        System.out.println("[ListImageHandler][processDriver] " + findElements.size() + " results shown");
-
-        // log outlinks to /tmp/outlinks
-        List<WebElement> findOutlinks = driver.findElements(By.xpath("//a"));
-        try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("/tmp/outlinks", true)))) {
-            // this are all the links you like to visit
-            int count = 0;
-            for (WebElement elem : findOutlinks) {
-                out.println(elem.getAttribute("href"));
-                count++;
             }
-            System.out.println("[ListImageHandler][processDriver] total Outlinks Logged: " + count);
-        }catch (IOException e) {
-            System.err.println(e);
-        }
 
-        driver.close();
-        System.out.println("[ListImageHandler][processDriver] Close Driver");
+            // wait for finsih loading webpage, hard code the timer
+            try {
+                System.out.println("[SearchBarHandler][processDriver] before sleep");
+                Thread.sleep(2000);
+                System.out.println("[SearchBarHandler][processDriver] after sleep");
+
+            } catch (Exception e) {
+                System.out.println("[SearchBarHandler][processDriver] Exception caught");
+            }
+
+            // find all image element and write URLs into file
+            List<WebElement> findImages = driver.findElements(By.xpath("//img"));
+            if (url.equals("http://www.vci-classifieds.com/")) {
+                WebElement myDynamicElement = (new WebDriverWait(driver, 10))
+                        .until(ExpectedConditions.presenceOfElementLocated(By.id("searchlist")));
+                findImages = driver.findElements(By.xpath(".//*[@id='searchlist']/center/table/tbody/tr/td/img"));
+            }
+            System.out.println("[SearchBarHandler][processDriver] total images Found: " + findImages.size());
+
+            try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("/tmp/images", true)))) {
+                // show all the links of image
+                for (WebElement elem : findImages) {
+                    out.println(elem.getAttribute("src"));
+                    //System.out.println(elem.getAttribute("src"));
+                }
+                System.out.println("[SearchBarHandler][processDriver] " + findImages.size() + " images found");
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+
+        }
+        System.out.println("=========== Leave SearchBarHandler's processDriver ==========");
+
     }
 
     public boolean shouldProcessURL(String URL) {
@@ -135,18 +150,21 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
             System.out.println(ste);
         */
         /*
-        System.out.println("[ListImageHandler][shouldProcessURL] URL: " + URL);
+        System.out.println("[SearchBarHandler][shouldProcessURL] URL: " + URL);
         String domain_url = "www.vci-classifieds.com";
         System.out.println(URL.indexOf(domain_url) != -1);
         String seed_url = "http://www.vci-classifieds.com/";
         System.out.println("should process this URL? : "+ URL.equals(seed_url));
         return URL.equals(seed_url);
         */
-        System.out.println("[ListImageHandler][shouldProcessURL] should process \"" + URL + "\" ?: " + urlSet.contains(URL));
+        System.out.println("[SearchBarHandler][shouldProcessURL] should process \"" + URL + "\" ?: " + urlSet.contains(URL));
         return urlSet.contains(URL);
+        //return !URL.isEmpty();
     }
 
     public void addAllUrlIntoSet() {
+        urlSet.add("http://www.google.com/");
+        urlSet.add("https://www.google.com/?gws_rd=ssl");
         /*
         urlSet.add("http://www.4chan.org/k/");
         urlSet.add("http://www.academy.com/");
@@ -233,6 +251,7 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
         urlSet.add("http://www.tradesnsales.com/");
         urlSet.add("http://www.upstateguntrader.com/");
         urlSet.add("http://www.vci-classifieds.com/");
+        urlSet.add("https://www.vci-classifieds.com/");
         urlSet.add("http://www.zidaho.com/index.php?a=19");
     }
 }

@@ -1,0 +1,86 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# The default url filter.
+# Better for whole-internet crawling.
+
+# Each non-comment, non-blank line contains a regular expression
+# prefixed by '+' or '-'.  The first matching pattern in the file
+# determines whether a URL is included or ignored.  If no pattern
+# matches, the URL is ignored.
+
+# skip file: ftp: and mailto: urls
+-^(file|ftp|mailto):
+
+# skip image and other suffixes we can't yet parse
+# for a more extensive coverage use the urlfilter-suffix plugin
+#-\.(gif|GIF|jpg|JPG|png|PNG|ico|ICO|css|CSS|sit|SIT|eps|EPS|wmf|WMF|zip|ZIP|ppt|PPT|mpg|MPG|xls|XLS|gz|GZ|rpm|RPM|tgz|TGZ|mov|MOV|exe|EXE|jpeg|JPEG|bmp|BMP|js|JS|mp4|MP4|mp3|MP3)$
+-\.(css|CSS|sit|SIT|eps|EPS|wmf|WMF|zip|ZIP|ppt|PPT|mpg|MPG|xls|XLS|gz|GZ|rpm|RPM|tgz|TGZ|mov|MOV|exe|EXE|js|JS|mp4|MP4|mp3|MP3)$
+
+# skip URLs containing certain characters as probable queries, etc.
+#-[?*!@=]
+
+# skip URLs with slash-delimited segment that repeats 3+ times, to break loops
+-.*(/[^/]+)/[^/]+\1/[^/]+\1/
+
+# skip URLs with slash-delimited segment that repeats 3+ times, to break loops
+-.*(/.+?)/.*?\1/.*?\1/
+
+
++^(http:|https:)//([a-z0-9]*\.)*gunauction.com
+
+# accept hosts in MY.DOMAIN.NAME
++^(http:|https:)//([a-z0-9]*\.)*www.google.com/
++^(http:|https:)//([a-z0-9]*\.)*mllu.elasticbeanstalk.com/crawlerTest/
+
++^(http:|https:)//([a-z0-9]*\.)*iguntrade.com
++^(http:|https:)//([a-z0-9]*\.)*jasonsguns.com
+
++^(http:|https:)//www.jasonsguns.com/Display.aspx
++^(http:|https:)//www.jasonsguns.com/Search.aspx?code=Firearms
+
++^(http:|https:)//([a-z0-9]*\.)*ksl.com
++^(http:|https:)//([a-z0-9]*\.)*kyclassifieds.com
++^(http:|https:)//([a-z0-9]*\.)*midutahradio.com/tradio
++^(http:|https:)//([a-z0-9]*\.)*midwestgtrader.com
++^(http:|https:)//([a-z0-9]*\.)*montanagunclassifieds.com
++^(http:|https:)//([a-z0-9]*\.)*montanagunsforsale.com
++^(http:|https:)//([a-z0-9]*\.)*mountaintrader.com
++^(http:|https:)//([a-z0-9]*\.)*msguntrader.com
++^(http:|https:)//([a-z0-9]*\.)*ncgunads.com
++^(http:|https:)//([a-z0-9]*\.)*newmexicoguntrader.com
++^(http:|https:)//([a-z0-9]*\.)*nextechclassifieds.com
++^(http:|https:)//([a-z0-9]*\.)*sanjoseguntrader.com
+
++^(http:|https:)//([a-z0-9]*\.)*tell-n-sell.com
++^(http:|https:)//www.tell-n-sell.com/c-Guns---Weapons-Classifieds-48.aspx
+
++^(http:|https:)//([a-z0-9]*\.)*tennesseegunexchange.com
++^(http:|https:)//([a-z0-9]*\.)*theoutdoorstrader.com
+# blocking page
+#+^(http:|https:)//([a-z0-9]*\.)*tradesnsales.com
+#+^(http:|https:)//www.tradesnsales.com/category/recreational%2Fguns
++^(http:|https:)//([a-z0-9]*\.)*upstateguntrader.com
+# javascript
+#+^(http:|https:)//([a-z0-9]*\.)*vci-classifieds.com
+
+#+^(http:|https:)//([a-z0-9]*\.)*zidaho.com
++^(http:|https:)//www.zidaho.com/category/
+
+
+# skip everything else
+-.
+

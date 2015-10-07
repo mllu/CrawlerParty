@@ -40,8 +40,6 @@
 -.*(/.+?)/.*?\1/.*?\1/
 
 
-+^(http:|https:)//([a-z0-9]*\.)*gunauction.com
-
 # accept hosts in MY.DOMAIN.NAME
 +^(http:|https:)//([a-z0-9]*\.)*www.google.com/
 +^(http:|https:)//([a-z0-9]*\.)*mllu.elasticbeanstalk.com/crawlerTest/

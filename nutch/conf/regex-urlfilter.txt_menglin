@@ -57,7 +57,10 @@
 +^(http:|https:)//([a-z0-9]*\.)*montanagunclassifieds.com
 +^(http:|https:)//([a-z0-9]*\.)*montanagunsforsale.com
 +^(http:|https:)//([a-z0-9]*\.)*mountaintrader.com
+
 +^(http:|https:)//([a-z0-9]*\.)*msguntrader.com
++^(http:|https:)//([a-z0-9]*\.)*msguntrader.com/ad-category
+
 +^(http:|https:)//([a-z0-9]*\.)*ncgunads.com
 +^(http:|https:)//([a-z0-9]*\.)*newmexicoguntrader.com
 +^(http:|https:)//([a-z0-9]*\.)*nextechclassifieds.com
@@ -69,8 +72,8 @@
 +^(http:|https:)//([a-z0-9]*\.)*tennesseegunexchange.com
 +^(http:|https:)//([a-z0-9]*\.)*theoutdoorstrader.com
 # blocking page
-#+^(http:|https:)//([a-z0-9]*\.)*tradesnsales.com
-#+^(http:|https:)//www.tradesnsales.com/category/recreational%2Fguns
++^(http:|https:)//([a-z0-9]*\.)*tradesnsales.com
++^(http:|https:)//www.tradesnsales.com/category/recreational%2Fguns
 +^(http:|https:)//([a-z0-9]*\.)*upstateguntrader.com
 # javascript
 #+^(http:|https:)//([a-z0-9]*\.)*vci-classifieds.com

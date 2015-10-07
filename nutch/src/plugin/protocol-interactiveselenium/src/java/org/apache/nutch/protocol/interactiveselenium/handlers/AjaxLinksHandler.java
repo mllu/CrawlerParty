@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
  * because it considers them as not usual links but ajax links/interactions. This uses the same logic of 
  * DefalultMultiInteractionHandler. 
  */
-public class DefaultClickAllAjaxLinksHandler implements InteractiveSeleniumHandler {
+public class AjaxLinksHandler implements InteractiveSeleniumHandler {
   private static final Logger LOG = LoggerFactory
       .getLogger(DefaultClickAllAjaxLinksHandler.class);
 

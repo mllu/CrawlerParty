@@ -25,14 +25,15 @@ public class DefaultHandler implements InteractiveSeleniumHandler {
 	public void processDriver(WebDriver driver) {
 		System.out.println("=========== Into Default Handler ==========");
 		driver.get(driver.getCurrentUrl()); //load a new page in the current browser windows
-		searchBarFinder(driver);
-		driver.close();
+		// [menglin] I think it's better to only let default handler to get original content of current link
+		// and let other handlers to interact with AJAX/Form and accumulate with those new HTML body back to the
+		// current original page
+//		searchBarFinder(driver);
 	}
 
 	public boolean shouldProcessURL(String URL) {
 		System.out.println("Defualt Handler : " + URL);
 		return !URL.isEmpty();
-//		return false;
 	}
 
 	private static void searchBarFinder(WebDriver driver){

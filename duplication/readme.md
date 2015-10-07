@@ -6,6 +6,7 @@ $ bash dumpImage.sh segmentDir outputDir
 Install distance, PIL for python script.
 ```
 pip install PIL
+(if PIL is not found for you, try pip install Pillow)
 pip install distance
 ```
 Then

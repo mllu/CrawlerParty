@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
  * interaction with the web driver and need data from each such interaction in the end. This code shows that after you have 
  * done multiple interactions and accumulated data you can in the end append that to the driver.  
  */
-public class DefalultMultiInteractionHandler implements
+public class DefaultMultiInteractionHandler implements
     InteractiveSeleniumHandler {
   private static final Logger LOG = LoggerFactory
       .getLogger(DefalultMultiInteractionHandler.class);

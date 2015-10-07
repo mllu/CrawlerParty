@@ -25,6 +25,7 @@ do
   then
     echo "=========== Inject new outlinks ==========="
     nutch inject crawl/crawldb /tmp/outlinks
+    mv /tmp/outlinks /tmp/outlinks$i
   fi
   printf "\n\n"
 done

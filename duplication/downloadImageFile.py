@@ -17,8 +17,9 @@ def main():
         mapFile.write(url + str(file_name) + "\n")
         filepath = os.path.join(outputDir, str(file_name))
         # Download the file from `url` and save it locally under `file_name`:
-        with urllib.request.urlopen(url) as response, open(filepath, 'wb') as out_file:
-            shutil.copyfileobj(response, out_file)
+        # with urllib.request.urlopen(url) as response, open(filepath, 'wb') as out_file:
+        #     shutil.copyfileobj(response, out_file)
+        urllib.request.urlretrieve(url, filepath)
 
 
 if __name__ == '__main__':

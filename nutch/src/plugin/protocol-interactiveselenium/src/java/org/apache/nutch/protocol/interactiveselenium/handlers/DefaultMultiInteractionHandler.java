@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 public class DefaultMultiInteractionHandler implements
     InteractiveSeleniumHandler {
   private static final Logger LOG = LoggerFactory
-      .getLogger(DefalultMultiInteractionHandler.class);
+      .getLogger(DefaultMultiInteractionHandler.class);
 
   public void processDriver(WebDriver driver) {
     try {

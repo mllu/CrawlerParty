@@ -127,7 +127,7 @@
 +^(http:|https:)//([a-z0-9]*\.)*upstateguntrader.com
 +^(http:|https:)//([a-z0-9]*\.)*vci-classifieds.com
 +^(http:|https:)//([a-z0-9]*\.)*zidaho.com
-
++^(http:|https:)//([a-z0-9]*\.)*amazonaws.com
 
 # skip everything else
 -.

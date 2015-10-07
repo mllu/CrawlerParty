@@ -107,7 +107,7 @@ def phash(image_file_name):
     return "000000000000"
 
 
-def find_similar(userpath, is_exact="False"):
+def find_similar(userpath, is_exact, mapDict, statisticsFile):
     def list_path_and_add_file(toAddlist, path):
         if os.path.isdir(path) and ".idea" not in path:
             for childpath in os.listdir(path):
@@ -124,11 +124,12 @@ def find_similar(userpath, is_exact="False"):
     images = {}
     # print(is_exact)
     print("Number of photos before duplication: ", len(pathlist))
+    statisticsFileOut = open(statisticsFile, "w")
     i = 0
     for img in sorted(pathlist):
         # print(img)
         i += 1
-        if i % 10000 == 0:
+        if i % 1000 == 0:
             print("process", i)
         if is_exact.lower() == "true":
             # print("Exact Duplicate")
@@ -136,20 +137,42 @@ def find_similar(userpath, is_exact="False"):
         else:
             # print("Near Duplicate")
             hashValue = hashfunc(img, hash_method)
-        images[hashValue] = images.get(hashValue, []) + [img]
+        images[hashValue] = images.get(hashValue, []) + [mapDict[os.path.basename(img)]]
     for k, img_list in images.items():
         if len(img_list) > 1:
-            print(" ".join(img_list))
+            # print("\n".join(img_list))
+            # print()
+            # print()
+            statisticsFileOut.write("\n".join(img_list) + "\n\n\n")
+
     print("Number of photos before duplication: ", len(pathlist))
     print("Number of photos after duplication: ", len(images))
+    statisticsFileOut.write("Number of photos before duplication: " + str(len(pathlist)) + "\n")
+    statisticsFileOut.write("Number of photos before duplication: " + str(len(images)) + "\n")
+    statisticsFileOut.close()
 
 
 if __name__ == '__main__':
     def usage():
-        sys.stderr.write("""SYNOPSIS: python %s <directory> [<is_exact>]\n""" % sys.argv[0])
+        sys.stderr.write(
+            """SYNOPSIS: python %s <directory> <is_exact> <mapFile> <duplicateStatOutput> \n""" % sys.argv[0])
         sys.exit(1)
 
 
     userpath = sys.argv[1] if len(sys.argv) > 1 else usage()
-    is_exact = sys.argv[2] if len(sys.argv) > 1 else "false"
-    find_similar(userpath=userpath, is_exact=is_exact)
+    is_exact = sys.argv[2] if len(sys.argv) > 2 else "false"
+    mapFilename = sys.argv[3] if len(sys.argv) > 3 else "mapFileOut"
+    statisticsFile = sys.argv[4] if len(sys.argv) > 4 else "duplicateStatistics.out"
+    mapFile = open(mapFilename)
+    mapDict = {}
+    lineNumber = 1
+    url = ""
+    for line in mapFile:
+        if lineNumber % 2 == 1:
+            url = line.strip()
+        else:
+            uuid = line.strip()
+            mapDict[uuid] = url
+        lineNumber += 1
+    # print(mapDict)
+    find_similar(userpath=userpath, is_exact=is_exact, mapDict=mapDict, statisticsFile=statisticsFile)

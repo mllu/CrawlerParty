@@ -1,0 +1,222 @@
+We identified several typical errors we encounter and highlight them here as the first part. In the second part, we will list the urls that we failed to crawl as a long list. The list of fail-to-crawl urls should be longer than 100 here.
+
+
+Part 1:
+
+https://www.gunsamerica.com/
+Can't handle https protocol. Using the selenium afterwards solves this.
+
+http://www.gunauction.com/shop/items.aspx 
+Can only enter this page through posting a search form in the frontpage
+
+http://www.budsgunshop.com/catalog/advanced_search_result.php 
+Can only enter this page through posting a search form in the frontpage
+
+http://www.theoutdoorstrader.com/members/ronaldo-crespin.55445/ 
+Http 403 Forbidden
+
+http://www.kyclassifieds.com/xmlrpc.php 
+XML-RPC server accepts POST requests only
+
+http://www.gunbroker.com/Auction/ViewItem.aspx?Item=511226420
+Tika cannot parse text/aspdotnet
+
+http://www.impactguns.com/
+Need Ajax to parse the content. Cannot crawl any deeper.
+
+http://www.gunsinternational.com/
+Need Ajax to parse the content. Cannot crawl any deeper.
+
+http://www.midwestguntrader.com/
+Internal error. No way to deal with this. Dead link
+
+http://www.americanlisted.com/alabama_1/all_categories_0/110cc+pocket+bike/
+Http error 404. Not able to crawl
+
+http://www.mountaintrader.com/uploads/assets/russ's auto 38.png
+Can't handle space inside url. Fixed this by modifying the parse-normalize.xml
+
+http://www.gunauction.com/shop/guns/guns-for-sale-curios-relics/curios-relics-rifles/guns/cobra/enterprises/
+Cant' handle redirect with the current configuration
+
+
+
+Part 2:
+http://www.gunauction.com/shop/guns/black-powder/black-powder-shotguns/calico/
+ 5 (db_redir_perm)
+http://www.gunauction.com/shop/guns/black-powder/black-powder-shotguns/california/
+ 5 (db_redir_perm)
+http://www.gunauction.com/shop/guns/black-powder/black-powder-shotguns/canon/
+ 5 (db_redir_perm)
+http://www.gunauction.com/shop/guns/black-powder/black-powder-shotguns/carbine/
+ 5 (db_redir_perm)
+http://www.gunauction.com/shop/guns/black-powder/black-powder-shotguns/carl/gustaf/
+ 5 (db_redir_perm)
+ http://www.armslist.com/posts/3638357
+ 5 (db_redir_perm)
+http://www.armslist.com/posts/3638778
+ 5 (db_redir_perm)
+http://www.armslist.com/posts/3639203
+ 5 (db_redir_perm)
+http://www.armslist.com/posts/3639233
+ 5 (db_redir_perm)
+http://www.armslist.com/posts/3639280
+ 5 (db_redir_perm)
+ http://www.abqjournal.com/?attachment_id=639995
+ 5 (db_redir_perm)
+http://www.abqjournal.com/?attachment_id=640118
+ 5 (db_redir_perm)
+http://www.abqjournal.com/?attachment_id=640437
+ 5 (db_redir_perm)
+ http://www.theoutdoorstrader.com/threads/572998-WANTED-Browning-BL-22-Rifle
+ 3 (db_gone)
+http://www.theoutdoorstrader.com/threads/573021-FT-Glock-21-sf-FS-450
+ 3 (db_gone)
+http://www.theoutdoorstrader.com/threads/573124-FS-40-Cal-Federal-Premium-HST-ammo
+ 3 (db_gone)
+http://www.theoutdoorstrader.com/threads/573318-Item-Gone!-FS-FT-Ruger-SR9C
+ 3 (db_gone)
+http://www.abqjournal.com/?attachment_id=641809
+ 5 (db_redir_perm)
+http://www.abqjournal.com/?attachment_id=642233
+ 5 (db_redir_perm)
+http://www.theoutdoorstrader.com/css.php?css=xenforo,form,public&style=2&dir=LTR&d=1443752570
+Can't retrieve Tika parser for mime-type text/x-php
+http://www.ksl.com/jobs/css/jobs.css?0.13917300 1443675448
+Can't retrieve Tika parser for mime-type text/css
+http://www.theoutdoorstrader.com/members/win3006.1254/ failed with: Http code=403, url=http://www.theoutdoorstrader.com/members/win3006.1254/
+http://www.theoutdoorstrader.com/members/d0pesc0pe312.52876/ failed with: Http code=403, url=http://www.theoutdoorstrader.com/members/d0pesc0pe312.52876/
+http://www.theoutdoorstrader.com/members/brannonp.52045/ failed with: Http code=403, url=http://www.theoutdoorstrader.com/members/brannonp.52045/
+fetching http://www.theoutdoorstrader.com/trade/feedback/steer-clear-renigged-on-deal-after-agreement-and-meet-set-fail.83487/view (queue crawl delay=100ms)
+http://www.theoutdoorstrader.com/members/pistol386.42106/ failed with: Http code=403, url=http://www.theoutdoorstrader.com/members/pistol386.42106/
+fetch of http://www.theoutdoorstrader.com/members/spreyn.15467/ failed with: Http code=403, url=http://www.theoutdoorstrader.com/members/spreyn.15467/
+fetch of http://www.theoutdoorstrader.com/members/13053/ failed with: Http code=403, url=http://www.theoutdoorstrader.com/members/13053/
+http://www.abqjournal.com/author/cbrunt/feed: failed(2,0): RSS parse error
+http://www.abqjournal.com/author/mgallagher/feed: failed(2,0): RSS parse error
+http://www.abqjournal.com/author/rmetcalf/feed: failed(2,0): RSS parse error
+http://www.abqjournal.com/category/news-more/feed: failed(2,0): RSS parse error
+http://www.theoutdoorstrader.com/attachments/545843/
+ 5 (db_redir_perm)
+http://www.theoutdoorstrader.com/attachments/546115/
+ 5 (db_redir_perm)
+http://www.theoutdoorstrader.com/attachments/546116/
+ 5 (db_redir_perm)
+http://www.theoutdoorstrader.com/attachments/546322/
+ 5 (db_redir_perm)
+http://www.theoutdoorstrader.com/attachments/546323/
+ 5 (db_redir_perm)
+http://www.theoutdoorstrader.com/attachments/546327/
+ 5 (db_redir_perm)
+http://www.kyclassifieds.com/ads/commercial-zero-turn-mower-54-kawasaki-engine-2/index.php/report-ad?rh-context=http%3A%2F%2Fwww.kyclassifieds.com%2Fads%2Fcommercial-zero-turn-mower-54-kawasaki-engine-2%2F
+ 5 (db_redir_perm)
+http://www.kyclassifieds.com/ads/computer-printer-2/index.php/report-ad?rh-context=http%3A%2F%2Fwww.kyclassifieds.com%2Fads%2Fcomputer-printer-2%2F
+ 5 (db_redir_perm)
+http://www.kyclassifieds.com/ads/computer-tower/index.php/report-ad?rh-context=http%3A%2F%2Fwww.kyclassifieds.com%2Fads%2Fcomputer-tower%2F
+ 5 (db_redir_perm)
+http://www.kyclassifieds.com/ads/concession-stand/index.php/report-ad?rh-context=http%3A%2F%2Fwww.kyclassifieds.com%2Fads%2Fconcession-stand%2F
+ 5 (db_redir_perm)
+http://www.kyclassifieds.com/ads/concrete-wallforming-2/index.php/report-ad?rh-context=http%3A%2F%2Fwww.kyclassifieds.com%2Fads%2Fconcrete-wallforming-2%2F
+ 5 (db_redir_perm)
+http://www.kyclassifieds.com/ads/confederate-rebel-merchandise/index.php/report-ad?rh-context=http%3A%2F%2Fwww.kyclassifieds.com%2Fads%2Fconfederate-rebel-merchandise%2F
+ 5 (db_redir_perm)
+http://www.ksl.com/jobs/css/colorbox.css?0.44329700 1443662092: failed(2,0): Can't retrieve Tika parser for mime-type text/css
+http://www.ksl.com/jobs/css/colorbox.css?0.47684100 1443661292: failed(2,0): Can't retrieve Tika parser for mime-type text/css
+http://www.ksl.com/jobs/css/colorbox.css?0.48658200 1443662450: failed(2,0): Can't retrieve Tika parser for mime-type text/css
+http://www.ksl.com/jobs/css/jobs.css?0.02819800 1443664860: failed(2,0): Can't retrieve Tika parser for mime-type text/css
+http://www.ksl.com/jobs/css/jobs.css?0.03073700 1443662334: failed(2,0): Can't retrieve Tika parser for mime-type text/css
+http://www.ksl.com/jobs/css/jobs.css?0.12232900 1443661947: failed(2,0): Can't retrieve Tika parser for mime-type text/css
+http://www.ksl.com/jobs/css/jobs.css?0.23046900 1443662347: failed(2,0): Can't retrieve Tika parser for mime-type text/css
+http://www.theoutdoorstrader.com/threads/834157-Item-Gone!-FS-22-lr
+ 3 (db_gone)
+http://www.theoutdoorstrader.com/threads/834171-FS-AIM-NiBx-BCG
+ 3 (db_gone)
+http://www.theoutdoorstrader.com/threads/834259-Item-Gone!-FS-FT-Glock-19-RTF2
+ 3 (db_gone)
+http://www.theoutdoorstrader.com/threads/834331-FS-PSA-AR-15-Complete-Lower
+ 3 (db_gone)
+http://www.theoutdoorstrader.com/threads/834520-Item-Relisted!-FS-M-amp-P-9-Shield-NIB?p=4177254
+ 3 (db_gone)
+http://www.theoutdoorstrader.com/threads/834536-Item-Gone!-FS-Glock-41-w-3-mags-LNIB-**Price-Drop**
+ 3 (db_gone)
+http://www.theoutdoorstrader.com/threads/834537-Item-Gone!-PRICE-REDUCED-FS-FT-Pick-up-Toolbox
+ 3 (db_gone)
+http://www.americanlisted.com/pennsylvania_38/all_categories_0/honda+crf+150/
+ 3 (db_gone)
+http://www.americanlisted.com/pennsylvania_38/all_categories_0/honda+crf+230/
+ 3 (db_gone)
+http://www.americanlisted.com/pennsylvania_38/all_categories_0/honey+extractor/
+ 3 (db_gone)
+http://www.americanlisted.com/pennsylvania_38/all_categories_0/ibc+totes/
+ 3 (db_gone)
+http://www.americanlisted.com/pennsylvania_38/all_categories_0/iphone+4/
+ 3 (db_gone)
+http://www.americanlisted.com/pennsylvania_38/all_categories_0/jeep+ax15+transmission/
+ 3 (db_gone)
+ http://www.americanlisted.com/oregon_37/all_categories_0/precor+elliptical/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/pygmy+marmoset/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/s10+xtreme/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/scag+mower/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/scag/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/shelled+corn/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/snowblowers/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/suzuki+gsxr+1000/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/suzuki+ltr+450/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/swangas/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/teacup+pigs/
+ 3 (db_gone)
+ http://www.americanlisted.com/oregon_37/all_categories_0/marmoset+monkey/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/mesquite+firewood/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/mini+bikes/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/mini+boxer+puppies/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/mini+chopper/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/mini+crotch+rocket/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/mini+lop+rabbits/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/mini+pot+belly+pigs/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/mini+potbelly+pigs/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/mitsubishi+eclipse+gsx/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/pitbull+friendly+apartments/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/pot+bellied+pigs/
+ 3 (db_gone)
+http://www.americanlisted.com/oregon_37/all_categories_0/pot+belly+pigs/
+ 3 (db_gone)
+ http://www.americanlisted.com/oklahoma_36/all_categories_0/s10+xtreme/
+ 3 (db_gone)
+http://www.americanlisted.com/oklahoma_36/all_categories_0/scag+mower/
+ 3 (db_gone)
+http://www.americanlisted.com/oklahoma_36/all_categories_0/scag/
+ 3 (db_gone)
+http://www.americanlisted.com/oklahoma_36/all_categories_0/shelled+corn/
+ 3 (db_gone)
+http://www.americanlisted.com/oklahoma_36/all_categories_0/shifter+kart/
+ 3 (db_gone)
+http://www.americanlisted.com/oklahoma_36/all_categories_0/skidder/
+ 3 (db_gone)
+http://www.americanlisted.com/oklahoma_36/all_categories_0/snow+pusher/
+ 3 (db_gone)
+http://www.americanlisted.com/oklahoma_36/all_categories_0/spider+monkey/
+ 3 (db_gone)
+http://www.americanlisted.com/oklahoma_36/all_categories_0/super+swampers/
+
+
+

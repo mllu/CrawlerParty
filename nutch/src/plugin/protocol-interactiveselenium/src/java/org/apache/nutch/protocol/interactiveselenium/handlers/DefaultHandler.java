@@ -24,7 +24,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class DefaultHandler implements InteractiveSeleniumHandler {
 	public void processDriver(WebDriver driver) {
 		System.out.println("=========== Into Default Handler ==========");
-		driver.get(driver.getCurrentUrl()); //load a new page in the current browser windows
+		//driver.get(driver.getCurrentUrl()); //load a new page in the current browser windows
 		// [menglin] I think it's better to only let default handler to get original content of current link
 		// and let other handlers to interact with AJAX/Form and accumulate with those new HTML body back to the
 		// current original page

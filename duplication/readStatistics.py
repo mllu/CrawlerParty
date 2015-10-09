@@ -25,9 +25,10 @@ def main():
     for list_item in data:
         if lineNumber % 1000 == 0:
             print(lineNumber)
-        if lineNumber > 5:
-            break
-        url = str(list_item[0])
+        # if lineNumber > 5:
+        #     break
+        print(list_item[0])
+        url = str(list_item[0].encode("utf-8"))
         domain = ""
         # print(urlDomainList)
         for key in urlDomainList:
@@ -63,13 +64,14 @@ def main():
             statisticDic[domain] = statisticPerUrl
         lineNumber += 1
     with open(outputFile, 'w') as f:
-        f.write("domain imageCount urlCount fetchSuccess fetchUnfetched fetchRedirectTemp fetchGone fetchRedirectPerm\n")
+        f.write(
+            "domain imageCount urlCount fetchSuccess fetchUnfetched fetchRedirectTemp fetchGone fetchRedirectPerm\n")
         # print(len(statisticDic))
         # print(statisticDic)
         for item in statisticDic:
             # print(statisticDic[item])
             tempDict = statisticDic[item]
-            print(type(tempDict))
+            # print(type(tempDict))
             f.write(
                 str(item) + " " + str(tempDict["imageCount"]) + " " + str(tempDict["urlCount"]) +
                 " " + str(tempDict["fetchSuccess"]) + " " + str(tempDict["fetchUnfetched"]) + " " +

@@ -128,7 +128,7 @@
 <property>
   <name>interactiveselenium.handlers</name>
   <!--<value>DefaultHandler</value>-->
-  <value>DefaultClickAllAjaxLinksHandler,SearchBarHandler,DefaultHandler</value>
+  <value>BlockPageHandler,DefaultHandler</value>
   <description></description>
 </property>
 

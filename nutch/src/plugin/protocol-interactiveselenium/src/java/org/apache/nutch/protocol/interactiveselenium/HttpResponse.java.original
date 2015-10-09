@@ -37,11 +37,6 @@ import org.apache.nutch.protocol.ProtocolException;
 import org.apache.nutch.protocol.http.api.HttpException;
 import org.apache.nutch.protocol.http.api.HttpBase;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.firefox.internal.ProfilesIni;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import org.apache.nutch.protocol.selenium.HttpWebClient;
 
@@ -57,16 +52,11 @@ public class HttpResponse implements Response {
   private int code;
   private Metadata headers = new SpellCheckedMetadata();
   private static InteractiveSeleniumHandler[] handlers;
-  private static WebDriver driver;
 
   /** The nutch configuration */
   private Configuration conf = null;
 
   public HttpResponse(Http http, URL url, CrawlDatum datum) throws ProtocolException, IOException {
-    // initial a firefox driver with profile
-    ProfilesIni profileObj = new ProfilesIni();
-    FirefoxProfile yourFFProfile = profileObj.getProfile("your profile");
-    driver = new FirefoxDriver(yourFFProfile);
 
     this.conf = http.getConf();
     this.http = http;
@@ -224,7 +214,6 @@ public class HttpResponse implements Response {
       if (socket != null)
         socket.close();
     }
-
   }
 
   /* ------------------------- *
@@ -286,17 +275,12 @@ public class HttpResponse implements Response {
             continue;
         }
 
-        //WebDriver driver = HttpWebClient.getDriverForPage(url.toString(), conf);
+        WebDriver driver = HttpWebClient.getDriverForPage(url.toString(), conf);
 
-        if (!url.toString().isEmpty()) {
-          driver.get(url.toString());
-          new WebDriverWait(driver, 10);
+        handler.processDriver(driver);
+        processedPage += HttpWebClient.getHTMLContent(driver, conf);
 
-          handler.processDriver(driver);
-          processedPage += HttpWebClient.getHTMLContent(driver, conf);
-          driver.close();
-        }
-        //HttpWebClient.cleanUpDriver(driver);
+        HttpWebClient.cleanUpDriver(driver);
     }
 
     content = processedPage.getBytes("UTF-8");

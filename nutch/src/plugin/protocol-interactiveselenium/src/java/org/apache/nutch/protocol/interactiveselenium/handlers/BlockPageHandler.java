@@ -36,6 +36,7 @@ import org.apache.nutch.parse.OutlinkExtractor;
 public class BlockPageHandler implements InteractiveSeleniumHandler {
 	private static HashMap<String, String> cookieMap = new HashMap<String, String>();
 	private static ArrayList<Cookie> cookies = new ArrayList<Cookie>();
+	private static String accumulatedData;
 
 	public void processDriver(WebDriver driver, ArrayList<Cookie> cookies) {
 		this.cookies = cookies;
@@ -50,7 +51,8 @@ public class BlockPageHandler implements InteractiveSeleniumHandler {
 		System.out.println("[BlockPageHandler][processDriver] The current URL is: " + url);
 		System.out.println("[BlockPageHandler][processDriver] cookieMap.size() is: " + cookies.size());
 
-//		for (Map.Entry<String, String> entry : cookieMap.entrySet()) {
+		/*
+		//for (Map.Entry<String, String> entry : cookieMap.entrySet()) {
 		for (Cookie cookie : cookies) {
 			System.out.println("Retrieve cookie back!!!");
 			printCookie(cookie);
@@ -63,7 +65,8 @@ public class BlockPageHandler implements InteractiveSeleniumHandler {
 
 			driver.manage().addCookie(ck);
 		}
-		//driver.get(url);
+		*/
+		driver.get(url);
 
 		/*
 		// wait for finsih loading webpage, hard code the timer
@@ -123,6 +126,15 @@ public class BlockPageHandler implements InteractiveSeleniumHandler {
 				System.err.println(e);
 			}
 
+			// append the string to the last page's driver
+			JavascriptExecutor jsx = (JavascriptExecutor) driver;
+			jsx.executeScript("document.body.innerHTML=document.body.innerHTML "
+					+ accumulatedData + ";");
+
+			accumulatedData += driver.findElement(By.tagName("body"))
+					.getAttribute("innerHTML");
+
+			/*
 			Set<Cookie> cookies = driver.manage().getCookies();
 			System.out.println("Size: " + cookies.size());
 
@@ -130,10 +142,13 @@ public class BlockPageHandler implements InteractiveSeleniumHandler {
 			while (itr.hasNext()) {
 				Cookie cookie = itr.next();
 				cookies.add(cookie);
-//				cookieMap.put(cookie.getName(), cookie.getValue());
+				//cookieMap.put(cookie.getName(), cookie.getValue());
 				printCookie(cookie);
 			}
+			*/
+
 		}
+
 		System.out.println("=========== Leave BlockPageHandler's processDriver ==========");
 
 	}

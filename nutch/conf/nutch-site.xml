@@ -135,7 +135,7 @@
 <!-- lib-selenium configuration -->
 <property>
   <name>libselenium.page.load.delay</name>
-  <value>1</value>
+  <value>3</value>
   <description>
     The delay in seconds to use when loading a page with lib-selenium. This
     setting is used by protocol-selenium and protocol-interactiveselenium
@@ -169,7 +169,7 @@
 </property>
 <property>
   <name>http.redirect.max</name>
-  <value>3</value>
+  <value>-1</value>
   <description>The maximum number of redirects the fetcher will follow when
   trying to fetch a page. If set to negative or 0, fetcher won't immediately
   follow redirected URLs, instead it will record them for later fetching.

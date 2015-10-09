@@ -8,7 +8,7 @@ import nutchpy
 '''
 
 if len(sys.argv) != 2:
-    print "usage: python readSegContentData.py segmentDir/content/part-xxxxx/data"
+    print ("usage: python readSegContentData.py segmentDir/content/part-xxxxx/data")
     sys.exit()
 
 path = sys.argv[1]
@@ -37,7 +37,7 @@ print("Total Run: %d" % iteration)
 f.write("Total Run: %d\n" % iteration)
 
 for i in range(0,iteration):
-    print "\nround %d: from %d to %d"% (i+1, i*cnt, (i+1)*cnt-1) 
+    print ("\nround %d: from %d to %d"% (i+1, i*cnt, (i+1)*cnt-1) )
     f.write("\nround %d: from %d to %d\n"% (i+1, i*cnt, (i+1)*cnt-1))
     slice = seq_reader.slice(i*cnt, (i+1)*cnt-1, path)
     for s in slice:
@@ -46,22 +46,22 @@ for i in range(0,iteration):
         if header_data['contentType'] not in all_types:
             #import pdb; pdb.set_trace()
             all_types.add(header_data['contentType'])
-            print header_data['contentType']
+            print (header_data['contentType'])
             f.write(header_data['contentType']+"\n")
             if "image" in header_data['contentType']:
                 image_types.add(header_data['contentType'])
 
-print "\nAll MIME type:"
+print ("\nAll MIME type:")
 f.write("\nAll MIME type:\n")
 for type in all_types:
-    print "\ttype: %s\n"% type
+    print ("\ttype: %s\n"% type)
     f.write("\ttype: %s\n"% type)
 
-print "Unique Image MIME type:"
+print ("Unique Image MIME type:")
 f.write("\nUnique Image MIME type:\n")
 for type in image_types:
     str = "\ttype: %s\n"% type
-    print str
+    print (str)
     f.write(str)
     #print "\t%s" % "type", "%s"% type
 

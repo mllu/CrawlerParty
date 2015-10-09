@@ -1,4 +1,9 @@
-#Workflow:
+# Read statistics
+
+Run readStatistics to retrieve the statistics from crawldb
+
+
+##Deprecated 
 After you crawl the data, use the retrieveImgUrls.py script to read all the urls from the crawldb. Then download all these urls. Do some merging, like put all the images together in the same directory. Then run the duplicationWithUrlMapFile.py script.
 
 ```
@@ -9,7 +14,6 @@ python3 duplicateWithUrlMapFile.py <ImageDir> <is_exact> <mapFile> <duplicateSta
 
 ```
 
-##Deprecate
 Dump the images file to wherever you like using the dumpImage.sh: 
 ```sh
 $ bash dumpImage.sh segmentDir outputDir

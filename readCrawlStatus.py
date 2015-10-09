@@ -48,7 +48,7 @@ for list_item in data:
                 imageTypeSet.add(list_item[1][key])
                 imageCount += 1
 
-            if "db_unfetched" not in list_item[1]["Status"] \
+            if "Status" in list_item[1] and "db_unfetched" not in list_item[1]["Status"] \
                     and "db_duplicate" not in list_item[1]["Status"]:
                 urlStatistics.append([str(list_item[0]), str(list_item[1]["Status"]), list_item[1][key]])
 

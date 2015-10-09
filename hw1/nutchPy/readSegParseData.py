@@ -1,6 +1,7 @@
 import os
 import re
 import sys
+import math
 import nutchpy
 
 '''
@@ -8,7 +9,7 @@ import nutchpy
 '''
 
 if len(sys.argv) != 2:
-    print "usage: python readSegParseData.py segmentDir/parse_data/part-xxxxx/data"
+    print ("usage: python readSegParseData.py segmentDir/parse_data/part-xxxxx/data")
     sys.exit()
 
 path = sys.argv[1]
@@ -29,7 +30,7 @@ f.write("count of data: %d\n" % count)
 #print(seq_reader.head(1,node_path))
 
 cnt = 10
-iteration = count / cnt + 1;
+iteration = math.ceil(count / cnt);
 print("Total Run: %d" % iteration)
 f.write("Total Run: %d\n" % iteration)
 for i in range(0,iteration):

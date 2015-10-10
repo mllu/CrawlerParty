@@ -25,9 +25,9 @@ def main():
     for list_item in data:
         if lineNumber % 1000 == 0:
             print(lineNumber)
-        # if lineNumber > 5:
-        #     break
-        url = str(list_item[0])
+        #if lineNumber > 5:
+        #    break
+        url = str((list_item[0]).encode("utf-8"))
         domain = ""
         # print(urlDomainList)
         for key in urlDomainList:

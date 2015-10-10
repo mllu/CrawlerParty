@@ -65,7 +65,6 @@ for segment in dirs:
             parseText.append(key.strip())
             parseText.append(value.strip())
 
-
         with open(urlFilePath, 'w') as f:
             f.write(url + "\n")
             f.write(" ".join(parseText))
@@ -107,8 +106,6 @@ for segment in dirs:
                 parseMetadata.append(key.strip())
                 parseMetadata.append(value.strip())
 
-
-
         urlFilePath = os.path.join(metadataDir, urlFilename)
 
         with open(urlFilePath, 'w') as f:
@@ -141,22 +138,11 @@ for segment in dirs:
         urlMap[url] = urlFilename
         urlFilePath = os.path.join(contentDir, urlFilename)
         content = []
+        # what if it is a image file that is encoded in bytes?
         for key in list_item[1]:
 
             if key != "metadata":
-                # for html, key and value are the same, so we just add the keys.
                 content.append(key.strip())
-                # print("keys")
-                # print(key)
-                # print(type(key))
-                # print("values")
-                # print(list_item[1][key])
-
-
-        # newDict = urlDict.get(url, {"content": "", "metadata": "", "parseText": ""})
-        # newDict["content"] = " ".join(content)
-        # urlDict[url] = newDict
-        # print("item1", list_item[1])
 
         with open(urlFilePath, 'w') as f:
             f.write(url + "\n")

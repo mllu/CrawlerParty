@@ -44,6 +44,7 @@ for segment in dirs:
     lineNumber = 0
     for list_item in data:
         lineNumber += 1
+        print(lineNumber)
         if lineNumber % 1000 == 0:
             print(lineNumber)
         # if lineNumber > 1:
@@ -54,12 +55,13 @@ for segment in dirs:
         #
         # print(type(list_item[1]))
         url = str(list_item[0])
+        print(url)
 
         urlFilename = urlMap.get(url, str(uuid4()))
         urlMap[url] = urlFilename
 
         urlFilePath = os.path.join(textDir, urlFilename)
-
+        # print(urlFilePath)
         parseText = []
         for key, value in dict(list_item[1]).items():
             parseText.append(key.strip())
@@ -145,7 +147,6 @@ for segment in dirs:
                 content.append(key.strip())
 
         with open(urlFilePath, 'w') as f:
-            f.write(url + "\n")
             f.write(" ".join(content))
 for url, uuid in urlMap.items():
     print(url)

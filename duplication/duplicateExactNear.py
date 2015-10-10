@@ -19,6 +19,13 @@ def md5Checksum(filePath):
         return m.hexdigest()
 
 
+def md5ChecksumWithString(stringinput):
+    # print(stringinput)
+    m = hashlib.md5()
+    m.update(stringinput.encode())
+    return m.hexdigest()
+
+
 def get_features(s):
     width = 3
     s = s.lower()
@@ -57,11 +64,15 @@ metadataDir = os.path.join(inputDir, "metadata")
 textDir = os.path.join(inputDir, "text")
 
 dirs = os.listdir(contentDir)
-
+print(len(dirs))
+numberOfFiles = 0
 for file in dirs:
+    numberOfFiles += 1
+    if numberOfFiles % 100 == 0:
+        print(numberOfFiles)
     contentFilePath = os.path.join(contentDir, file)
     metadataFilePath = os.path.join(metadataDir, file)
-    textFilePath = os.path.join(metadataDir, file)
+    textFilePath = os.path.join(textDir, file)
     url = ""
     # read the content, metadata, parsetext into memory
     with open(metadataFilePath, "r") as f:
@@ -73,25 +84,26 @@ for file in dirs:
         record["url"] = url.strip()
         # record["text"] = f.readline().strip()
         text = f.readline().strip()
+        # print(text, text == "Google Google")
         if text != "":
             record["textSimHash"] = Simhash(get_features(text))
-            record["textMD5Hash"] = md5Checksum(textFilePath)
-    with open(contentFilePath, "r") as f:
-        record["contentSimHash"] = Simhash(get_features(f.read()))
+            record["textMD5Hash"] = md5ChecksumWithString(text)
+    with open(contentFilePath, "rb") as f:
+        record["contentSimHash"] = Simhash(get_features(f.read().decode('cp437')))
     record["contentMD5Hash"] = md5Checksum(contentFilePath)
 
     contentSimIndex.add(record["url"], record["contentSimHash"])
     metadataSimIndex.add(record['url'], record["metadataSimHash"])
     textSimIndex.add(record['url'], record["textSimHash"])
-
+    # print("record", record)
     hashDict[record["url"]] = record
     if is_exact.lower() == "true":
         if record["contentMD5Hash"] in contentMd5Dict or record["textMD5Hash"] in textMd5Dict:
             if record["contentMD5Hash"] in contentMd5Dict:
-                print("exact\n", contentMd5Dict[record["contentMD5Hash"]], record["url"])
+                print("exact\n", record["url"], contentMd5Dict[record["contentMD5Hash"]] )
                 contentMd5Dict[record["contentMD5Hash"]].add(record["url"])
-            if record["textMD5Hash"] in textMd5Dict:
-                print("exact\n", textMd5Dict[record["textMD5Hash"]], record["url"])
+            elif record["textMD5Hash"] in textMd5Dict:
+                print("exact\n", record["url"], textMd5Dict[record["textMD5Hash"]])
                 textMd5Dict[record["textMD5Hash"]].add(record["url"])
                 #             print out the exact duplicate and what it is a duplicate against
         else:
@@ -102,7 +114,23 @@ for file in dirs:
                 textMd5Dict[record["textMD5Hash"]] = set()
                 textMd5Dict[record["textMD5Hash"]].add(record["url"])
     else:
+        duplicateSet = set()
         for url in contentSimIndex.get_near_dups(record["contentSimHash"]):
-            if url != record["url"] and url in textSimIndex.get_near_dups(
-                    record["textSimHash"]) and url in metadataSimIndex.get_near_dups(record["metadataSimHash"]):
-                print("near\n", url, record["url"])
+            # if url != record["url"] and (url in textSimIndex.get_near_dups(
+            #         record["textSimHash"]) or url in metadataSimIndex.get_near_dups(record["metadataSimHash"])):
+            #     print("near\n", url, record["url"])
+            duplicateSet.add(url)
+        for url in textSimIndex.get_near_dups(record["textSimHash"]):
+            # if url != record["url"] and (url in textSimIndex.get_near_dups(
+            #         record["textSimHash"]) or url in metadataSimIndex.get_near_dups(record["metadataSimHash"])):
+            #     print("near\n", url, record["url"])
+            duplicateSet.add(url)
+        for url in metadataSimIndex.get_near_dups(record["metadataSimHash"]):
+            duplicateSet.add(url)
+        if len(duplicateSet) > 1:
+            print("Near Duplicates: " + record["url"])
+            for url in duplicateSet:
+                if url != record["url"]:
+                    print(url)
+            print()
+            print()

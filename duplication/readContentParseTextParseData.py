@@ -31,6 +31,8 @@ filename = "url"
 urlMap = {}
 # This would print all the files and directories
 for segment in dirs:
+    if "DS_Store" in segment:
+        continue
     parseTextFile = os.path.join(segmentDir, segment, "parse_text", "part-00000", "data")
     parseDataFile = os.path.join(segmentDir, segment, "parse_data", "part-00000", "data")
 
@@ -44,7 +46,7 @@ for segment in dirs:
     lineNumber = 0
     for list_item in data:
         lineNumber += 1
-        print(lineNumber)
+        # print(lineNumber)
         if lineNumber % 1000 == 0:
             print(lineNumber)
         # if lineNumber > 1:
@@ -55,8 +57,8 @@ for segment in dirs:
         #
         # print(type(list_item[1]))
         url = str(list_item[0])
-        print(url)
-
+        # print(url)
+        print(str(list_item[0]).encode())
         urlFilename = urlMap.get(url, str(uuid4()))
         urlMap[url] = urlFilename
 
@@ -89,7 +91,7 @@ for segment in dirs:
         #     break
         # print(type(list_item))
         # # print(list_item)
-        # print(str(list_item[0]).encode())
+        print(str(list_item[0]).encode())
         #
         # print(type(list_item[1]))
         url = str(list_item[0])
@@ -99,14 +101,56 @@ for segment in dirs:
         parseMetadata = []
         for key, value in dict(list_item[1]).items():
             if "Parse Metadata" in key:
-                parseMetadata.append(key.strip())
+                # parseMetadata.append(key.strip())
+                # stripe the value of irrelevant values:
+                items = value.split(" ")
                 parseMetadata.append(value.strip())
             elif "Content Metadata" in key:
-                parseMetadata.append(key.strip())
-                parseMetadata.append(value.strip())
-            elif "Title" in key:
-                parseMetadata.append(key.strip())
-                parseMetadata.append(value.strip())
+                print("ContentMetadata", value)
+                # parseMetadata.append(key.strip())
+                # parseMetadata.append(value.strip())
+                items = value.split("=")
+                metadataKeyValuePair = {}
+                previousValue = ""
+                nextKey = ""
+                for item in items:
+                    indexOfSpace = item.rfind(" ")
+                    if indexOfSpace == -1:
+                        if nextKey == "" and previousValue == "":
+                            #         at the beginning:
+                            nextKey = item
+                            continue
+                        else:
+                            previousValue = item
+                            metadataKeyValuePair[nextKey] = previousValue
+                            continue
+                    # either it is start or the end of the metadata
+                    previousValue = item[:indexOfSpace]
+                    metadataKeyValuePair[nextKey] = previousValue
+                    nextKey = item[indexOfSpace + 1:]
+                toDeleteKeys = []
+                for metadatakey, metadatavalue in metadataKeyValuePair.items():
+                    if "nutch" in metadatakey:
+                        toDeleteKeys.append(metadatakey)
+                        # metadataKeyValuePair.pop(metadatakey)
+                    elif "Server" in metadatakey:
+                        toDeleteKeys.append(metadatakey)
+                        # metadataKeyValuePair.pop(metadatakey)
+                    elif "Date" in metadatakey:
+                        toDeleteKeys.append(metadatakey)
+                        # metadataKeyValuePair.pop(metadatakey)
+                    elif "expire" in metadatakey:
+                        toDeleteKeys.append(metadatakey)
+                        # metadataKeyValuePair.pop(metadatakey)
+                for toDeleteKey in toDeleteKeys:
+                    metadataKeyValuePair.pop(toDeleteKey)
+                sortedTuple = sorted(metadataKeyValuePair.items())
+                toAppendStringArray = []
+                for tupleItem in sortedTuple:
+                    stringElement = " ".join(tupleItem)
+                    toAppendStringArray.append(stringElement)
+                outputString = " ".join(toAppendStringArray)
+                parseMetadata.append(outputString.strip())
 
         urlFilePath = os.path.join(metadataDir, urlFilename)
 
@@ -125,6 +169,7 @@ for segment in dirs:
         lineNumber += 1
         if lineNumber % 1000 == 0:
             print(lineNumber)
+        print(str(list_item[0]).encode())
         # if lineNumber > 1:
         #     break
         # print(type(list_item))

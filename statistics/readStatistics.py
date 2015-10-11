@@ -73,7 +73,7 @@ def main():
             statisticDic[domain] = statisticPerUrl
         lineNumber += 1
     with open(outputFile, 'w') as f:
-        f.write("domain imageCount urlCount fetchSuccess fetchUnfetched fetchRedirectTemp fetchGone fetchRedirectPerm\n")
+        f.write("domain\timageCount\turlCount\tfetchSuccess\tfetchUnfetched\tfetchRedirectTemp\tfetchGone\tfetchRedirectPerm\n")
         # print(len(statisticDic))
         # print(statisticDic)
         for item in statisticDic:
@@ -81,9 +81,9 @@ def main():
             tempDict = statisticDic[item]
             # print(type(tempDict))
             f.write(
-                str(item) + " " + str(tempDict["imageCount"]) + " " + str(tempDict["urlCount"]) +
-                " " + str(tempDict["fetchSuccess"]) + " " + str(tempDict["fetchUnfetched"]) + " " +
-                str(tempDict["fetchRedirectTemp"]) + " " + str(tempDict["fetchGone"]) + " " +
+                str(item) + "\t" + str(tempDict["imageCount"]) + "\t" + str(tempDict["urlCount"]) +
+                "\t" + str(tempDict["fetchSuccess"]) + "\t" + str(tempDict["fetchUnfetched"]) + "\t" +
+                str(tempDict["fetchRedirectTemp"]) + "\t" + str(tempDict["fetchGone"]) + "\t" +
                 str(tempDict['fetchRedirectPerm']) + "\n")
 
 

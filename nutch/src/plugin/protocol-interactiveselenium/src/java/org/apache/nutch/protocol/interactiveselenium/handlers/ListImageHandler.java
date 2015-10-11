@@ -35,7 +35,7 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
     public static HashSet<String> urlSet = new HashSet<String>();
 
     public void processDriver(WebDriver driver) {
-        System.out.println("=========== Into Handler_vci_classifieds ==========");
+        System.out.println("=========== Into ListImageHandler ==========");
         //Get the current page URL and store the value in variable 'url'
         String url = driver.getCurrentUrl();
 
@@ -45,6 +45,7 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
         //Load a new page in the current browser windows
         driver.get(url);
 
+        /*
         // form-input structure for search bar
         WebElement form = driver.findElement(By.tagName("form"));
         List<WebElement> inputs = null;
@@ -82,11 +83,12 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
             }
 
         }
+        */
 
         // wait for finsih loading webpage, hard code timer
         try {
             System.out.println("[ListImageHandler][processDriver] before sleep");
-            Thread.sleep(2000);
+            Thread.sleep(1000);
             System.out.println("[ListImageHandler][processDriver] after sleep");
 
         } catch (Exception e) {
@@ -95,19 +97,27 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
 
         // find all image element
         List<WebElement> findElements = driver.findElements(By.xpath("//img"));
+        /*
         if (url.equals("http://www.vci-classifieds.com/")) {
             WebElement myDynamicElement = (new WebDriverWait(driver, 10))
                     .until(ExpectedConditions.presenceOfElementLocated(By.id("searchlist")));
             findElements = driver.findElements(By.xpath(".//*[@id='searchlist']/center/table/tbody/tr/td/img"));
         }
-        System.out.println("[ListImageHandler][processDriver] total Results Found: " + findElements.size());
+        */
+        System.out.println("[ListImageHandler][processDriver] total images Found: " + findElements.size());
 
-        // show all the links of image
-        for (WebElement elem : findElements) {
-            System.out.println(elem.getAttribute("src"));
-            // System.out.println(elem.toString());
+        try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("/tmp/images", true)))) {
+            // show all the links of image
+            for (WebElement elem : findElements) {
+                out.println(elem.getAttribute("src"));
+                // System.out.println(elem.toString());
+            }
+            System.out.println("[ListImageHandler][processDriver] " + findElements.size() + " images shown");
+        }catch (IOException e) {
+            System.err.println(e);
         }
-        System.out.println("[ListImageHandler][processDriver] " + findElements.size() + " results shown");
+
+
 
         // log outlinks to /tmp/outlinks
         List<WebElement> findOutlinks = driver.findElements(By.xpath("//a"));
@@ -123,12 +133,12 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
             System.err.println(e);
         }
 
-        driver.close();
-        System.out.println("[ListImageHandler][processDriver] Close Driver");
+        //driver.close();
+        //System.out.println("[ListImageHandler][processDriver] Close Driver");
     }
 
     public boolean shouldProcessURL(String URL) {
-        addAllUrlIntoSet();
+        //addAllUrlIntoSet();
         // print stackTrace
         /*
         for (StackTraceElement ste : Thread.currentThread().getStackTrace())
@@ -142,8 +152,9 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
         System.out.println("should process this URL? : "+ URL.equals(seed_url));
         return URL.equals(seed_url);
         */
-        System.out.println("[ListImageHandler][shouldProcessURL] should process \"" + URL + "\" ?: " + urlSet.contains(URL));
-        return urlSet.contains(URL);
+        //System.out.println("[ListImageHandler][shouldProcessURL] should process \"" + URL + "\" ?: " + urlSet.contains(URL));
+        //return urlSet.contains(URL);
+        return !URL.isEmpty();
     }
 
     public void addAllUrlIntoSet() {

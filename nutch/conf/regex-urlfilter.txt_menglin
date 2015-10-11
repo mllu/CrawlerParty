@@ -49,7 +49,10 @@
 +^(http:|https:)//www.jasonsguns.com/Search.aspx?code=Firearms
 
 +^(http:|https:)//([a-z0-9]*\.)*ksl.com
+
 +^(http:|https:)//([a-z0-9]*\.)*kyclassifieds.com
++^(http:|https:)//([a-z0-9]*\.)*cloudfront.net
+
 +^(http:|https:)//([a-z0-9]*\.)*midutahradio.com/tradio
 +^(http:|https:)//([a-z0-9]*\.)*midwestgtrader.com
 +^(http:|https:)//([a-z0-9]*\.)*montanagunclassifieds.com
@@ -60,8 +63,13 @@
 +^(http:|https:)//([a-z0-9]*\.)*msguntrader.com/ad-category
 
 +^(http:|https:)//([a-z0-9]*\.)*ncgunads.com
++^(http:|https:)//([a-z0-9]*\.)*gowilkes.com
+
 +^(http:|https:)//([a-z0-9]*\.)*newmexicoguntrader.com
+
 +^(http:|https:)//([a-z0-9]*\.)*nextechclassifieds.com
++^(http:|https:)//([a-z0-9]*\.)*media.discoverstuff.com
+
 +^(http:|https:)//([a-z0-9]*\.)*sanjoseguntrader.com
 
 +^(http:|https:)//([a-z0-9]*\.)*tell-n-sell.com

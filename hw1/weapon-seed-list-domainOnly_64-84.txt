@@ -2,6 +2,7 @@ iguntrade
 jasonsguns
 ksl
 kyclassifieds
+cloudfront
 midutahradio
 midwestgtrader
 montanagunclassifieds
@@ -9,8 +10,10 @@ montanagunsforsale
 mountaintrader
 msguntrader
 ncgunads
+gowilkes
 newmexicoguntrader
 nextechclassifieds
+discoverstuff
 sanjoseguntrader
 tell-n-sell
 tennesseegunexchange

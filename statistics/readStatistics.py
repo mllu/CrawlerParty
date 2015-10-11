@@ -23,18 +23,28 @@ def main():
     statisticDic = {}
     lineNumber = 0
     for list_item in data:
+        #print list_item
         if lineNumber % 1000 == 0:
             print(lineNumber)
         #if lineNumber > 5:
         #    break
-        url = str((list_item[0]).encode("utf-8"))
+        
+        # print type(list_item[0])
+        # --> <class 'py4j.java_gateway.JavaObject'>
+        # convert JavaObject to String with java API toString()
+        url = list_item[0].toString()
+        #print url.encode('utf-8')
+        #print url
+
+        #unable to handler unicode properly
+        #url = str(list_item[0])
         domain = ""
         # print(urlDomainList)
         for key in urlDomainList:
             # print(domain)
             # print(url)
             if re.search(key, url):
-                # print("matched")
+                #print("matched")
                 domain = key
                 break
         # print(url)

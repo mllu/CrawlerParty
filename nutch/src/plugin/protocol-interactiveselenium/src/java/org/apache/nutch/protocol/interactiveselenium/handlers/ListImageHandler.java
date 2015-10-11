@@ -100,14 +100,20 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
                     .until(ExpectedConditions.presenceOfElementLocated(By.id("searchlist")));
             findElements = driver.findElements(By.xpath(".//*[@id='searchlist']/center/table/tbody/tr/td/img"));
         }
-        System.out.println("[ListImageHandler][processDriver] total Results Found: " + findElements.size());
+        System.out.println("[ListImageHandler][processDriver] total images Found: " + findElements.size());
 
-        // show all the links of image
-        for (WebElement elem : findElements) {
-            System.out.println(elem.getAttribute("src"));
-            // System.out.println(elem.toString());
+        try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("/tmp/images", true)))) {
+            // show all the links of image
+            for (WebElement elem : findElements) {
+                out.println(elem.getAttribute("src"));
+                // System.out.println(elem.toString());
+            }
+            System.out.println("[ListImageHandler][processDriver] " + findElements.size() + " images shown");
+        }catch (IOException e) {
+            System.err.println(e);
         }
-        System.out.println("[ListImageHandler][processDriver] " + findElements.size() + " results shown");
+
+
 
         // log outlinks to /tmp/outlinks
         List<WebElement> findOutlinks = driver.findElements(By.xpath("//a"));
@@ -123,8 +129,8 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
             System.err.println(e);
         }
 
-        driver.close();
-        System.out.println("[ListImageHandler][processDriver] Close Driver");
+        //driver.close();
+        //System.out.println("[ListImageHandler][processDriver] Close Driver");
     }
 
     public boolean shouldProcessURL(String URL) {
@@ -143,7 +149,8 @@ public class ListImageHandler implements InteractiveSeleniumHandler {
         return URL.equals(seed_url);
         */
         System.out.println("[ListImageHandler][shouldProcessURL] should process \"" + URL + "\" ?: " + urlSet.contains(URL));
-        return urlSet.contains(URL);
+        //return urlSet.contains(URL);
+        return !URL.isEmpty();
     }
 
     public void addAllUrlIntoSet() {

@@ -27,7 +27,7 @@ def main():
             print(lineNumber)
         #if lineNumber > 5:
         #    break
-        url = str((list_item[0]).encode("utf-8"))
+        url = str(list_item[0].encode('utf8'))
         domain = ""
         # print(urlDomainList)
         for key in urlDomainList:

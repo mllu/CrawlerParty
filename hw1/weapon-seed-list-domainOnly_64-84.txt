@@ -11,6 +11,7 @@ msguntrader
 ncgunads
 newmexicoguntrader
 nextechclassifieds
+discoverstuff
 sanjoseguntrader
 tell-n-sell
 tennesseegunexchange

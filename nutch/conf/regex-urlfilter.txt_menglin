@@ -61,7 +61,10 @@
 
 +^(http:|https:)//([a-z0-9]*\.)*ncgunads.com
 +^(http:|https:)//([a-z0-9]*\.)*newmexicoguntrader.com
+
 +^(http:|https:)//([a-z0-9]*\.)*nextechclassifieds.com
++^(http:|https:)//([a-z0-9]*\.)*media.discoverstuff.com
+
 +^(http:|https:)//([a-z0-9]*\.)*sanjoseguntrader.com
 
 +^(http:|https:)//([a-z0-9]*\.)*tell-n-sell.com

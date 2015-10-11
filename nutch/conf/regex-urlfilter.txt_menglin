@@ -44,6 +44,7 @@
 +^(http:|https:)//([a-z0-9]*\.)*iguntrade.com
 +^(http:|https:)//([a-z0-9]*\.)*jasonsguns.com
 
++^(http:|https:)//([a-z0-9]*\.)*jasonsguns.com
 +^(http:|https:)//www.jasonsguns.com/Display.aspx
 +^(http:|https:)//www.jasonsguns.com/Search.aspx?code=Firearms
 
@@ -68,14 +69,17 @@
 
 +^(http:|https:)//([a-z0-9]*\.)*tennesseegunexchange.com
 +^(http:|https:)//([a-z0-9]*\.)*theoutdoorstrader.com
+
 # blocking page
 +^(http:|https:)//([a-z0-9]*\.)*tradesnsales.com
 +^(http:|https:)//www.tradesnsales.com/category/recreational%2Fguns
+
 +^(http:|https:)//([a-z0-9]*\.)*upstateguntrader.com
+
 # javascript
 +^(http:|https:)//([a-z0-9]*\.)*vci-classifieds.com
 
-#+^(http:|https:)//([a-z0-9]*\.)*zidaho.com
++^(http:|https:)//([a-z0-9]*\.)*zidaho.com
 +^(http:|https:)//www.zidaho.com/category/
 
 

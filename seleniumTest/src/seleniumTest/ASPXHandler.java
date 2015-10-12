@@ -44,14 +44,8 @@ public class ASPXHandler {
 		// Load a new page in the current browser windows
 		driver.get(url);
 		
-		try {
-			System.out.println("[ASPXHandler][processDriver] before sleep");
-			Thread.sleep(1000);
-			System.out.println("[ASPXHandler][processDriver] after sleep");
+		(new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id("page")));
 
-		} catch (Exception e) {
-			System.out.println("[ASPXHandler][processDriver] Exception caught");
-		}
 
 		if (url.indexOf("Search.aspx") != -1) {
 			// find all listing post link
@@ -104,13 +98,5 @@ public class ASPXHandler {
 				System.err.println(e);
 			}
 		}
-		/*
-		 * try { System.out.println("[ASPXHandler][processDriver] before sleep"
-		 * ); Thread.sleep(1000); System.out.println(
-		 * "[ASPXHandler][processDriver] after sleep");
-		 * 
-		 * } catch (Exception e) { System.out.println(
-		 * "[ASPXHandler][processDriver] Exception caught"); }
-		 */
 	}
 }

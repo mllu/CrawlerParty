@@ -128,7 +128,7 @@
 <property>
   <name>interactiveselenium.handlers</name>
   <!--<value>DefaultHandler</value>-->
-  <value>ListImageHandler,DefaultHandler</value>
+  <value>ASPXHandler,DefaultHandler</value>
   <description></description>
 </property>
 

@@ -73,7 +73,7 @@ for digestValue in digestDict:
         numberOfDuplicates += len(digestDict[digestValue]) - 1
         print()
 for key in sorted(digestDict.keys()):
-    digestOutput.write("%s %s" % (key, len(digestDict[key])))
+    digestOutput.write("%s %s %s" % (key, len(digestDict[key]), digestDict[key]))
     digestOutput.write("\n")
 print()
 print("Number Of Exact Duplicates", numberOfDuplicates)

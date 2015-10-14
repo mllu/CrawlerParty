@@ -2,7 +2,10 @@ from uuid import uuid4
 import nutchpy
 import sys
 import os
-
+if len(sys.argv) < 2:
+    sys.stderr.write(
+            """SYNOPSIS: python3 %s <segmentDirectory> \n""" % sys.argv[0])
+    sys.exit(1)
 segmentDir = sys.argv[1]
 dirs = os.listdir(segmentDir)
 urlMap = {}

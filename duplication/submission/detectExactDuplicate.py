@@ -2,18 +2,23 @@ from uuid import uuid4
 import nutchpy
 import sys
 import os
+
 if len(sys.argv) < 2:
     sys.stderr.write(
-            """SYNOPSIS: python3 %s <segmentDirectory> \n""" % sys.argv[0])
+        """SYNOPSIS: python3 %s <segmentDirectory> <outputDigestFile>\n""" % sys.argv[0])
     sys.exit(1)
 segmentDir = sys.argv[1]
+digestOutputFile = sys.argv[2]
 dirs = os.listdir(segmentDir)
 urlMap = {}
 digestDict = {}
 print("number of segments", len(dirs))
 segmentNumber = 0
 for eachSegment in dirs:
+    if "DS_Store" in eachSegment:
+        continue
     segmentNumber += 1
+    print()
     print("segment ", segmentNumber)
     try:
         parseDataFile = os.path.join(segmentDir, eachSegment, "parse_data", "part-00000", "data")
@@ -59,11 +64,16 @@ for eachSegment in dirs:
                     digestDict[digestValue].add(url)
                     print(digestDict[digestValue])
 
+digestOutput = open(digestOutputFile, "w")
 numberOfDuplicates = 0
+print("Print out Images")
 for digestValue in digestDict:
     if len(digestDict[digestValue]) > 1:
         print(digestDict[digestValue])
         numberOfDuplicates += len(digestDict[digestValue]) - 1
         print()
+for key in sorted(digestDict.keys()):
+    digestOutput.write("%s %s" % (key, len(digestDict[key])))
+    digestOutput.write("\n")
 print()
 print("Number Of Exact Duplicates", numberOfDuplicates)

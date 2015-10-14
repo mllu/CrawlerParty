@@ -40,7 +40,6 @@
 -.*(/.+?)/.*?\1/.*?\1/
 
 # very rich resources
-
 -^http://pc.gunbroker.com/Content/Images/firstd.gif
 -^http://pc.gunbroker.com/Content/Images/nextd.gif
 -^http://pc.gunbroker.com/Content/Images/prevd.gif
@@ -50,40 +49,43 @@
 -^(http:|https:)//pc.gunbroker.com/Account/Login
 -^(http:|https:)//www.gunsamerica.com/Login.aspx
 
-+^(http:|https:)//([a-z0-9]*\.)*gunbroker.com
-# too little links
-
-# +^(http:|https:)//([a-z0-9]*\.)*gundeals.org
-
-# too many useless urls
-# +^(http:|https:)//([a-z0-9]*\.)*gunlistings.org
+-^(http:|https:)//pc.gunbroker.com/Account/Login
+-^(http:|https:)//www.gunbroker.com/ShowLogin.aspx?
++^http://www.gunbroker.com/Firearms
++^http://www.gunbroker.com/Auction/ViewItem
++^http://pics.gunbroker.com/
 
 
-+^(http:|https:)//([a-z0-9]*\.)*gunsamerica.com
-+^(http:|https:)//([a-z0-9]*\.)*gunsinternational.com
-+^(http:|https:)//([a-z0-9]*\.)*shooting.com
+# need selenium to run
+-^(http:|https:)//([a-z0-9]*\.)*gunsinternational.com
 
-# deal with nextechclassifieds
-+^(http:|https:)//([a-z0-9]*\.)*nextechclassifieds.com/search/firearms
+# too general and too many irrelevant photos
+-^(http:|https:)//([a-z0-9]*\.)*nextechclassifieds.com/search/firearms
 -^(http:|https:)//([a-z0-9]*\.)*nextechclassifieds.com/listings
-+^(http:|https:)//([a-z0-9]*\.)*discoverstuff.com/img/
+-^(http:|https:)//([a-z0-9]*\.)*discoverstuff.com/img/
 # national gun trader 
+-^(http:|https:)//([a-z0-9]*\.)*nationalguntrader.com/ffl
 +^(http:|https:)//([a-z0-9]*\.)*nationalguntrader.com
 +^(http:|https:)//([a-z0-9]*\.)*amazonaws.com
-
++^(http:|https:)//([a-z0-9]*\.)*hipointfirearmsforums.com/photo
++^(http:|https:)//([a-z0-9]*\.)*hipointfirearmsforums.com/images
 # +^(http:|https:)//([a-z0-9]*\.)*oodle.com
 
 # +^(http:|https:)//([a-z0-9]*\.)*recycler.com
-+^(http:|https:)//([a-z0-9]*\.)*shooterswap.com
-+^(http:|https:)//([a-z0-9]*\.)*shooting.org
-+^(http:|https:)//([a-z0-9]*\.)*slickguns.com
++^(http:|https:)//([a-z0-9]*\.)*shooterswap.com/$
++^(http:|https:)//([a-z0-9]*\.)*shooterswap.com/guns-for-sale
++^(http:|https:)//([a-z0-9]*\.)*shooterswap.com/wp-content
++^(http:|https:)//([a-z0-9]*\.)*shooting.org/Guns
++^(http:|https:)//([a-z0-9]*\.)*shooting.org/show_image
++^(http:|https:)//([a-z0-9]*\.)*shooting.org/Ammo
++^(http:|https:)//([a-z0-9]*\.)*slickguns.com/$
++^(http:|https:)//([a-z0-9]*\.)*slickguns.com/category
++^(http:|https:)//([a-z0-9]*\.)*slickguns.com/product
++^(http:|https:)//([a-z0-9]*\.)*slickguns.com/sites/default
 
-+^(http:|https:)//([a-z0-9]*\.)*hipointfirearmsforums.com/photo
-+^(http:|https:)//([a-z0-9]*\.)*hipointfirearmsforums.com/images
-+^(http:|https:)//([a-z0-9]*\.)*impactguns.com
-# +^(http:|https:)//([a-z0-9]*\.)*iwanna.com
 +^(http:|https:)//([a-z0-9]*\.)*lionseek.com/(guns|item)
 +^(http:|https:)//([a-z0-9]*\.)*midwestguntrader.com
+
 
 
 

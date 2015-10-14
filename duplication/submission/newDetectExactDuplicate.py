@@ -1,0 +1,66 @@
+from uuid import uuid4
+import nutchpy
+import sys
+import os
+
+segmentDir = sys.argv[1]
+dirs = os.listdir(segmentDir)
+urlMap = {}
+digestDict = {}
+print("number of segments", len(dirs))
+segmentNumber = 0
+for eachSegment in dirs:
+    segmentNumber += 1
+    print("segment ", segmentNumber)
+    try:
+        parseDataFile = os.path.join(segmentDir, eachSegment, "parse_data", "part-00000", "data")
+        # read metadata
+        print(os.path.join(segmentDir, eachSegment))
+        count = nutchpy.sequence_reader.count(parseDataFile)
+        print(count)
+        data = nutchpy.sequence_reader.read_iterator(parseDataFile)
+    except:
+        continue
+
+    lineNumber = 0
+    for list_item in data:
+        lineNumber += 1
+        if lineNumber % 1000 == 0:
+            print(lineNumber)
+        # if lineNumber > 1:
+        #     break
+        # print(type(list_item))
+        # # print(list_item)
+        # print(str(list_item[0]).encode())
+        #
+        # print(type(list_item[1]))
+        url = str(list_item[0])
+
+        # urlFilename = urlMap.get(url, str(uuid4()))
+        parseMetadata = []
+        for key, value in dict(list_item[1]).items():
+            if "Content Metadata" in key:
+                # print("ContentMetadata", value)
+                # print(type(value))
+                startIndexOfNutchDigest = str(value).index("nutch.content.digest=")
+                endOfNutchDigest = str(value)[startIndexOfNutchDigest:].index(" ")
+                digestValue = str(value)[startIndexOfNutchDigest:startIndexOfNutchDigest + endOfNutchDigest]
+                # print(digestValue)
+                if digestValue not in digestDict:
+                    newSet = set()
+                    newSet.add(url)
+                    digestDict[digestValue] = newSet
+                else:
+                    print("Exact Duplicate")
+
+                    digestDict[digestValue].add(url)
+                    print(digestDict[digestValue])
+
+numberOfDuplicates = 0
+for digestValue in digestDict:
+    if len(digestDict[digestValue]) > 1:
+        print(digestDict[digestValue])
+        numberOfDuplicates += len(digestDict[digestValue]) - 1
+        print()
+print()
+print("Number Of Exact Duplicates", numberOfDuplicates)

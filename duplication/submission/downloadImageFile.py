@@ -1,8 +1,13 @@
 import urllib.request
+from urllib.request import Request
 import shutil
 import sys
 import os
 from uuid import uuid4
+
+
+class AppURLopener(urllib.request.FancyURLopener):
+    version = "Mozilla/5.0"
 
 
 def main():
@@ -24,9 +29,9 @@ def main():
             print(lineNumber)
         # if lineNumber > 3:
         #     break
-        url = line
+        url = line.strip()
         file_name = uuid4()
-        mapFile.write(url + str(file_name) + "\n")
+        mapFile.write(url + "\n" + str(file_name) + "\n")
         if not os.path.exists(outputDir):
             os.makedirs(outputDir)
         filepath = os.path.join(outputDir, str(file_name))
@@ -35,11 +40,20 @@ def main():
         #     shutil.copyfileobj(response, out_file)
         if "avatar" not in url and "discover" not in url:
             try:
-                urllib.request.urlretrieve(url, filepath)
-            except urllib.error.HTTPError:
-                print("Oops, an Http Error")
+                print(url.encode())
+                req = Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) '
+                                                          'AppleWebKit/537.36 (KHTML, like Gecko) '
+                                                          'Chrome/34.0.1847.137 Safari/537.36'})
+                with open(filepath, "wb") as f:
+                    f.write(urllib.request.urlopen(req).read())
+            except urllib.error.HTTPError as e:
+                print("Oops, an Http Error", e)
+            except urllib.error.URLError as e:
+                print("Oops, an Url Error", e)
+            except Exception as e:
+                print("whatever Error", e)
 
-            lineNumber += 1
+        lineNumber += 1
 
 
 if __name__ == '__main__':

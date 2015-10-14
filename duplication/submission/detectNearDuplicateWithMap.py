@@ -124,6 +124,7 @@ def find_similar(userpath, is_exact, mapDict, statisticsFile):
     images = {}
     # print(is_exact)
     print("Number of photos before duplication: ", len(pathlist))
+    print(pathlist)
     statisticsFileOut = open(statisticsFile, "w")
     i = 0
     for img in sorted(pathlist):
@@ -137,32 +138,51 @@ def find_similar(userpath, is_exact, mapDict, statisticsFile):
         else:
             # print("Near Duplicate")
             hashValue = hashfunc(img, hash_method)
+            print(hashValue)
         images[hashValue] = images.get(hashValue, []) + [mapDict[os.path.basename(img)]]
-    for k, img_list in images.items():
+
+    numberOfDuplicates = 0
+    keys = list(images.keys())
+    newImageDict = images.copy()
+    for i in range(0, len(keys)):
+        for j in range(i + 1, len(keys)):
+            if calculate_hamming_distance(keys[i], keys[j]) <= 3:
+                print("Near Duplicates with Different Hash Value", images[keys[i]] + images[keys[j]])
+                newList = list(images[keys[i]] + images[keys[j]])
+                statisticsFileOut.write(
+                    "Near Duplicates with Different Hash Value:\n" + "\n".join(newList) + "\n\n\n")
+                numberOfDuplicates += len(newList) - 1
+                newImageDict.pop(keys[i])
+                newImageDict.pop(keys[j])
+
+    # print(len(newImageDict))
+    for k, img_list in newImageDict.items():
         if len(img_list) > 1:
             # print("\n".join(img_list))
             # print()
             # print()
             statisticsFileOut.write("\n".join(img_list) + "\n\n\n")
+            print("Near Duplicates with Exactly same Hash Value", img_list)
+            numberOfDuplicates += len(img_list) - 1
 
     print("Number of photos before duplication: ", len(pathlist))
-    print("Number of photos after duplication: ", len(images))
+    print("Number of photos after duplication: ", len(pathlist) - numberOfDuplicates)
     statisticsFileOut.write("Number of photos before duplication: " + str(len(pathlist)) + "\n")
-    statisticsFileOut.write("Number of photos before duplication: " + str(len(images)) + "\n")
+    statisticsFileOut.write("Number of photos before duplication: " + str(len(pathlist) - numberOfDuplicates) + "\n")
     statisticsFileOut.close()
 
 
 if __name__ == '__main__':
     def usage():
         sys.stderr.write(
-            """SYNOPSIS: python %s <directory> <is_exact> <mapFile> <duplicateStatOutput> \n""" % sys.argv[0])
+            """SYNOPSIS: python %s <directory> <mapFile> <duplicateStatOutput> \n""" % sys.argv[0])
         sys.exit(1)
 
 
     userpath = sys.argv[1] if len(sys.argv) > 1 else usage()
-    is_exact = sys.argv[2] if len(sys.argv) > 2 else "false"
-    mapFilename = sys.argv[3] if len(sys.argv) > 3 else "mapFileOut"
-    statisticsFile = sys.argv[4] if len(sys.argv) > 4 else "duplicateStatistics.out"
+    # is_exact = sys.argv[2] if len(sys.argv) > 2 else "false"
+    mapFilename = sys.argv[2] if len(sys.argv) > 2 else "mapFileOut"
+    statisticsFile = sys.argv[3] if len(sys.argv) > 3 else "duplicateStatistics.out"
     mapFile = open(mapFilename)
     mapDict = {}
     lineNumber = 1
@@ -175,4 +195,4 @@ if __name__ == '__main__':
             mapDict[uuid] = url
         lineNumber += 1
     # print(mapDict)
-    find_similar(userpath=userpath, is_exact=is_exact, mapDict=mapDict, statisticsFile=statisticsFile)
+    find_similar(userpath=userpath, is_exact="false", mapDict=mapDict, statisticsFile=statisticsFile)

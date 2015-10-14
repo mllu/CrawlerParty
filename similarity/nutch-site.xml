@@ -155,7 +155,7 @@
 </property>
 <property>
     <name>scoring.similarity.stopword.file</name>
-    <value>stopwords.txt</value>
+    <value>stopword.txt</value>
 </property>
 
 <property>

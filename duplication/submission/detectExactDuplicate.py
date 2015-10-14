@@ -42,7 +42,7 @@ for eachSegment in dirs:
         # print(str(list_item[0]).encode())
         #
         # print(type(list_item[1]))
-        url = str(list_item[0])
+        url = list_item[0].toString()
 
         # urlFilename = urlMap.get(url, str(uuid4()))
         parseMetadata = []

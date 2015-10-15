@@ -1,6 +1,7 @@
 from uuid import uuid4
 import nutchpy
 import sys
+from collections import OrderedDict
 import os
 
 if len(sys.argv) < 2:
@@ -11,7 +12,8 @@ segmentDir = sys.argv[1]
 digestOutputFile = sys.argv[2]
 dirs = os.listdir(segmentDir)
 urlMap = {}
-digestDict = {}
+# digestDict = {}
+digestDict = OrderedDict()
 print("number of segments", len(dirs))
 segmentNumber = 0
 for eachSegment in dirs:
@@ -72,7 +74,7 @@ for digestValue in digestDict:
         print(digestDict[digestValue])
         numberOfDuplicates += len(digestDict[digestValue]) - 1
         print()
-for key in sorted(digestDict.keys()):
+for key in digestDict:
     digestOutput.write("%s %s\n%s" % (key, len(digestDict[key]), digestDict[key]))
     digestOutput.write("\n")
 print()

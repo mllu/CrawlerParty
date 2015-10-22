@@ -1,0 +1,14 @@
+domain	imageCount	urlCount	fetchSuccess	fetchUnfetched	fetchRedirectTemp	fetchGone	fetchRedirectPerm
+gunsinternational	11892	32750	12569	20164	16	0	1
+gunsamerica	6585	97151	23177	70777	2543	92	562
+gunbroker	21541	342758	126663	188473	20830	6768	24
+nextechclassifieds.com	0	10748	2785	5169	2794	0	0
+discoverstuff.com	13580	13584	135800	0	4	0
+nationalguntrader	80	27367	19225	172	14	2	7954
+amazonaws.com	20778	20857	20778	79	0	0	0
+shooterswap	3928	11066	7996	2020	4	4	1042
+slickguns	19598	367726	115362	241755	5670	4500	439
+shooting	21868	125850	69730	54887	890	85	258
+hipointfirearmsforums	2556	5990	5696	1	263	29	1
+lionseek	207625	360312	338204	22098	10	0	0
+impactguns	4759	7216	5455	1693	53	15	0

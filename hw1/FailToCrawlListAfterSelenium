@@ -1,0 +1,6 @@
+After enabling the selenium and tika-tesseract, we are able to crawl more urls at the expense of crawling speed. However, we still have problems crawling some specific urls.
+
+As before, we first highlight some of the urls that we identified, and then we will append a list.
+
+https://www.gunsamerica.com/
+When we crawl this using selenium, the firefox doesn't even open. We have exclude the possibility that we can't handle https, as can be testified by other urls. We can only assume that somehow the webmaster prohibits us from crawling. 

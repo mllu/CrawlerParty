@@ -29,6 +29,7 @@ def main():
         #     break
         # print(list_item[0])
         url = str((list_item[0]).encode("utf-8"))
+        # url = str(list_item[0])
         domain = ""
         # print(urlDomainList)
         for key in urlDomainList:

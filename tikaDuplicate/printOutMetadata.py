@@ -8,6 +8,6 @@ tika.initVM()
 inputDir = sys.argv[1]
 dirs = os.listdir(inputDir)
 for eachFile in dirs:
-    parsed = parser.from_file(os.path.join(inputDir, eachFile))
-    print(parsed['metadata'])
-    print(parsed['content'])
+    if "DS_Store" not in eachFile:
+        parsed = parser.from_file(os.path.join(inputDir, eachFile))
+        print(eachFile, parsed['metadata'])

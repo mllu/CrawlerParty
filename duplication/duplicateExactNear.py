@@ -66,6 +66,7 @@ textDir = os.path.join(inputDir, "text")
 dirs = os.listdir(contentDir)
 print(len(dirs))
 numberOfFiles = 0
+numberOfDuplicates = {"exact": 0, "near": 0}
 for file in dirs:
     numberOfFiles += 1
     if numberOfFiles % 100 == 0:
@@ -100,10 +101,12 @@ for file in dirs:
     if is_exact.lower() == "true":
         if record["contentMD5Hash"] in contentMd5Dict or record["textMD5Hash"] in textMd5Dict:
             if record["contentMD5Hash"] in contentMd5Dict:
-                print("exact\n", record["url"], contentMd5Dict[record["contentMD5Hash"]] )
+                print("exact\n", record["url"], contentMd5Dict[record["contentMD5Hash"]])
+                numberOfDuplicates["exact"] += len(contentMd5Dict[record["contentMD5Hash"]])
                 contentMd5Dict[record["contentMD5Hash"]].add(record["url"])
             elif record["textMD5Hash"] in textMd5Dict:
                 print("exact\n", record["url"], textMd5Dict[record["textMD5Hash"]])
+                numberOfDuplicates["exact"] += len(textMd5Dict[record["textMD5Hash"]])
                 textMd5Dict[record["textMD5Hash"]].add(record["url"])
                 #             print out the exact duplicate and what it is a duplicate against
         else:
@@ -134,3 +137,7 @@ for file in dirs:
                     print(url)
             print()
             print()
+        numberOfDuplicates["near"] += len(duplicateSet) - 1
+
+print("number of duplicate\n")
+print(numberOfDuplicates)

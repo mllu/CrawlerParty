@@ -130,7 +130,7 @@ public class SUTimeParser {
 		calendar.setTime(sdf.parse(timeInfo));
 		System.out.println("parseTimeInfo: " + timeInfo);
 		int year = calendar.get(Calendar.YEAR);
-		int month = calendar.get(Calendar.MONTH);
+		int month = calendar.get(Calendar.MONTH) + 1;
 		int day = calendar.get(Calendar.DAY_OF_MONTH);
 
 		int hour = calendar.get(Calendar.HOUR);
@@ -138,6 +138,7 @@ public class SUTimeParser {
 		int second = calendar.get(Calendar.SECOND);
 
 		String date = year + "-" + month + "-" + day;
+		//System.out.println(date);
 		rangePair.add(date);
 		return true;
 	}

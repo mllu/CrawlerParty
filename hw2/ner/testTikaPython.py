@@ -21,7 +21,7 @@ fOutput.write("<add>\n")
 
 
 # for each input file, do something like the following
-parsed = parser.from_file('../test2.html')
+parsed = parser.from_file('./test.html')
 # print parsed["metadata"]["Description"]
 fOutput.write("\t<doc>\n")
 print parsed["metadata"]["title"]

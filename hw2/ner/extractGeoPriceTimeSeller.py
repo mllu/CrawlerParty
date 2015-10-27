@@ -209,7 +209,7 @@ for htmlFileName in htmlPathList:
     # on mine.
     # For now just use the regular expression to match the time
 
-    timePattern = re.compile(r'(\d{1,2})/(\d{1,2})/(\d{4}) (\d{1,2}):(\d{2}):(\d{2}) ([A|P]M)')
+    timePattern = re.compile(r'(\d{1,2})/(\d{1,2})/(\d{4}) (\d{1,2}):(\d{1,2}):(\d{1,2}) ([A|P]M)')
     timeList = timePattern.findall(parsed["content"])
 
     if len(timeList) == 2:

@@ -39,10 +39,10 @@ for filename in dirs:
         jsonList += json.load(f)
 
 for json in jsonList:
-    if json["add"]["doc"]["id"] in jsonDict:
-        print "Duplicates Found"
-        print jsonDict[json["add"]["doc"]["id"]]
-        print json
+    # if json["add"]["doc"]["id"] in jsonDict:
+    # print "Duplicates Found"
+    # print jsonDict[json["add"]["doc"]["id"]]
+    # print json
     jsonDict[json["add"]["doc"]["id"]] = json
 print len(jsonList), len(jsonDict)
 
@@ -61,7 +61,8 @@ for i in range(0, len(jsonList)):
             similarity += 3
         if get_state(jsonI["location"]) == get_state(jsonJ['location']):
             similarity += 5
-        if get_day(jsonI['startTime']) == get_day(jsonJ['startTime']):
+        # print jsonI, jsonJ
+        if "startTime" in jsonI and "startTime" in jsonJ and get_day(jsonI['startTime']) == get_day(jsonJ['startTime']):
             similarity += 1
         if jsonI['seller'] == jsonJ['seller'] and "A+" not in jsonI['seller']:
             similarity += 0.5
@@ -69,11 +70,12 @@ for i in range(0, len(jsonList)):
             similarity += 0.3
         edgeList = [(jsonI['id'], jsonJ['id'], similarity), (jsonJ['id'], jsonI['id'], similarity)]
         G.add_weighted_edges_from(edgeList)
-
+print G
 # add the page rank to the document
-pageRank = nx.pagerank(G)
-for jsonId in pageRank:
-    jsonDict[jsonId]["add"]["boost"] = pageRank[jsonId] * 1000
-# output this json file, ready to post to solr
-with open(outputFile, "w") as f:
-    f.write(json.dump(jsonDict))
+# pageRank = nx.pagerank(G)
+# print pageRank
+# for jsonId in pageRank:
+#     jsonDict[jsonId]["add"]["boost"] = pageRank[jsonId] * 1000
+# # output this json file, ready to post to solr
+# with open(outputFile, "w") as f:
+#     f.write(json.dump(jsonDict))

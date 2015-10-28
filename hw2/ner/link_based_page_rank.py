@@ -38,12 +38,12 @@ for filename in dirs:
     with open(filepath) as f:
         jsonList += json.load(f)
 
-for json in jsonList:
+for jsonElement in jsonList:
     # if json["add"]["doc"]["id"] in jsonDict:
     # print "Duplicates Found"
     # print jsonDict[json["add"]["doc"]["id"]]
     # print json
-    jsonDict[json["add"]["doc"]["id"]] = json
+    jsonDict[jsonElement["add"]["doc"]["id"]] = jsonElement
 print len(jsonList), len(jsonDict)
 
 # no need to worry about deduplication for now. Solr will handle that when we index
@@ -51,8 +51,22 @@ print len(jsonList), len(jsonDict)
 # handle this by just writing both edges to the input file. This might not be very accurate as you can assume.
 
 G = nx.DiGraph()
+number = 0
 for i in range(0, len(jsonList)):
     for j in range(i + 1, len(jsonList)):
+        number += 1
+print "All combinations: ", number
+for i in range(0, len(jsonList)):
+    G.add_node(jsonList[i]["add"]["doc"]["id"])
+number = 0
+isBreak = False
+for i in range(0, len(jsonList)):
+    for j in range(i + 1, len(jsonList)):
+        number += 1
+        if number % 10000 == 0:
+            print number
+            # isBreak = True
+            # break
         jsonI = jsonList[i]["add"]["doc"]
         jsonJ = jsonList[j]["add"]["doc"]
         # assign different weight to the edges if they share the same property in different ways
@@ -68,14 +82,26 @@ for i in range(0, len(jsonList)):
             similarity += 0.5
         if jsonI['price'] != 0.00 and jsonJ['price'] != 0.00 and abs(jsonI['price'] - jsonJ['price']) < 20:
             similarity += 0.3
-        edgeList = [(jsonI['id'], jsonJ['id'], similarity), (jsonJ['id'], jsonI['id'], similarity)]
-        G.add_weighted_edges_from(edgeList)
-print G
+        if similarity > 0:
+            # edgeList = [(jsonI['id'], jsonJ['id'], similarity), (jsonJ['id'], jsonI['id'], similarity)]
+            edgeList = [(jsonI['id'], jsonJ['id'], similarity)]
+            if number % 10000 == 0:
+                print edgeList
+            G.add_weighted_edges_from(edgeList)
+
+    if isBreak:
+        break
+# print G
 # add the page rank to the document
-# pageRank = nx.pagerank(G)
+pageRank = nx.pagerank(G)
 # print pageRank
-# for jsonId in pageRank:
-#     jsonDict[jsonId]["add"]["boost"] = pageRank[jsonId] * 1000
-# # output this json file, ready to post to solr
-# with open(outputFile, "w") as f:
-#     f.write(json.dump(jsonDict))
+for jsonId in pageRank:
+    jsonDict[jsonId]["add"]["doc"]["pagerank"] = pageRank[jsonId]
+    jsonDict[jsonId]["add"]["boost"] = pageRank[jsonId]
+# output this json file, ready to post to solr
+outputJsonList = []
+for jsonId in jsonDict:
+    outputJsonList.append(jsonDict[jsonId])
+with open(outputFile, "w") as f:
+    f.write(json.dumps(outputJsonList, indent=4, separators=(',', ': ')))
+

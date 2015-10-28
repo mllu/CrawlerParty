@@ -122,6 +122,7 @@ print "Number of htmls", len(htmlPathList)
 
 # tagger = ner.SocketNER(host='localhost', port=9191, output_format='slashTags')
 count = 0
+gunContentList = []
 for htmlFileName in htmlPathList:
     count += 1
     if count % 1000 == 0:
@@ -233,13 +234,17 @@ for htmlFileName in htmlPathList:
         bidder = get_bidder(soup)
         if len(bidder) > 0:
             gunInfoDict['bidder'] = bidder
-
+    # gunInfoDict['text'] = parsed["content"]
+    newGunInfoDict = {}
+    newGunInfoDict[gunInfoDict['id']] = parsed['content']
+    gunContentList.append(newGunInfoDict)
     gunInfoList.append({"add": {"doc": gunInfoDict}})
 # print json.dumps(gunInfoList, indent=4, separators=(',', ': '))
 print "Length of GunInfo", len(gunInfoList)
-fOutput = open(outputJson, "w")
 with open(outputJson, "w") as output:
     output.write(json.dumps(gunInfoList, indent=4, separators=(',', ': ')))
+with open(outputJson[:outputJson.find(".")] + "_content.json", "w") as output:
+    output.write(json.dumps(gunContentList, indent=4, separators=(',', ': ')))
 # print json.dumps({"add": {"doc": gunInfoDict}}, indent=4, separators=(',', ': '))
 # print ","
 # if boosting

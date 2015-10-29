@@ -8,6 +8,7 @@ __author__ = 'Taichi1'
 
 if len(sys.argv) < 4:
     print "Synopsis: %s directory outputJson propertyname" % sys.argv[0]
+    sys.exit(0)
 
 
 def get_state(string):
@@ -30,8 +31,10 @@ def _page_rank(G, propertyDict, propertyName, jsonDict):
     for key in propertyDict:
         print "Length of the group", len(propertyDict[key])
         number = 0
-        for elementI in propertyDict[key]:
-            for elementJ in propertyDict[key]:
+        for i in range(0, len(propertyDict[key])):
+            for j in range(i + 1, len(propertyDict[key])):
+                elementI = propertyDict[key][i]
+                elementJ = propertyDict[key][j]
                 number += 1
                 if number % 10000 == 0:
                     print(number)
@@ -97,6 +100,8 @@ if classifier == "location":
     locationDict = {}
     for i in range(0, len(jsonList)):
         jsonElement = jsonList[i]["add"]["doc"]
+        if "location" not in jsonElement:
+            continue
         statename = get_state(jsonElement["location"])
         locationList = locationDict.get(statename, [])
         locationList.append(jsonElement)
@@ -106,21 +111,26 @@ elif classifier == "time":
     timeDict = {}
     for i in range(0, len(jsonList)):
         jsonElement = jsonList[i]["add"]["doc"]
+        # print jsonElement
+        if "startTime" not in jsonElement:
+            continue
         day = get_day(jsonElement["startTime"])
         timeList = timeDict.get(day, [])
         timeList.append(jsonElement)
         timeDict[day] = timeList
     _page_rank(G, timeDict, "startTime", jsonDict)
 
-elif classifier == "gunType":
+elif classifier == "gunCategory":
     gunTypeDict = {}
     for i in range(0, len(jsonList)):
         jsonElement = jsonList[i]["add"]["doc"]
-        gunType = jsonElement["gunType"]
+        if "gunCategory" not in jsonElement:
+            continue
+        gunType = jsonElement["gunCategory"]
         gunTypeList = gunTypeDict.get(gunType, [])
         gunTypeList.append(jsonElement)
         gunTypeDict[gunType] = gunTypeList
-    _page_rank(G, gunTypeDict, "gunType", jsonDict)
+    _page_rank(G, gunTypeDict, "gunCategory", jsonDict)
 # for i in range(0, len(jsonList)):
 #     for j in range(i + 1, len(jsonList)):
 #         number += 1

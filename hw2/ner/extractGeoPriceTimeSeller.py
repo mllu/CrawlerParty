@@ -238,6 +238,8 @@ for htmlFileName in htmlPathList:
     newGunInfoDict = {}
     newGunInfoDict[gunInfoDict['id']] = parsed['content']
     gunContentList.append(newGunInfoDict)
+
+    gunInfoDict['text'] = parsed["content"]
     gunInfoList.append({"add": {"doc": gunInfoDict}})
 # print json.dumps(gunInfoList, indent=4, separators=(',', ': '))
 print "Length of GunInfo", len(gunInfoList)

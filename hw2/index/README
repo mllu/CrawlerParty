@@ -1,3 +1,10 @@
-place schema under solr-5.3.1/example/techproducts/solr/techproducts/conf 
-updateSolr is for adding json format file and will automatically commit.
-please note that this updateSolr corresponds to the finaloutput2.json format.
+
+1. place schema under solr-5.3.1/example/techproducts/solr/techproducts/conf 
+
+2. run updateSolr.sh for adding json format file and will automatically commit.
+(please note that this updateSolr corresponds to the finaloutput2.json format.)
+
+3. reload schema by re-running 
+  $SOLR_HOME/bin/solr stop
+  $SOLR_HOME/bin/solr -e techproducts
+

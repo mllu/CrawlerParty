@@ -1,3 +1,4 @@
+Buyer_Spatial: 
 loc		freq
 WI		2
 WV		1

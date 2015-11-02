@@ -8,7 +8,7 @@ import re
 
 
 base = "http://localhost:8983/solr/techproducts/select?"
-query = "rifle"
+query = "*"
 filterQuery = "startTime:[*%20TO%20NOW]"
 searchFields = "title+seller+sellerRating+bidder+gunModel+location+startTime+endTime+pagerank_gunCategory+pagerank_location+pagerank_temporal"
 url = base + "q=" + query + "&fq=" + filterQuery + "&fl=" + searchFields
@@ -22,7 +22,9 @@ numFound = int(root.xpath('//result/@numFound')[0])
 print "numFound: " + str(numFound) + "\n"
 
 # numFound = 2220
+dict_ads_geo = {}
 dict_bidder_geo = {}
+
 for cnt in range(0, numFound/10+1):
     start = cnt*10
     # print start
@@ -35,34 +37,54 @@ for cnt in range(0, numFound/10+1):
     doc = root.xpath('//doc')
 
     for d in doc:
+        title = d.xpath('./arr[@name="title"]/str/text()')
+        # print "title: " + title[0]
+        endTime = d.xpath('./date[@name="startTime"]/text()')
+        # print "endTime: " + endTime[0]
+        dt = parser.parse(endTime[0])
+        # print str(dt.year) + "/" +str(dt.month) + "/" + str(dt.day)
+        location = d.xpath('./str[@name="location"]/text()')
+        # print location
+        loc = re.split(', ',location[0])
+        loc = loc[1].split(' ')[0]
+        # print "location: " + loc
+
+        if loc in dict_ads_geo:
+            cnt = dict_ads_geo[loc]
+            dict_ads_geo[loc] = cnt + 1
+        else:
+            dict_ads_geo[loc] = 1
+
         bidder = d.xpath('./str[@name="bidder"]/text()')
         if bidder:
-            title = d.xpath('./arr[@name="title"]/str/text()')
-            print "title: " + title[0]
             bidderInfo = bidder[0].replace(u'\xa0', u' ')
-            print "bidder: " + bidderInfo
-            endTime = d.xpath('./date[@name="endTime"]/text()')
-            # print "endTime: " + endTime[0]
-            dt = parser.parse(endTime[0])
-            print str(dt.year) + "/" +str(dt.month) + "/" + str(dt.day)
-            location = d.xpath('./str[@name="location"]/text()')
-            # print location
-            loc = re.split(', ',location[0])
-            loc = loc[1].split(' ')[0]
-            print "location: " + loc
+            # print "bidder: " + bidderInfo
+
             if loc in dict_bidder_geo:
                 cnt = dict_bidder_geo[loc]
                 dict_bidder_geo[loc] = cnt + 1
             else:
                 dict_bidder_geo[loc] = 1
             # print "Num of bidders in {0} are {1}." .format(loc, str(dict_bidder_geo[loc]))
+            # print "\n"
 
-            print "\n"
-
-with open("stat.txt", "w") as f:
+# dump buyer vs spatial for rifle
+with open("Buyer_Spatial.txt", "w") as f:
+    print("Buyer_Spatial: ")
+    f.write("Buyer_Spatial: \n")
     print("loc\t\tfreq")
     f.write("loc\t\tfreq\n")
     for key, value in dict_bidder_geo.iteritems():
+        stat = key + "\t\t" + str(value)
+        print stat
+        f.write(stat+"\n")
+
+with open("Ads_Spatial.txt", "w") as f:
+    print("Ads_Spatial: ")
+    f.write("Ads_Spatial: \n")
+    print("loc\t\tfreq")
+    f.write("loc\t\tfreq\n")
+    for key, value in dict_ads_geo.iteritems():
         stat = key + "\t\t" + str(value)
         print stat
         f.write(stat+"\n")

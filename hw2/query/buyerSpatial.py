@@ -23,7 +23,6 @@ print "numFound: " + str(numFound) + "\n"
 
 # numFound = 2220
 dict_bidder_geo = {}
-start = 0
 for cnt in range(0, numFound/10+1):
     start = cnt*10
     # print start

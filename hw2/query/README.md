@@ -14,6 +14,6 @@
   2. update solr with Yao-Jung's scripts under hw2/index and 
      start solr's example techproduct for testing, please refer to README under hw2/index
  
-  3. python bidderLocation.py
+  3. python buyerSpatial.py
 
 [temporal+spatial vs buyer]

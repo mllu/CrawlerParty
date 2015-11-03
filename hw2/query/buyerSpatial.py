@@ -39,9 +39,9 @@ for cnt in range(0, numFound/10+1):
     for d in doc:
         title = d.xpath('./arr[@name="title"]/str/text()')
         # print "title: " + title[0]
-        endTime = d.xpath('./date[@name="startTime"]/text()')
-        # print "endTime: " + endTime[0]
-        dt = parser.parse(endTime[0])
+        startTime = d.xpath('./date[@name="startTime"]/text()')
+        # print "startTime: " + startTime[0]
+        dt = parser.parse(startTime[0])
         # print str(dt.year) + "/" +str(dt.month) + "/" + str(dt.day)
         location = d.xpath('./str[@name="location"]/text()')
         # print location
@@ -70,21 +70,17 @@ for cnt in range(0, numFound/10+1):
 
 # dump buyer vs spatial for rifle
 with open("Buyer_Spatial.txt", "w") as f:
-    print("Buyer_Spatial: ")
-    f.write("Buyer_Spatial: \n")
-    print("loc\t\tfreq")
-    f.write("loc\t\tfreq\n")
+    print("loc\tfreq")
+    f.write("loc\tfreq\n")
     for key, value in dict_bidder_geo.iteritems():
-        stat = key + "\t\t" + str(value)
+        stat = key + "\t" + str(value)
         print stat
         f.write(stat+"\n")
 
 with open("Ads_Spatial.txt", "w") as f:
-    print("Ads_Spatial: ")
-    f.write("Ads_Spatial: \n")
-    print("loc\t\tfreq")
-    f.write("loc\t\tfreq\n")
+    print("loc\tfreq")
+    f.write("loc\tfreq\n")
     for key, value in dict_ads_geo.iteritems():
-        stat = key + "\t\t" + str(value)
+        stat = key + "\t" + str(value)
         print stat
         f.write(stat+"\n")

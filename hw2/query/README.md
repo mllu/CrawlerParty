@@ -1,11 +1,4 @@
-
-[temporal vs ads]
-
-[spatial vs ads]
-
-[spatial vs buyer]
-
-[spatial vs buyer]: bidderLocation.py
+[spatial vs temporal]:
   1. To run bidderLocation.py, first install the following package
      $ pip install lxml
      $ pip install requests
@@ -14,6 +7,5 @@
   2. update solr with Yao-Jung's scripts under hw2/index and 
      start solr's example techproduct for testing, please refer to README under hw2/index
  
-  3. python buyerSpatial.py
+  3. ./autoQuery.sh
 
-[temporal+spatial vs buyer]

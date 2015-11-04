@@ -1,0 +1,24 @@
+
+October
+Location	Frequency
+ME	13
+TX	2
+ND	2
+FL	2
+VA	1
+IL	1
+
+September
+Location	Frequency
+
+August
+Location	Frequency
+
+July
+Location	Frequency
+
+June
+Location	Frequency
+
+May
+Location	Frequency

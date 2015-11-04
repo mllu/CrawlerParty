@@ -1,0 +1,7 @@
+Month	Frequency
+October	904
+September	33
+August	42
+July	20
+June	0
+May	0

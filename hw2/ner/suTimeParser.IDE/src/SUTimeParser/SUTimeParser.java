@@ -1,5 +1,5 @@
 // Uncomment the following line if you are modifing with IDE
-//package SUTimeParser;
+package SUTimeParser;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

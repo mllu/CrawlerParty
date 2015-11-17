@@ -29,7 +29,7 @@
       ],
       "list": {
         "0": {
-          "from": "2014-01-01T00:00:00.000Z",
+          "from": "2015-01-01T00:00:00.000Z",
           "to": "*",
           "field": "startTime",
           "type": "time",
@@ -107,8 +107,8 @@
           "filter_id": 0,
           "title": "Time Window",
           "time": {
-            "from": "11/17/2015 00:16:31",
-            "to": "11/17/2015 00:35:19"
+            "from": "12/31/2014 16:00:00",
+            "to": "11/17/2015 00:57:25"
           }
         }
       ]
@@ -139,7 +139,63 @@
       "collapse": false,
       "collapsable": true,
       "panels": [
-
+        {
+          "span": 4,
+          "editable": true,
+          "type": "histogram",
+          "loadingEditor": false,
+          "mode": "count",
+          "queries": {
+            "mode": "all",
+            "ids": [
+              0
+            ],
+            "query": "q=*&wt=json&rows=0&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.range=startTime&facet.range.start=2015-01-01T00:00:00.000Z/SECOND&facet.range.end=NOW&facet.range.gap=%2B1DAY\n",
+            "custom": ""
+          },
+          "max_rows": 100000,
+          "value_field": null,
+          "group_field": null,
+          "auto_int": true,
+          "resolution": 100,
+          "interval": "1d",
+          "intervals": [
+            "auto",
+            "1s",
+            "1m",
+            "5m",
+            "10m",
+            "30m",
+            "1h",
+            "3h",
+            "12h",
+            "1d",
+            "1w",
+            "1M",
+            "1y"
+          ],
+          "fill": 0,
+          "linewidth": 3,
+          "timezone": "browser",
+          "spyable": true,
+          "zoomlinks": true,
+          "bars": true,
+          "stack": true,
+          "points": false,
+          "lines": false,
+          "lines_smooth": false,
+          "legend": true,
+          "x-axis": true,
+          "y-axis": true,
+          "percentage": false,
+          "interactive": true,
+          "options": true,
+          "show_queries": true,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": false
+          }
+        }
       ]
     }
   ],

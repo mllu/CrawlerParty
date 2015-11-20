@@ -409,7 +409,7 @@ search box - the end user will not know they are happening.
                     	"highlight_field": "text",
                     	"post": "</span>"
                     }
-                ]    
+                ]
             ];
 
         // specify the defaults
@@ -488,18 +488,14 @@ search box - the end user will not know they are happening.
         var showfiltervals = function(event) {
             event.preventDefault();
             if ( $(this).hasClass('facetview_open') ) {
-                $(this).children('i').removeClass('glyphicon-minus');
-                $(this).children('i').removeClass('glyphicon');
-                $(this).children('i').addClass('glyphicon');
-                $(this).children('i').addClass('glyphicon-plus');
+                $(this).children('i').removeClass('icon-minus');
+                $(this).children('i').addClass('icon-plus');
                 $(this).removeClass('facetview_open');
                 $('[id="facetview_' + $(this).attr('rel') +'"]', obj ).children().find('.facetview_filtervalue').hide();
                 $(this).siblings('.facetview_filteroptions').hide();
             } else {
-                $(this).children('i').removeClass('glyphicon-plus');
-                $(this).children('i').removeClass('glyphicon');
-                $(this).children('i').addClass('glyphicon');
-                $(this).children('i').addClass('glyphicon-minus');
+                $(this).children('i').removeClass('icon-plus');
+                $(this).children('i').addClass('icon-minus');
                 $(this).addClass('facetview_open');
                 $('[id="facetview_' + $(this).attr('rel') +'"]', obj ).children().find('.facetview_filtervalue').show();
                 $(this).siblings('.facetview_filteroptions').show();
@@ -537,19 +533,19 @@ search box - the end user will not know they are happening.
             // iterate to next sort type on click. order is term, rterm, count, rcount
             if ( $(this).hasClass('facetview_term') ) {
                 options.facets[which]['order'] = 'reverse_term';
-                $(this).html('a-z <i class="glyphicon glyphicon-arrow-up"></i>');
+                $(this).html('a-z <i class="icon-arrow-up"></i>');
                 $(this).removeClass('facetview_term').addClass('facetview_rterm');
             } else if ( $(this).hasClass('facetview_rterm') ) {
                 options.facets[which]['order'] = 'count';
-                $(this).html('count <i class="glyphicon glyphicon-arrow-down"></i>');
+                $(this).html('count <i class="icon-arrow-down"></i>');
                 $(this).removeClass('facetview_rterm').addClass('facetview_count');
             } else if ( $(this).hasClass('facetview_count') ) {
                 options.facets[which]['order'] = 'reverse_count';
-                $(this).html('count <i class="glyphicon glyphicon-arrow-up"></i>');
+                $(this).html('count <i class="icon-arrow-up"></i>');
                 $(this).removeClass('facetview_count').addClass('facetview_rcount');
             } else if ( $(this).hasClass('facetview_rcount') ) {
                 options.facets[which]['order'] = 'term';
-                $(this).html('a-z <i class="glyphicon glyphicon-arrow-down"></i>');
+                $(this).html('a-z <i class="icon-arrow-down"></i>');
                 $(this).removeClass('facetview_rcount').addClass('facetview_term');
             }
             dosearch();
@@ -582,7 +578,7 @@ search box - the end user will not know they are happening.
                 btn btn-info" rel="' + rel + 
                 '" alt="remove" title="remove"' +
                 ' href="' + $(this).attr("href") + '">' +
-                range + ' <i class="glyphicon glyphicon-white glyphicon-remove"></i></a></div>';
+                range + ' <i class="icon-white icon-remove"></i></a></div>';
             $('#facetview_selectedfilters', obj).append(newobj);
             $('.facetview_filterselected', obj).unbind('click',clearfilter);
             $('.facetview_filterselected', obj).bind('click',clearfilter);
@@ -609,8 +605,8 @@ search box - the end user will not know they are happening.
                 <small>to</small> \
                 <span class="facetview_highrangeval_' + rel + '">...</span></h3> \
                 <div style="float:right;" class="btn-group">';
-            rangeselect += '<a class="facetview_facetrange_remove btn btn-default" rel="' + rel + '" alt="remove" title="remove" \
-                 href="#"><i class="glyphicon glyphicon-remove"></i></a> \
+            rangeselect += '<a class="facetview_facetrange_remove btn" rel="' + rel + '" alt="remove" title="remove" \
+                 href="#"><i class="icon-remove"></i></a> \
                 </div></div> \
                 <div class="clearfix" style="margin:20px;" id="facetview_slider_' + rel + '"></div> \
                 </div>';
@@ -646,16 +642,16 @@ search box - the end user will not know they are happening.
                 for ( var idx = 0; idx < filters.length; idx++ ) {
                     var _filterTmpl = '<table id="facetview_{{FILTER_NAME}}" class="facetview_filters table table-bordered table-condensed table-striped" style="display:none;"> \
                         <tr><td><a class="facetview_filtershow" title="filter by {{FILTER_DISPLAY}}" rel="{{FILTER_NAME}}" \
-                        style="color:#333; font-weight:bold;" href=""><i class="glyphicon glyphicon-plus"></i> {{FILTER_DISPLAY}} \
+                        style="color:#333; font-weight:bold;" href=""><i class="icon-plus"></i> {{FILTER_DISPLAY}} \
                         </a> \
                         <div class="btn-group facetview_filteroptions" style="display:none; margin-top:5px;"> \
-                            <a class="btn btn-sm facetview_learnmore" title="click to view search help information" href="#"><b>?</b></a> \
-                            <a class="btn btn-sm facetview_morefacetvals" title="filter list size" rel="{{FACET_IDX}}" href="{{FILTER_EXACT}}">{{FILTER_HOWMANY}}</a> \
-                            <a class="btn btn-sm facetview_sort {{FILTER_SORTTERM}}" title="filter value order" href="{{FILTER_EXACT}}">{{FILTER_SORTCONTENT}}</a> \
-                            <a class="btn btn-sm facetview_or" title="select another option from this filter" rel="AND" href="{{FILTER_EXACT}}" style="color:#aaa;">OR</a> \
+                            <a class="btn btn-small facetview_learnmore" title="click to view search help information" href="#"><b>?</b></a> \
+                            <a class="btn btn-small facetview_morefacetvals" title="filter list size" rel="{{FACET_IDX}}" href="{{FILTER_EXACT}}">{{FILTER_HOWMANY}}</a> \
+                            <a class="btn btn-small facetview_sort {{FILTER_SORTTERM}}" title="filter value order" href="{{FILTER_EXACT}}">{{FILTER_SORTCONTENT}}</a> \
+                            <a class="btn btn-small facetview_or" title="select another option from this filter" rel="AND" href="{{FILTER_EXACT}}" style="color:#aaa;">OR</a> \
                             ';
                     if ( options.enable_rangeselect ) {
-                        _filterTmpl += '<a class="btn btn-sm facetview_facetrange" title="make a range selection on this filter" rel="{{FACET_IDX}}" href="{{FILTER_EXACT}}" style="color:#aaa;">range</a>';
+                        _filterTmpl += '<a class="btn btn-small facetview_facetrange" title="make a range selection on this filter" rel="{{FACET_IDX}}" href="{{FILTER_EXACT}}" style="color:#aaa;">range</a>';
                     }
                     _filterTmpl +='</div> \
                         </td></tr> \
@@ -670,20 +666,20 @@ search box - the end user will not know they are happening.
                     if ( 'order' in filters[idx] ) {
                         if ( filters[idx]['order'] == 'term' ) {
                             thefilters = thefilters.replace(/{{FILTER_SORTTERM}}/g, 'facetview_term');
-                            thefilters = thefilters.replace(/{{FILTER_SORTCONTENT}}/g, 'a-z <i class="glyphicon glyphicon-arrow-down"></i>');
+                            thefilters = thefilters.replace(/{{FILTER_SORTCONTENT}}/g, 'a-z <i class="icon-arrow-down"></i>');
                         } else if ( filters[idx]['order'] == 'reverse_term' ) {
                             thefilters = thefilters.replace(/{{FILTER_SORTTERM}}/g, 'facetview_rterm');
-                            thefilters = thefilters.replace(/{{FILTER_SORTCONTENT}}/g, 'a-z <i class="glyphicon glyphicon-arrow-up"></i>');
+                            thefilters = thefilters.replace(/{{FILTER_SORTCONTENT}}/g, 'a-z <i class="icon-arrow-up"></i>');
                         } else if ( filters[idx]['order'] == 'count' ) {
                             thefilters = thefilters.replace(/{{FILTER_SORTTERM}}/g, 'facetview_count');
-                            thefilters = thefilters.replace(/{{FILTER_SORTCONTENT}}/g, 'count <i class="glyphicon glyphicon-arrow-down"></i>');
+                            thefilters = thefilters.replace(/{{FILTER_SORTCONTENT}}/g, 'count <i class="icon-arrow-down"></i>');
                         } else if ( filters[idx]['order'] == 'reverse_count' ) {
                             thefilters = thefilters.replace(/{{FILTER_SORTTERM}}/g, 'facetview_rcount');
-                            thefilters = thefilters.replace(/{{FILTER_SORTCONTENT}}/g, 'count <i class="glyphicon glyphicon-arrow-up"></i>');
+                            thefilters = thefilters.replace(/{{FILTER_SORTCONTENT}}/g, 'count <i class="icon-arrow-up"></i>');
                         };
                     } else {
                         thefilters = thefilters.replace(/{{FILTER_SORTTERM}}/g, 'facetview_count');
-                        thefilters = thefilters.replace(/{{FILTER_SORTCONTENT}}/g, 'count <i class="glyphicon glyphicon-arrow-down"></i>');
+                        thefilters = thefilters.replace(/{{FILTER_SORTCONTENT}}/g, 'count <i class="icon-arrow-down"></i>');
                     };
                     thefilters = thefilters.replace(/{{FACET_IDX}}/gi,idx);
                     if ('display' in filters[idx]) {
@@ -726,7 +722,7 @@ search box - the end user will not know they are happening.
             newobj += '" rel="' + rel + 
                 '" alt="remove" title="remove"' +
                 ' href="' + href + '">' +
-                href + ' <i class="glyphicon glyphicon-white glyphicon-remove" style="margin-top:1px;"></i></a>';
+                href + ' <i class="icon-white icon-remove" style="margin-top:1px;"></i></a>';
 
             if ( $('#facetview_group_' + relclean, obj).length ) {
                 $('#facetview_group_' + relclean, obj).append(newobj);
@@ -895,7 +891,7 @@ search box - the end user will not know they are happening.
                     else if (display[lineitem][object].hasOwnProperty('highlight_field')){
                         var highlightkey = display[lineitem][object]['highlight_field'];
                         thevalue = highlights[highlightkey];
-                    }          
+                    }
                     if (thevalue && thevalue.toString().length) {
                         display[lineitem][object]['pre']
                             ? line += display[lineitem][object]['pre'] : false;
@@ -978,7 +974,7 @@ search box - the end user will not know they are happening.
                 </div>';
             } else {
                 var metaTmpl = '<div class="pagination"> \
-                    <ul class="pagination"> \
+                    <ul> \
                         <li class="prev"><a class="facetview_decrement" href="{{from}}">&laquo; back</a></li> \
                         <li class="active"><a>{{from}} &ndash; {{to}} of {{total}}</a></li> \
                         <li class="next"><a class="facetview_increment" href="{{to}}">next &raquo;</a></li> \
@@ -1303,11 +1299,11 @@ search box - the end user will not know they are happening.
         var order = function(event) {
             event.preventDefault();
             if ( $(this).attr('href') == 'desc' ) {
-                $(this).html('<i class="glyphicon glyphicon-arrow-up"></i>');
+                $(this).html('<i class="icon-arrow-up"></i>');
                 $(this).attr('href','asc');
                 $(this).attr('title','current order ascending. Click to change to descending');
             } else {
-                $(this).html('<i class="glyphicon glyphicon-arrow-down"></i>');
+                $(this).html('<i class="icon-arrow-down"></i>');
                 $(this).attr('href','desc');
                 $(this).attr('title','current order descending. Click to change to ascending');
             };
@@ -1414,24 +1410,24 @@ search box - the end user will not know they are happening.
                     so if a wider filter range is required, first increase the filter size then select the filter range.</p>';
             }
         };
-        thehelp += '<p><a class="facetview_learnmore label label-default" href="#">close the help</a></p></div>';
+        thehelp += '<p><a class="facetview_learnmore label" href="#">close the help</a></p></div>';
         
         // the facet view object to be appended to the page
-        var thefacetview = '<div id="facetview"><div class="row">';
+        var thefacetview = '<div id="facetview"><div class="row-fluid">';
         if ( options.facets.length > 0 ) {
-            thefacetview += '<div class="col-md-3"><div id="facetview_filters" style="padding-top:45px;"></div></div>';
-            thefacetview += '<div class="col-md-9" id="facetview_rightcol">';
+            thefacetview += '<div class="span3"><div id="facetview_filters" style="padding-top:45px;"></div></div>';
+            thefacetview += '<div class="span9" id="facetview_rightcol">';
         } else {
-            thefacetview += '<div class="col-md-12" id="facetview_rightcol">';
+            thefacetview += '<div class="span12" id="facetview_rightcol">';
         }
-        thefacetview += '<div class="facetview_search_options_container btn-toolbar">';
+        thefacetview += '<div class="facetview_search_options_container">';
         thefacetview += '<div class="btn-group" style="display:inline-block; margin-right:5px;"> \
-            <a class="btn btn-default" title="clear all search settings and start again" href=""><i class="glyphicon glyphicon-remove"></i></a> \
-            <a class="btn btn-default facetview_learnmore" title="click to view search help information" href="#"><b>?</b></a> \
-            <a class="btn btn-default facetview_howmany" title="change result set size" href="#">{{HOW_MANY}}</a>';
+            <a class="btn btn-small" title="clear all search settings and start again" href=""><i class="icon-remove"></i></a> \
+            <a class="btn btn-small facetview_learnmore" title="click to view search help information" href="#"><b>?</b></a> \
+            <a class="btn btn-small facetview_howmany" title="change result set size" href="#">{{HOW_MANY}}</a>';
         if ( options.search_sortby.length > 0 ) {
-            thefacetview += '<a class="btn btn-sm facetview_order" title="current order descending. Click to change to ascending" \
-                href="desc"><i class="glyphicon glyphicon-arrow-down"></i></a>';
+            thefacetview += '<a class="btn btn-small facetview_order" title="current order descending. Click to change to ascending" \
+                href="desc"><i class="icon-arrow-down"></i></a>';
             thefacetview += '</div>';
             thefacetview += '<select class="facetview_orderby" style="border-radius:5px; \
                 -moz-border-radius:5px; -webkit-border-radius:5px; width:100px; background:#eee; margin:0 5px 21px 0;"> \
@@ -1454,10 +1450,10 @@ search box - the end user will not know they are happening.
             };
             thefacetview += '</select>';
         };
-        thefacetview += '<input type="text" class="facetview_freetext col-md-4" style="display: inline-block ; margin:0 0 21px 0; border-radius:0.4em; background:' + options.searchbox_shade + ';" name="q" \
+        thefacetview += '<input type="text" class="facetview_freetext span4" style="display:inline-block; margin:0 0 21px 0; background:' + options.searchbox_shade + ';" name="q" \
             value="" placeholder="search term" />';
         if ( options.sharesave_link ) {
-            thefacetview += '<a class="btn btn-default facetview_sharesave" title="share or save this search" style="margin:0 0 21px 5px;" href=""><i class="glyphicon glyphicon-share-alt"></i></a>';
+            thefacetview += '<a class="btn facetview_sharesave" title="share or save this search" style="margin:0 0 21px 5px;" href=""><i class="icon-share-alt"></i></a>';
             thefacetview += '<div class="facetview_sharesavebox alert alert-info" style="display:none;"> \
                 <button type="button" class="facetview_sharesave close">×</button> \
                 <p>Share or save this search:</p> \

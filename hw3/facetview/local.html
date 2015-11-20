@@ -22,15 +22,17 @@
 jQuery(document).ready(function($) {
   $('.facet-view-simple').each(function() {
   $(this).facetview({
-    search_url: 'http://localhost:8983/solr/techproducts/select?',
+    search_url: 'http://localhost:8983/isatools-test/select?',
     search_index: 'solr',
     datatype: 'json',
     facets: [
-        {'field':'state', 'display': 'state'},
-        {'field':'gunCategory', 'display': 'gunCategory'}
+        {'field': 'journal.name.exact', 'display': 'journal'},
+        {'field': 'author.name.exact', 'display': 'author'},
+        {'field': 'year.exact', 'display': 'year'},
+        {'field': 'collection.exact', 'display': 'collection'},
     ],
-    search_sortby: [{'display':'state', 'field':'state'},{'display':'gunCategory','field':'gunCategory'}],
-    searchbox_fieldselect: [{'display':'state','field':'state'},{'display':'gunCategory','field':'gunCategory'}],
+    search_sortby: [{'display':'year', 'field':'year.exact'},{'display':'journal','field':'journal.name.exact'}],
+    searchbox_fieldselect: [{'display':'author','field':'author.name'},{'display':'journal','field':'journal.name'}],
     paging: {
       size: 10
     },

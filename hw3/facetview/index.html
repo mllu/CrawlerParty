@@ -25,9 +25,46 @@ jQuery(document).ready(function($) {
   $('.facet-view-simple').facetview({
     search_url: 'http://localhost:8983/solr/techproducts/select?',
     search_index: 'solr',
+    datatype: 'json',
+    default_url_params:{
+                    "wt":"json",
+                    "facet.mincount":1,
+                    "hl": true
+                    },
     facets: [
-        {'field':'state', 'display': 'state'},
-        {'field':'gunCategory', 'display': 'gunCategory'}
+        {'field':'state', 'display': 'State'},
+        {'field':'gunCategory', 'display': 'Gun Category'},
+        {'field':'price', 'display': 'Gun Price'}
+    ],
+    result_display : [
+        [
+          {
+            "pre" : "<h4>",
+            "field" : "title",
+            "post" : "</h4>"
+          }
+        ],
+        [
+          {
+            "pre" : "<b>Gun Price:  </b><text>",
+            "field" : "price",
+            "post" : "</text><br>"
+          }
+        ],
+        [
+          {
+            "pre" : "<b>Gun Category:  </b><text>",
+            "field" : "gunCategory",
+            "post" : "</text><br>"
+          }
+        ],
+        [
+          {
+            "pre" : "<b>Seller:  </b><text>",
+            "field" : "seller",
+            "post" : "</text>"
+          }
+        ]
     ],
     paging: {
         from: 0,
@@ -41,6 +78,7 @@ jQuery(document).ready(function($) {
 
 <body>
 
+<!--
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
@@ -52,17 +90,16 @@ jQuery(document).ready(function($) {
     </div>
   </div>
 </div>
-
+-->
 <div class="container"> 
   <div class="content">
     <div class="page-header">
       <h1>
-      Study Search
+      Facet View For Weapon Search
       </h1>
     </div>
 
     <div class="facet-view-simple"></div>
-
   </div>
 
 </div>

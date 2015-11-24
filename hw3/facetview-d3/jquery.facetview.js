@@ -993,7 +993,7 @@ search box - the end user will not know they are happening.
                 var meta = metaTmpl.replace(/{{from}}/g, from);
                 meta = meta.replace(/{{to}}/g, to);
                 meta = meta.replace(/{{total}}/g, data.found);
-                //$('.facetview_metadata', obj).html("").append(meta);
+                $('.facetview_metadata', obj).html("").append(meta);
                 $('.facetview_decrement', obj).bind('click',decrement);
                 from < size ? $('.facetview_decrement', obj).html('..') : "";
                 $('.facetview_increment', obj).bind('click',increment);
@@ -1023,7 +1023,7 @@ search box - the end user will not know they are happening.
             if (typeof options.post_search_callback == 'function') {
                 options.post_search_callback.call(this);
             }
-            
+
         };
 
         // ===============================================

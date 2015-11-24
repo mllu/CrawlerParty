@@ -25,7 +25,12 @@
     console.log($('.facet-view-simple').facetview.options);
     var response = $('.facet-view-simple').facetview.options.rawdata.response;
     console.log(response);
-    // pass response into D3
+    
+    // [To-Do]
+    // pass response as argument into your D3 function to draw image
+
+    // uncomment the following line iterate data
+    // $('.facetview_increment').click();
   }
   jQuery(document).ready(function($) {
 
@@ -39,7 +44,11 @@
                       "hl": true
                       },
       post_search_callback: D3_CallBack_Function,
-
+      initialsearch:false,
+      paging: {
+          from: 0,
+          size: 100
+      }
       /*
       facets: [
           {'field':'state', 'display': 'State'},

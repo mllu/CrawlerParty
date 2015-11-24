@@ -830,6 +830,8 @@ search box - the end user will not know they are happening.
 
         // used to get value by dotted notation in result_display
         var getvalue = function(obj, dotted_notation) {
+            if (!dotted_notation)
+                return undefined
             var parts = dotted_notation.split('.');
             parts.reverse();
             var ref = [parts.pop()];
@@ -981,7 +983,7 @@ search box - the end user will not know they are happening.
                     </ul> \
                 </div>';
             };
-            $('.facetview_metadata', obj).first().html("Not found...");
+            //$('.facetview_metadata', obj).first().html("Not found...");
             if (data.found) {
                 var from = options.paging.from + 1;
                 var size = options.paging.size;
@@ -991,21 +993,23 @@ search box - the end user will not know they are happening.
                 var meta = metaTmpl.replace(/{{from}}/g, from);
                 meta = meta.replace(/{{to}}/g, to);
                 meta = meta.replace(/{{total}}/g, data.found);
-                $('.facetview_metadata', obj).html("").append(meta);
+                //$('.facetview_metadata', obj).html("").append(meta);
                 $('.facetview_decrement', obj).bind('click',decrement);
                 from < size ? $('.facetview_decrement', obj).html('..') : "";
                 $('.facetview_increment', obj).bind('click',increment);
                 data.found <= to ? $('.facetview_increment', obj).html('..') : "";
             }
 
+            
             // put the filtered results on the page
             $('#facetview_results',obj).html("");
             var infofiltervals = new Array();
             $.each(data.records, function(index, value) {
                 // write them out to the results div
-                 $('#facetview_results', obj).append( buildrecord(index) );
+                 //$('#facetview_results', obj).append( buildrecord(index) );
                  options.linkify ? $('#facetview_results tr:last-child', obj).linkify() : false;
             });
+
             if ( options.result_box_colours.length > 0 ) {
                 jQuery('.result_box', obj).each(function () {
                     var colour = options.result_box_colours[Math.floor(Math.random()*options.result_box_colours.length)] ;
@@ -1019,6 +1023,7 @@ search box - the end user will not know they are happening.
             if (typeof options.post_search_callback == 'function') {
                 options.post_search_callback.call(this);
             }
+            
         };
 
         // ===============================================

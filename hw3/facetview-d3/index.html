@@ -21,89 +21,102 @@
   <link rel="stylesheet" href="css/style.css">
 
   <script type="text/javascript">
-jQuery(document).ready(function($) {
-  $('.facet-view-simple').facetview({
-    search_url: 'http://localhost:8983/solr/techproducts/select?',
-    search_index: 'solr',
-    datatype: 'json',
-    default_url_params:{
-                    "wt":"json",
-                    "facet.mincount":1,
-                    "hl": true
-                    },
-    facets: [
-        {'field':'state', 'display': 'State'},
-        {'field':'gunCategory', 'display': 'Gun Category'},
-        {'field':'price', 'display': 'Gun Price'},
-        {'field':'startTime', 'display': 'Start Time'},
-        {'field':'endTime', 'display': 'End Time'}
-    ],
-    result_display : [
-        [
-          {
-            "pre" : "<h4>",
-            "field" : "title",
-            "post" : "</h4>"
-          }
-        ],
-        [
-          {
-            "pre" : "<b>Gun Price:  </b><text>",
-            "field" : "price",
-            "post" : "</text>"
-          }
-        ],
-        [
-          {
-            "pre" : "<b>Gun Category:  </b><text>",
-            "field" : "gunCategory",
-            "post" : "</text><br>"
-          }
-        ],
-        [
-          {
-            "pre" : "<b>Seller:  </b><text>",
-            "field" : "seller",
-            "post" : "</text>"
-          }
-        ],
-        [
-          {
-            "pre" : "<b>Seller Rating:  </b><text>",
-            "field" : "sellerRating",
-            "post" : "</text><br>"
-          }
-        ],
-        [
-          {
-            "pre" : "<b>Start Time:  </b><text>",
-            "field" : "startTime",
-            "post" : "</text>"
-          }
-        ],
-        [
-          {
-            "pre" : "<b>End Time:  </b><text>",
-            "field" : "endTime",
-            "post" : "</text><br>"
-          }
-        ],
-        [
-          {
-            "pre" : "<b>State:  </b><text>",
-            "field" : "state",
-            "post" : "</text>"
-          }
-        ]
-    ],
-    paging: {
-        from: 0,
-        size: 10
-    }
+  function D3_CallBack_Function() {
+    console.log($('.facet-view-simple').facetview.options);
+    var response = $('.facet-view-simple').facetview.options.rawdata.response;
+    console.log(response);
+    // pass response into D3
+  }
+  jQuery(document).ready(function($) {
 
+    $('.facet-view-simple').facetview({
+      search_url: 'http://localhost:8983/solr/techproducts/select?',
+      search_index: 'solr',
+      datatype: 'json',
+      default_url_params:{
+                      "wt":"json",
+                      "facet.mincount":1,
+                      "hl": true
+                      },
+      post_search_callback: D3_CallBack_Function,
+
+      /*
+      facets: [
+          {'field':'state', 'display': 'State'},
+          {'field':'gunCategory', 'display': 'Gun Category'},
+          {'field':'price', 'display': 'Gun Price'},
+          {'field':'startTime', 'display': 'Start Time'},
+          {'field':'endTime', 'display': 'End Time'}
+      ],
+
+      result_display : [
+          [
+            {
+              "pre" : "<h4>",
+              "field" : "title",
+              "post" : "</h4>"
+            }
+          ],
+          [
+            {
+              "pre" : "<b>Gun Price:  </b><text>",
+              "field" : "price",
+              "post" : "</text>"
+            }
+          ],
+          [
+            {
+              "pre" : "<b>Gun Category:  </b><text>",
+              "field" : "gunCategory",
+              "post" : "</text><br>"
+            }
+          ],
+          [
+            {
+              "pre" : "<b>Seller:  </b><text>",
+              "field" : "seller",
+              "post" : "</text>"
+            }
+          ],
+          [
+            {
+              "pre" : "<b>Seller Rating:  </b><text>",
+              "field" : "sellerRating",
+              "post" : "</text><br>"
+            }
+          ],
+          [
+            {
+              "pre" : "<b>Start Time:  </b><text>",
+              "field" : "startTime",
+              "post" : "</text>"
+            }
+          ],
+          [
+            {
+              "pre" : "<b>End Time:  </b><text>",
+              "field" : "endTime",
+              "post" : "</text><br>"
+            }
+          ],
+          [
+            {
+              "pre" : "<b>State:  </b><text>",
+              "field" : "state",
+              "post" : "</text>"
+            }
+          ]
+      ],
+      paging: {
+          from: 0,
+          size: 10
+      }
+      */
+    });
+  
   });
-});
   </script>
+
 </head>
 
 <body>
@@ -128,8 +141,9 @@ jQuery(document).ready(function($) {
       Facet View For Weapon Search
       </h1>
     </div>
-
     <div class="facet-view-simple"></div>
+    
+
   </div>
 
 </div>

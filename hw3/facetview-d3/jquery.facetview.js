@@ -420,7 +420,7 @@ search box - the end user will not know they are happening.
             "searchbox_fieldselect": [],
             "searchbox_shade": "#ecf4ff",
             "search_sortby": [],
-            "sharesave_link": true,
+            "sharesave_link": false,
             "description":"",
             "facets":[],
             "facet_display_count":5,
@@ -993,7 +993,7 @@ search box - the end user will not know they are happening.
                 var meta = metaTmpl.replace(/{{from}}/g, from);
                 meta = meta.replace(/{{to}}/g, to);
                 meta = meta.replace(/{{total}}/g, data.found);
-                $('.facetview_metadata', obj).html("").append(meta);
+                // $('.facetview_metadata', obj).html("").append(meta);
                 $('.facetview_decrement', obj).bind('click',decrement);
                 from < size ? $('.facetview_decrement', obj).html('..') : "";
                 $('.facetview_increment', obj).bind('click',increment);

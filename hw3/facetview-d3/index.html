@@ -1,160 +1,21 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-  <meta charset="utf-8" />
-  <title>Facet View</title>
-
-  <script type="text/javascript" src="vendor/jquery/1.7.1/jquery-1.7.1.min.js"></script>
-
-  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-  <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>  
-
-  <script type="text/javascript" src="vendor/linkify/1.0/jquery.linkify-1.0-min.js"></script>  
-  
-  <link rel="stylesheet" href="vendor/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.css">
-  <script type="text/javascript" src="vendor/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.min.js"></script>
-
-  <script type="text/javascript" src="jquery.facetview.js"></script>
-
-  <link rel="stylesheet" href="css/facetview.css">
-
-  <link rel="stylesheet" href="css/style.css">
-
-  <script type="text/javascript">
-  function D3_CallBack_Function() {
-    console.log($('.facet-view-simple').facetview.options);
-    var response = $('.facet-view-simple').facetview.options.rawdata.response;
-    console.log(response);
-    
-    // [To-Do]
-    // pass response as argument into your D3 function to draw image
-
-    // uncomment the following line iterate data
-    // $('.facetview_increment').click();
-  }
-  jQuery(document).ready(function($) {
-
-    $('.facet-view-simple').facetview({
-      search_url: 'http://localhost:8983/solr/techproducts/select?',
-      search_index: 'solr',
-      datatype: 'json',
-      default_url_params:{
-                      "wt":"json",
-                      "facet.mincount":1,
-                      "hl": true
-                      },
-      post_search_callback: D3_CallBack_Function,
-      initialsearch:false,
-      paging: {
-          from: 0,
-          size: 100
-      }
-      /*
-      facets: [
-          {'field':'state', 'display': 'State'},
-          {'field':'gunCategory', 'display': 'Gun Category'},
-          {'field':'price', 'display': 'Gun Price'},
-          {'field':'startTime', 'display': 'Start Time'},
-          {'field':'endTime', 'display': 'End Time'}
-      ],
-
-      result_display : [
-          [
-            {
-              "pre" : "<h4>",
-              "field" : "title",
-              "post" : "</h4>"
-            }
-          ],
-          [
-            {
-              "pre" : "<b>Gun Price:  </b><text>",
-              "field" : "price",
-              "post" : "</text>"
-            }
-          ],
-          [
-            {
-              "pre" : "<b>Gun Category:  </b><text>",
-              "field" : "gunCategory",
-              "post" : "</text><br>"
-            }
-          ],
-          [
-            {
-              "pre" : "<b>Seller:  </b><text>",
-              "field" : "seller",
-              "post" : "</text>"
-            }
-          ],
-          [
-            {
-              "pre" : "<b>Seller Rating:  </b><text>",
-              "field" : "sellerRating",
-              "post" : "</text><br>"
-            }
-          ],
-          [
-            {
-              "pre" : "<b>Start Time:  </b><text>",
-              "field" : "startTime",
-              "post" : "</text>"
-            }
-          ],
-          [
-            {
-              "pre" : "<b>End Time:  </b><text>",
-              "field" : "endTime",
-              "post" : "</text><br>"
-            }
-          ],
-          [
-            {
-              "pre" : "<b>State:  </b><text>",
-              "field" : "state",
-              "post" : "</text>"
-            }
-          ]
-      ],
-      paging: {
-          from: 0,
-          size: 10
-      }
-      */
-    });
-  
-  });
-  </script>
-
+<title>D3 Gallery</title>
+<link href="images/main.css" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
-
-<!--
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="brand" href="#">FacetView</a>
-      <ul class="nav">
-        <li><a href="http://github.com/darth-pr/facetview">Github</a></li>
-        <li><a href="http://github.com/darth-pr/facetview/issues">Issues</a></li>
-      </ul>
-    </div>
+<div id ="container">
+  <div id="content">
+    <ul id="picturelist">
+      <li><a href="./d3_cloud.html"><img src="images/d3_wordCloud.png" alt="d3_worldCloud"/></a></li>
+      <li><a href="./d3_line.html"><img src="images/d3_lineChart.png" alt="d3_lineChart"/></a></li>
+      <li><a href="./d3_pie.html"><img src="images/d3_pieChart.png" alt="d3_pieChart"/></a></li>
+      <li><a href="./d3_bar.html"><img src="images/d3_sortableBar.png" alt="d3_sortableBar"/></a></li>
+      <li><a href="./d3_map.html"><img src="images/d3_stateMap.png" alt="d3_stateMap"/></a></li>
+      <li><a href="./d3_bubble.html"><img src="images/d3_bubbleChart.png" alt="d3_bubble"/></a></li>
+    </ul>
   </div>
-</div>
--->
-<div class="container"> 
-  <div class="content">
-    <div class="page-header">
-      <h1>
-      D3 widgets
-      </h1>
-    </div>
-    <div class="facet-view-simple"></div>
-    
-
-  </div>
-
 </div>
 </body>
 </html>

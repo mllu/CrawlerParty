@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        font-family:"Lucida Grande","Droid Sans",Arial,Helvetica,sans-serif;
+    }
+    .legend {
+        border: 1px solid #555555;
+        border-radius: 5px 5px 5px 5px;
+        font-size: 0.8em;
+        margin: 10px;
+        padding: 8px;
+    }
+    .bld {
+        font-weight: bold;
+    }
+</style>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Facet View</title>
+
+  <script type="text/javascript" src="vendor/jquery/1.7.1/jquery-1.7.1.min.js"></script>
+
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+  <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>  
+
+  <script type="text/javascript" src="vendor/linkify/1.0/jquery.linkify-1.0-min.js"></script>  
+  
+  <link rel="stylesheet" href="vendor/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.css">
+  <script type="text/javascript" src="vendor/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.min.js"></script>
+
+  <script type="text/javascript" src="jquery.facetview.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="d3.layout.cloud.js"></script>
+
+  <link rel="stylesheet" href="css/facetview.css">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+
+
+
+</script>
+  <script type="text/javascript">
+  var data = new Array();
+  var color;
+  function D3_CallBack_Function() {
+    // console.log($('.facet-view-simple').facetview.options);
+    // console.log("into d3 call_back");
+    var response = $('.facet-view-simple').facetview.options.rawdata.response;
+    var outputJson = response.docs;
+    var solrJsonArr = outputJson;
+    var dataArr = {};
+    // console.log(d3.selectAll('#svg_cloud > g'));
+   
+    // d3.selectAll('#text_cloud > *').remove();
+    // d3.selectAll('#svg_cloud > *').remove();
+    d3.selectAll('#svg_cloud').remove();
+    jQuery.each(solrJsonArr, function() {
+    var currJson = this;
+    var category = currJson["gunCategoryHyphen"];
+    if(typeof dataArr[category] == 'undefined'){
+      dataArr[category] = 1;
+    } else {
+      var posts = dataArr[category] + 1;
+      dataArr[category] = posts;
+    }
+});
+var valueArr = new Array();
+var keyArr = new Array();
+var maxPost = 0;
+for (var key in dataArr){
+    if (typeof dataArr[key] !== 'function') {
+        valueArr.push(dataArr[key]);
+        keyArr.push(key);
+        maxPost = (dataArr[key] > maxPost) ? dataArr[key] : maxPost;
+        data.push({size: dataArr[key] * 20, text: key});
+    }
+}
+    color = d3.scale.linear()
+            .domain([0,1,2,3,4,5,6,10,15,20,100])
+            .range(["#ddd", "#ccc", "#bbb", "#aaa", "#999", "#888", "#777", "#666", "#555", "#444", "#333", "#222"]);
+
+    d3.layout.cloud().size([800, 300])
+            .words(data)
+            .rotate(0)
+            .fontSize(function(d) { return d.size; })
+            .on("end", draw)
+            .start();
+  }
+  function draw(words) {
+        d3.select("#svg_div").append("svg")
+                .attr("id", "svg_cloud")
+                .attr("width", 850)
+                .attr("height", 550)
+                .attr("class", "wordcloud")
+                .append("g")
+                .attr("id","text_cloud")
+                // without the transform, words words would get cutoff to the left and top, they would
+                // appear outside of the SVG area
+                .attr("transform", "translate(320,200)")
+                .selectAll("text")
+                .data(data)
+                .enter().append("text")
+                .style("font-size", function(d) { return d.size + "px"; })
+                .style("fill", function(d, i) { return color(i); })
+                .attr("transform", function(d) {
+                    // console.log(d);
+                    return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                })
+                .text(function(d) { return d.text; });
+    }
+  jQuery(document).ready(function($) {
+
+    $('.facet-view-simple').facetview({
+      search_url: 'http://localhost:8983/solr/techproducts/select?',
+      search_index: 'solr',
+      datatype: 'json',
+      default_url_params:{
+                      "wt":"json",
+                      "facet.mincount":1,
+                      "hl": true
+                      },
+      post_search_callback: D3_CallBack_Function,
+      initialsearch:false,
+      paging: {
+          from: 0,
+          size: 100
+      }
+      
+    });
+  
+  });
+  </script>
+
+</head>
+
+<body>
+
+<div class="container"> 
+  <div class="content">
+    <div class="page-header">
+      <h1>
+      D3 widgets
+      </h1>
+    </div>
+    <div class="facet-view-simple"><label></div>
+    <div id ="svg_div">
+
+    </div>
+    
+  </div>
+</div>
+</body>
+</html>

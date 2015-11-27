@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<style>
+path {
+  stroke: DodgerBlue;
+  stroke-width: 1;
+  fill: none;
+}
+.axis {
+  font-size: 11px;
+  fill: gray;
+}
+
+.x.axis line {
+  stroke: lightgrey;
+}
+
+.x.axis .minor {
+  stroke-opacity: .5;
+}
+
+.x.axis path {
+  stroke: #fafafa;
+}
+
+.y.axis line, .y.axis path {
+  fill: none;
+  stroke: lightgrey;
+}
+
+</style>
+<head>
+  <meta charset="utf-8" />
+  <title>Facet View</title>
+
+  <script type="text/javascript" src="vendor/jquery/1.7.1/jquery-1.7.1.min.js"></script>
+
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" src="map.css">
+  <link rel="stylesheet" src="d3_bar.css">
+  <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>  
+
+  <script type="text/javascript" src="vendor/linkify/1.0/jquery.linkify-1.0-min.js"></script>  
+  
+  <link rel="stylesheet" href="vendor/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.css">
+  <script type="text/javascript" src="vendor/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.min.js"></script>
+
+  <script type="text/javascript" src="jquery.facetview.js"></script>
+  <script src="uStates.js"></script> <!-- creates uStates. -->
+  <script src="d3.v3.min.js"></script>
+  <script src="//d3js.org/d3.v3.min.js"></script>
+
+  <link rel="stylesheet" href="css/facetview.css">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script type="text/javascript">
+  function D3_CallBack_Function() {
+    // console.log($('.facet-view-simple').facetview.options);
+    // console.log("into d3 call_back");
+    d3.selectAll("#svg_div > *").remove();
+    var response = $('.facet-view-simple').facetview.options.rawdata.response;
+    var parseDate = d3.time.format("%Y-%m-%d").parse;
+    var outputJson = response.docs;
+    var solrJsonArr = outputJson;
+    var dataArr = {};
+    var valueArr = new Array();
+    var keyArr = new Array();
+    var data = new Array();
+    jQuery.each(solrJsonArr, function() {
+    var currJson = this;
+    if(typeof currJson["startTime"] == 'undefined'){
+      return true;
+    }
+    var startTime = currJson["startTime"].substring(0,10);
+    if(typeof dataArr[startTime] == 'undefined'){
+      dataArr[startTime] = 1;
+    } else {
+      var posts = dataArr[startTime] + 1;
+      dataArr[startTime] = posts;
+    }
+});
+    var margin = {top: 60, right: 40, bottom: 50, left: 60};
+var w = 580 ; // 寬
+var h = 300 ; // 高
+
+
+var dataset = []; //建立空的資料陣列
+var Num = 20
+for (var i=0; i < 50; i++){
+  var newNum = Num + (5 - Math.floor(Math.random() * 10));
+  dataset.push(newNum);
+  Num = newNum;
+}
+for (var key in dataArr){
+    if (typeof dataArr[key] !== 'function') {
+        valueArr.push(dataArr[key]);
+        keyArr.push(parseDate(key));
+        data.push({post: dataArr[key], date: new parseDate(key)});
+    }
+}
+
+//隨機產生一組隨機的數字陣列，數字的值，每次加減不超過5
+//X是資料的數量，Y則是資料的值
+
+console.log(data);
+var Ymax = d3.max(valueArr),
+Ymin = d3.min(valueArr);
+var maxDate=new Date(Math.max.apply(null,keyArr));
+var minDate=new Date(Math.min.apply(null,keyArr));
+
+var xScale = d3.time.scale().domain([minDate,maxDate]).range([0, w]);
+
+var yScale = d3.scale.linear().domain([Ymin, Ymax]).range([h, 0]);
+data.sort(function(a,b){
+  return a.date - b.date;
+});
+
+// 增加一個line function，用來把資料轉為x, y
+var line = d3.svg.line()
+.x(function(d,i) { 
+    console.log(d.date);
+    return xScale(d.date); //利用尺度運算資料索引，傳回x的位置
+  })
+.y(function(d) { 
+    console.log(d.post);
+    return yScale(d.post); //利用尺度運算資料的值，傳回y的位置
+  });
+
+//增加一個SVG元素
+var svg = d3.select('#svg_div').append('svg')
+  .attr('width', w + margin.left + margin.right) //將左右補滿
+  .attr('height', h + margin.top + margin.bottom) //上下補滿
+  .append('g') //增加一個群組g
+  .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+// 增加x軸線，tickSize是軸線的垂直高度，-h會往上拉高
+// tickSubdivide不清楚是什麼用處
+var xAxis = d3.svg.axis().scale(xScale).orient('bottom').tickSize(-h).tickSubdivide(true);
+// SVG加入x軸線
+svg.append('g')
+.attr('class', 'x axis')
+.attr('transform', 'translate(0,' + h + ')')
+.call(xAxis);
+
+
+// 建立y軸線，4個刻度，數字在左
+var yAxisLeft = d3.svg.axis().scale(yScale).ticks(4).orient('left');
+// SVG加入y軸線
+svg.append('g')
+.attr('class', 'y axis')
+.attr('transform', 'translate(0,0)')
+.call(yAxisLeft);
+
+  svg.append('path').attr('d', line(data)); //將資料套用d3.svg.line()
+
+}
+jQuery(document).ready(function($) {
+
+  $('.facet-view-simple').facetview({
+    search_url: 'http://localhost:8983/solr/techproducts/select?',
+    search_index: 'solr',
+    datatype: 'json',
+    default_url_params:{
+      "wt":"json",
+      "facet.mincount":1,
+      "hl": true
+    },
+    post_search_callback: D3_CallBack_Function,
+    initialsearch:false,
+    paging: {
+      from: 0,
+      size: 100
+    }
+
+  });
+
+});
+</script>
+
+</head>
+
+<body>
+
+  <div class="container"> 
+    <div class="content">
+      <div class="page-header">
+        <h1>
+          D3 widgets
+        </h1>
+      </div>
+      <div class="facet-view-simple"></div>
+      <div id = "svg_div">
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

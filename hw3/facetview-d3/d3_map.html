@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Facet View</title>
+
+  <script type="text/javascript" src="vendor/jquery/1.7.1/jquery-1.7.1.min.js"></script>
+
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" src="map.css">
+  <link rel="stylesheet" src="d3_bar.css">
+  <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>  
+
+  <script type="text/javascript" src="vendor/linkify/1.0/jquery.linkify-1.0-min.js"></script>  
+  
+  <link rel="stylesheet" href="vendor/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.css">
+  <script type="text/javascript" src="vendor/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.min.js"></script>
+
+  <script type="text/javascript" src="jquery.facetview.js"></script>
+  <script type="text/javascript" src="d3_map.js"></script>
+  <script type="text/javascript" src="d3_bar.js"></script>
+  <script src="uStates.js"></script> <!-- creates uStates. -->
+  <script src="d3.v3.min.js"></script>
+  <script src="//d3js.org/d3.v3.min.js"></script>
+
+  <link rel="stylesheet" href="css/facetview.css">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script type="text/javascript">
+  function D3_CallBack_Function() {
+    // console.log($('.facet-view-simple').facetview.options);
+    // console.log("into d3 call_back");
+    var response = $('.facet-view-simple').facetview.options.rawdata.response;
+    var outputJson = response.docs;
+    drawMap(outputJson);
+  }
+  jQuery(document).ready(function($) {
+
+    $('.facet-view-simple').facetview({
+      search_url: 'http://localhost:8983/solr/techproducts/select?',
+      search_index: 'solr',
+      datatype: 'json',
+      default_url_params:{
+                      "wt":"json",
+                      "facet.mincount":1,
+                      "hl": true
+                      },
+      post_search_callback: D3_CallBack_Function,
+      initialsearch:false,
+      paging: {
+          from: 0,
+          size: 100
+      }
+      
+    });
+  
+  });
+  </script>
+
+</head>
+
+<body>
+
+<div class="container"> 
+  <div class="content">
+    <div class="page-header">
+      <h1>
+      D3 widgets
+      </h1>
+    </div>
+    <div class="facet-view-simple"></div>
+    
+
+  </div>
+
+</div>
+<center>
+  <div id="tooltip"></div><!-- div to hold tooltip. -->
+  <svg width="960" height="600" id="statesvg"></svg> <!-- svg to hold the map. -->
+</center>
+</body>
+</html>

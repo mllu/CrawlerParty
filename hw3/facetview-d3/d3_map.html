@@ -1,9 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+  
   <meta charset="utf-8" />
   <title>US State Map</title>
+  <style>
+    .backImg {
+        display: inline-block;
+        vertical-align: middle;
+        border: none;
+        padding: 0;
+        margin: 0;
+        height: 34px;
+        width: 99px;
+        max-width: 100%;
+        cursor: pointer; cursor: hand;
+    }
 
+  </style>
   <script type="text/javascript" src="vendor/jquery/1.7.1/jquery-1.7.1.min.js"></script>
 
   <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
@@ -58,6 +72,11 @@
   });
   </script>
 
+  <script>
+  function goBack() {
+      window.history.back();
+  }
+  </script>
 </head>
 
 <body>
@@ -66,8 +85,10 @@
   <div class="content">
     <div class="page-header">
       <h1>
-      US State Map
+      US State Map  
+      <spans style="float:right;"><img class="backImg" onclick="goBack()" src="./images/button_back.jpg" alt="Back to Previous Page"></span>
       </h1>
+
     </div>
     <div class="facet-view-simple"></div>
     

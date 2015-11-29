@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html>
 <style>
+.backImg {
+    display: inline-block;
+    vertical-align: middle;
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: 34px;
+    width: 99px;
+    max-width: 100%;
+    cursor: pointer; cursor: hand;
+}
 path {
   stroke: DodgerBlue;
   stroke-width: 1;
@@ -177,7 +188,11 @@ jQuery(document).ready(function($) {
 
 });
 </script>
-
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
 </head>
 
 <body>
@@ -187,6 +202,7 @@ jQuery(document).ready(function($) {
       <div class="page-header">
         <h1>
           Line Chart
+          <spans style="float:right;"><img class="backImg" onclick="goBack()" src="./images/button_back.jpg" alt="Back to Previous Page"></span>
         </h1>
       </div>
       <div class="facet-view-simple"></div>

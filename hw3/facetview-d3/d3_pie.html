@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html>
 <style>
-
+.backImg {
+    display: inline-block;
+    vertical-align: middle;
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: 34px;
+    width: 99px;
+    max-width: 100%;
+    cursor: pointer; cursor: hand;
+}
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   /*width: 960px;
@@ -252,7 +262,11 @@ d3.select(".randomize")
 
   });
   </script>
-
+  <script>
+  function goBack() {
+      window.history.back();
+  }
+  </script>
 </head>
 
 <body>
@@ -262,6 +276,7 @@ d3.select(".randomize")
       <div class="page-header">
         <h1>
           Pie charts labels
+          <spans style="float:right;"><img class="backImg" onclick="goBack()" src="./images/button_back.jpg" alt="Back to Previous Page"></span>
         </h1>
       </div>
       <div class="facet-view-simple"></div>

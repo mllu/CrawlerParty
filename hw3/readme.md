@@ -27,12 +27,12 @@ template json file:
 
 # facetview
   facetview-d3/facetview.html
-  jquery_facetview.js
+  facetview-d3/jquery_facetview.js
 
 # d3
 main page: 
   facetview-d3/index.html
-  jquery.facetview.js
+  facetview-d3/jquery.facetview.js
 
 gallery pages:
   facetview-d3/d3_bar.html

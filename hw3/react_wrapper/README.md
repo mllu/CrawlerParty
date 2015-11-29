@@ -1,3 +1,17 @@
+
+Installation for react wrapper of D3 visualization
+=====================================================
+Install node.js
+$ brew install node
+
+$ npm install -g npm
+$ npm install -g gulp
+
+$ npm install
+$ npm install history react-router@latest
+$ npm install react-script-loader
+=====================================================
+
 # [Material-UI](http://callemall.github.io/material-ui/) - Example Project
 
 This is an example project that uses [Material-UI](http://callemall.github.io/material-ui/).

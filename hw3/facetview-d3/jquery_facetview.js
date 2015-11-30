@@ -436,7 +436,9 @@ search box - the end user will not know they are happening.
             "nested": [],
             "default_url_params":{
                 'wt':'json',
-                'indent':'true'},
+                'indent':'true',
+                "facet.mincount":1,
+                'hl':'true'},
             "freetext_submit_delay":"500",
             "query_parameter":"q",
             "q":"",
@@ -719,10 +721,11 @@ search box - the end user will not know they are happening.
             if ( $('.facetview_or[href="' + rel + '"]', obj).attr('rel') == 'OR' ) {
                 newobj += ' facetview_logic_or';
             }
+            // unescape href for display
             newobj += '" rel="' + rel + 
                 '" alt="remove" title="remove"' +
                 ' href="' + href + '">' +
-                href + ' <i class="icon-white icon-remove" style="margin-top:1px;"></i></a>';
+                unescape(href) + ' <i class="icon-white icon-remove" style="margin-top:1px;"></i></a>';
 
             if ( $('#facetview_group_' + relclean, obj).length ) {
                 $('#facetview_group_' + relclean, obj).append(newobj);
@@ -883,9 +886,11 @@ search box - the end user will not know they are happening.
                     if (display[lineitem][object].hasOwnProperty('field')) {
                         var thekey = display[lineitem][object]['field'];                    
                         var alternative_key = display[lineitem][object]['alternative_field'];
-                        thevalue = getvalue(record, thekey);
+                        thevalue = record[thekey];
+                        //thevalue = getvalue(record, thekey);
                         if (!(thevalue && thevalue.toString().length)) {
-                            thevalue = getvalue(record, alternative_key);
+                            //thevalue = getvalue(record, alternative_key);
+                            thevalue = record[alternative_key];
                         }
                     }
                     else if (display[lineitem][object].hasOwnProperty('highlight_field')){
@@ -908,7 +913,7 @@ search box - the end user will not know they are happening.
                     }
                 }
                 if (line) {
-                    lines += line.replace(/^\s/,'').replace(/\s$/,'').replace(/\,$/,'') + "<br />";
+                    lines += line.replace(/^\s/,'').replace(/\s$/,'').replace(/\,$/,'') ;//+ "<br />";
                 }
             }
             lines ? result += lines : result += JSON.stringify(record,"","    ");
@@ -939,9 +944,16 @@ search box - the end user will not know they are happening.
                 facet_filter.children().find('.facetview_filtervalue').remove();
                 var records = data["facets"][ facet ];
                 for ( var item in records ) {
+                    //href needs to be escaped
                     var append = '<tr class="facetview_filtervalue" style="display:none;"><td><a class="facetview_filterchoice' +
-                        '" rel="' + facet + '" href="' + item + '">' + item +
-                        ' (' + records[item] + ')</a></td></tr>';
+                        '" rel="' + facet + '" href="' + escape(item) + '">';
+                        if(facet == 'state'){
+                            append += item.toUpperCase();
+                        }
+                        else{
+                            append += item;
+                        }
+                        append += ' (' + records[item] + ')</a></td></tr>';
                     facet_filter.append(append);
                 }
                 if ( $('.facetview_filtershow[rel="' + facetclean + '"]', obj).hasClass('facetview_open') ) {
@@ -1187,7 +1199,7 @@ search box - the end user will not know they are happening.
                 delete qs.facets;
                 options.querystring = JSON.stringify(qs)
             }
-            options.sharesave_link ? $('.facetview_sharesaveurl', obj).val('http://' + window.location.host + window.location.pathname + '?source=' + options.querystring) : "";
+            options.sharesave_link ? $('.facetview_sharesaveurl', obj).val('http://' + window.location.host + 'techproducts/select?q=' + options.querystring) : "";
             return qy;
         };
 
@@ -1198,6 +1210,7 @@ search box - the end user will not know they are happening.
                 urlparams += item + "=" + options.default_url_params[item] + "&";
             }
             // do paging params
+            //console.log(options.paging);
             var pageparams = "";
             for (var item in options.paging) {
                 pageparams += options.solr_paging_params[item] + "=" + options.paging[item] + "&";
@@ -1233,8 +1246,10 @@ search box - the end user will not know they are happening.
                 $(this).attr('href') + '" AND ';
             });
             // add any freetext filter
+            //console.log(options.q);
             if (options.q != "") {
-                query += options.q + '*';
+            //the query term needs to be escaped
+                query += escape(options.q) + '*';
             }
             query = query.replace(/ AND $/,"");
             // set a default for blank search
@@ -1274,6 +1289,8 @@ search box - the end user will not know they are happening.
               jsonp:"json.wrf", 
               success: function(data) { showresults(data) } 
             });
+            $('.facetview_sharesaveurl').text(options.search_url + solrsearchquery());
+            //console.log(options.search_url + solrsearchquery());
         };
 
         // show search help
@@ -1420,6 +1437,7 @@ search box - the end user will not know they are happening.
         } else {
             thefacetview += '<div class="span12" id="facetview_rightcol">';
         }
+        thefacetview += '<div class="d3_svg"></div>';
         thefacetview += '<div class="facetview_search_options_container">';
         thefacetview += '<div class="btn-group" style="display:inline-block; margin-right:5px;"> \
             <a class="btn btn-small" title="clear all search settings and start again" href=""><i class="icon-remove"></i></a> \
@@ -1457,9 +1475,10 @@ search box - the end user will not know they are happening.
             thefacetview += '<div class="facetview_sharesavebox alert alert-info" style="display:none;"> \
                 <button type="button" class="facetview_sharesave close">×</button> \
                 <p>Share or save this search:</p> \
-                <textarea class="facetview_sharesaveurl" style="width:100%;height:100px;">http://' + window.location.host + 
-                window.location.pathname + '?source=' + options.querystring + '</textarea> \
+                <textarea class="facetview_sharesaveurl" style="width:100%;height:100px;">' + options.search_url + solrsearchquery() + '</textarea> \
                 </div>';
+
+                //console.log(options.search_url + solrsearchquery());
         }
         thefacetview += '</div>';
         thefacetview += thehelp;

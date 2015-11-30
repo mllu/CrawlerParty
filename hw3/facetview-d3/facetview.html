@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<html>
+<meta charset="utf-8">
+
 <head>
   <meta charset="utf-8" />
-  <title>Facet View</title>
+  
+</head>
+
+
+
+<title>FacetView</title>
 
   <script type="text/javascript" src="vendor/jquery/1.7.1/jquery-1.7.1.min.js"></script>
 
@@ -14,118 +20,314 @@
   <link rel="stylesheet" href="vendor/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.css">
   <script type="text/javascript" src="vendor/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.min.js"></script>
 
-  <script type="text/javascript" src="jquery.facetview.js"></script>
+  <script type="text/javascript" src="jquery_facetview.js"></script>
 
   <link rel="stylesheet" href="css/facetview.css">
 
-  <link rel="stylesheet" href="css/style.css">
-
   <script type="text/javascript">
+  
 jQuery(document).ready(function($) {
-  $('.facet-view-simple').facetview({
+  $('.facet-view-simple').each(function() {
+  $(this).facetview({
     search_url: 'http://localhost:8983/solr/techproducts/select?',
     search_index: 'solr',
     datatype: 'json',
-    default_url_params:{
-                    "wt":"json",
-                    "facet.mincount":1,
-                    "hl": true
-                    },
-    facets: [
-        {'field':'state', 'display': 'State'},
-        {'field':'gunCategory', 'display': 'Gun Category'},
-        {'field':'price', 'display': 'Gun Price'},
-        {'field':'startTime', 'display': 'Start Time'},
-        {'field':'endTime', 'display': 'End Time'}
-    ],
-    result_display : [
-        [
-          {
-            "pre" : "<h4>",
-            "field" : "title",
-            "post" : "</h4>"
-          }
-        ],
-        [
-          {
-            "pre" : "<b>Gun Price:  </b><text>",
-            "field" : "price",
-            "post" : "</text>"
-          }
-        ],
-        [
-          {
-            "pre" : "<b>Gun Category:  </b><text>",
-            "field" : "gunCategory",
-            "post" : "</text><br>"
-          }
-        ],
-        [
-          {
-            "pre" : "<b>Seller:  </b><text>",
-            "field" : "seller",
-            "post" : "</text>"
-          }
-        ],
-        [
-          {
-            "pre" : "<b>Seller Rating:  </b><text>",
-            "field" : "sellerRating",
-            "post" : "</text><br>"
-          }
-        ],
-        [
-          {
-            "pre" : "<b>Start Time:  </b><text>",
-            "field" : "startTime",
-            "post" : "</text>"
-          }
-        ],
-        [
-          {
-            "pre" : "<b>End Time:  </b><text>",
-            "field" : "endTime",
-            "post" : "</text><br>"
-          }
-        ],
-        [
-          {
-            "pre" : "<b>State:  </b><text>",
-            "field" : "state",
-            "post" : "</text>"
-          }
-        ]
+     "facets": [
+        {'field':'state', 'display':'Location:'},
+        {'field':'gunCategoryHyphen', 'display':'Gun Category'}
     ],
     paging: {
-        from: 0,
-        size: 10
-    }
+      from: 0,
+      size: 20
+    },
+    post_search_callback: d3_callback,
+    "result_display" : [
+          [{
+            "pre": "<h3><b>",
+            "field": "title",
+            "post": "</b></h3>"
 
+          }],
+          [{
+            "pre" : "<p><b>Gun Category:  </b><span>",
+            "field" : "gunCategoryHyphen",
+            "post" : "</span></p>"
+          }],
+          [{
+            "pre" : "<p><b>Gun Model: </b>",
+            "field" : "gunModel",
+            "post" : "</p>"
+          }],
+          [{
+            "pre":"<p><b>Seller Rating: </b><font color='red'>",
+            "field":"sellerRating",
+            "post":"</font></p>"
+          }],
+          [{
+            "pre":"<p><b>Price: $</b>",
+            "field":"price",
+            "post":"</p>"
+          }],
+          [{
+            "pre":"<p><b>Location: </b><font color='blue'>",
+            "field":"location",
+            "post":"</font></p>"
+          }],
+          [{
+            "pre":"<p><b>Start Time: </b>",
+            "field":"startTime",
+            "post":"       "
+          }],
+          [{
+            "pre":"   <b>End Time: </b>",
+            "field":"endTime",
+            "post":"</p>"
+          }]
+    ],
+    default_operator: "AND"
+  });
   });
 });
+</script>
+<script>
+  var d3_callback = function(){
+  
+  d3.selectAll('svg').remove();
+    var margin = {top: 20, right: 20, bottom: 20, left: 120},
+    width = 840 - margin.right - margin.left,
+    height = 400 - margin.top - margin.bottom;
+
+    var i = 0,
+    duration = 750,
+    root;
+
+    var tree = d3.layout.tree()
+    .size([height, width]);
+
+    var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.y, d.x]; });
+    console.log(d3.select('.facetview_sharesaveurl').text());
+
+     var svg = d3.select(".d3_svg").append("svg")
+    .attr("width", width )
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  /*****************************likun's************************************/
+  //transfer the original json response to tree array
+    var response = $('.facet-view-simple').facetview.options.rawdata.response;
+    var rawJson = response.docs;
+    var treeJson =  new Array();
+    var childArr = new Array();
+    treeJson['name'] = 'Gun Category';
+    rawJson.forEach(setup);
+    //reduce the duplicated category
+    function setup(d){
+      for(var each in childArr){
+        if(childArr[each].name == d.gunCategory) {
+          childArr[each].size+=1;
+          return;
+        }
+      }
+      childArr.push({'name': d.gunCategory,"size":1});
+    }
+    treeJson['children'] = childArr;
+    /**************************origin************************************/
+    //d3.json("flare.json", function(error, flare) {
+    //if (error) throw error;
+   
+      
+      root = treeJson;
+      root.x0 = height / 2;
+      root.y0 = 0;
+      
+      function collapse(d) {
+        if (d.children) {
+          d._children = d.children;
+          d.children = null;
+        }
+      }
+
+      root.children.forEach(collapse);
+      update(root);
+    //});
+
+    d3.select(self.frameElement).style("height", "400px");
+
+    function update(source) {
+    // Compute the new tree layout.
+      var nodes = tree.nodes(root).reverse(),
+      links = tree.links(nodes);
+
+    // Normalize for fixed-depth.
+      nodes.forEach(function(d) { d.y = d.depth * 180; });
+
+    // Update the nodes…
+      var node = svg.selectAll("g.node")
+      .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+    // Enter any new nodes at the parent's previous position.
+      var nodeEnter = node.enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+      .on("click", click);
+
+      nodeEnter.append("circle")
+      .attr("r", 1e-6)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+      nodeEnter.append("text")
+      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+      .text(function(d) { return d.name; })
+      .style("fill-opacity", 1e-6);
+
+      // Transition nodes to their new position.
+      var nodeUpdate = node.transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+      nodeUpdate.select("circle")
+      .attr("r", 4.5)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+      nodeUpdate.select("text")
+      .style("fill-opacity", 1);
+
+      // Transition exiting nodes to the parent's new position.
+      var nodeExit = node.exit().transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+      .remove();
+
+      nodeExit.select("circle")
+      .attr("r", 1e-6);
+
+      nodeExit.select("text")
+      .style("fill-opacity", 1e-6);
+
+    // Update the links…
+      var link = svg.selectAll("path.link")
+      .data(links, function(d) { return d.target.id; });
+
+    // Enter any new links at the parent's previous position.
+      link.enter().insert("path", "g")
+      .attr("class", "link")
+      .attr("d", function(d) {
+        var o = {x: source.x0, y: source.y0};
+        return diagonal({source: o, target: o});
+      });
+
+      // Transition links to their new position.
+      link.transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+      // Transition exiting nodes to the parent's new position.
+      link.exit().transition()
+      .duration(duration)
+      .attr("d", function(d) {
+        var o = {x: source.x, y: source.y};
+        return diagonal({source: o, target: o});
+      })
+      .remove();
+
+      // Stash the old positions for transition.
+      nodes.forEach(function(d) {
+        d.x0 = d.x;
+        d.y0 = d.y;
+      });
+    }
+
+    // Toggle children on click.
+    function click(d) {
+      if (d.children) {
+        d._children = d.children;
+        d.children = null;
+      } else {
+        d.children = d._children;
+        d._children = null;
+      }
+     update(d);
+    }
+
+  }
+
+
   </script>
-</head>
 
+<style type="text/css">
+.ctree{
+  width:100%;
+  height:600px;
+  background-color: blue;
+
+}
+.facet-view-simple{
+    position: absolute;
+    top: 0px;
+    left:20px;
+    width:80%;
+    height:600px;
+    margin:20px auto 0 auto;
+}
+.d3_svg{
+  width:100%;
+  height:450px;
+  margin-top:40px;
+  margin-left:40px;
+}
+.page_header{
+  position:absolute;
+  top:0;
+  left:0;
+}
+svg{
+  position:relative;
+  top:20px;
+  right:40px;
+}
+</style>
+
+<style>
+
+.node {
+  cursor: pointer;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+
+</style>
 <body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
 
-<!--
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="brand" href="#">FacetView</a>
-      <ul class="nav">
-        <li><a href="http://github.com/darth-pr/facetview">Github</a></li>
-        <li><a href="http://github.com/darth-pr/facetview/issues">Issues</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
--->
+
+
+</script>
+
 <div class="container"> 
   <div class="content">
     <div class="page-header">
       <h1>
-      Facet View For Weapon Search
+      Facet View - Weapon Search
       </h1>
     </div>
 
@@ -133,5 +335,6 @@ jQuery(document).ready(function($) {
   </div>
 
 </div>
+
 </body>
 </html>

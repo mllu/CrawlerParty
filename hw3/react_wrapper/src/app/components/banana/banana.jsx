@@ -50,7 +50,7 @@ var Banana = React.createClass({
         }
         return (
             <div style={_style}>
-                <iframe src="http://localhost:8983/solr/banana/src/index.html" width="100%" scrolling="no"
+                <iframe src="http://localhost:8983/solr/banana/src/index.html" width="100%" height="1280px" scrolling="yes"
                         frameBorder="0"></iframe>
 
             </div>

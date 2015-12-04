@@ -66,7 +66,6 @@ var D3 = React.createClass({
             <div style={_style}>
                 <iframe src="http://localhost:8983/solr/facetview-d3/index.html" width="100%" height="1000px"
                         frameBorder="0"></iframe>
-
             </div>
         );
     }

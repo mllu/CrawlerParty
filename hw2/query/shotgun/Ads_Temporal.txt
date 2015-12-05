@@ -1,7 +1,0 @@
-Month	Frequency
-October	21779
-September	149
-August	70
-July	43
-June	0
-May	0

@@ -1,7 +1,0 @@
-Month	Frequency
-October	56
-September	6
-August	0
-July	0
-June	0
-May	0

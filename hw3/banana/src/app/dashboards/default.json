@@ -24,25 +24,25 @@
     },
     "filter": {
       "idQueue": [
-        0,
+        1,
         2
       ],
       "list": {
-        "1": {
+        "0": {
           "from": "2015-01-01T00:00:00.000Z/SECOND",
           "to": "*",
           "field": "startTime",
           "type": "time",
           "fromDateObj": "2015-01-01T00:00:00.000Z",
-          "toDateObj": "2015-12-04T09:53:44.599Z",
+          "toDateObj": "2015-12-05T05:41:18.589Z",
           "mandate": "must",
           "active": true,
           "alias": "",
-          "id": 1
+          "id": 0
         }
       },
       "ids": [
-        1
+        0
       ]
     }
   },
@@ -63,7 +63,11 @@
           ],
           "type": "query",
           "label": "Search",
-          "history": [],
+          "history": [
+            "shotgun",
+            "*:*",
+            "unverified"
+          ],
           "remember": 10,
           "pinned": true,
           "query": "*",
@@ -95,11 +99,11 @@
             "interval": 30,
             "min": 3
           },
-          "filter_id": 1,
+          "filter_id": 0,
           "title": "Time Window",
           "time": {
             "from": "12/31/2014 16:00:00",
-            "to": "12/04/2015 01:53:44"
+            "to": "12/04/2015 21:41:18"
           }
         },
         {
@@ -112,7 +116,7 @@
             "ids": [
               0
             ],
-            "query": "q=*%3A*&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&wt=json&rows=0\n",
+            "query": "q=shotgun&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&wt=json&rows=0\n",
             "basic_query": "",
             "custom": ""
           },
@@ -140,7 +144,7 @@
       "panels": [
         {
           "error": false,
-          "span": 4,
+          "span": 3,
           "editable": true,
           "spyable": true,
           "group": [
@@ -149,7 +153,7 @@
           "type": "filtering"
         },
         {
-          "span": 4,
+          "span": 2,
           "editable": true,
           "type": "facet",
           "loadingEditor": false,
@@ -159,8 +163,8 @@
             "ids": [
               0
             ],
-            "query": "q=*%3A*&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=state&wt=json",
-            "basic_query": "q=*%3A*&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=state",
+            "query": "q=shotgun&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=state&wt=json",
+            "basic_query": "q=shotgun&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=state",
             "custom": ""
           },
           "group": "default",
@@ -175,15 +179,15 @@
           "spyable": true,
           "facet_limit": 10,
           "foundResults": true,
-          "header_title": "Limit Your Search",
+          "header_title": "Limit State Search",
           "toggle_element": "state",
           "show_queries": true,
-          "title": "Facet",
+          "title": "State",
           "offset": 0,
           "exportSize": null
         },
         {
-          "span": 4,
+          "span": 3,
           "editable": true,
           "type": "facet",
           "loadingEditor": false,
@@ -193,8 +197,8 @@
             "ids": [
               0
             ],
-            "query": "q=*%3A*&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=startTime&wt=json",
-            "basic_query": "q=*%3A*&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=startTime",
+            "query": "q=shotgun&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=startTime&wt=json",
+            "basic_query": "q=shotgun&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=startTime",
             "custom": ""
           },
           "group": "default",
@@ -209,12 +213,80 @@
           "spyable": true,
           "facet_limit": 10,
           "foundResults": true,
-          "header_title": "Limit Your Search",
+          "header_title": "Limit Time Search",
           "toggle_element": "state",
           "show_queries": true,
           "title": "Time",
           "exportSize": null,
           "offset": 0
+        },
+        {
+          "span": 2,
+          "editable": true,
+          "type": "facet",
+          "loadingEditor": false,
+          "status": "Stable",
+          "queries": {
+            "mode": "all",
+            "ids": [
+              0
+            ],
+            "query": "q=shotgun&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=sellerRating&wt=json",
+            "basic_query": "q=shotgun&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=sellerRating",
+            "custom": ""
+          },
+          "group": "default",
+          "style": {
+            "font-size": "9pt"
+          },
+          "overflow": "min-height",
+          "fields": [
+            "sellerRating"
+          ],
+          "field_list": true,
+          "spyable": true,
+          "facet_limit": 10,
+          "foundResults": true,
+          "header_title": "Limit Seller Rating Search",
+          "toggle_element": "state",
+          "show_queries": true,
+          "title": "Seller",
+          "offset": 0,
+          "exportSize": null
+        },
+        {
+          "span": 2,
+          "editable": true,
+          "type": "facet",
+          "loadingEditor": false,
+          "status": "Stable",
+          "queries": {
+            "mode": "all",
+            "ids": [
+              0
+            ],
+            "query": "q=shotgun&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=bidder&wt=json",
+            "basic_query": "q=shotgun&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=bidder",
+            "custom": ""
+          },
+          "group": "default",
+          "style": {
+            "font-size": "9pt"
+          },
+          "overflow": "min-height",
+          "fields": [
+            "bidder"
+          ],
+          "field_list": true,
+          "spyable": true,
+          "facet_limit": 5,
+          "foundResults": true,
+          "header_title": "Limit Bidder Search",
+          "toggle_element": "state",
+          "show_queries": true,
+          "title": "Bidder",
+          "offset": 0,
+          "exportSize": null
         }
       ]
     },
@@ -242,9 +314,9 @@
           "fields": [
             "title",
             "gunCategory",
-            "seller",
             "sellerRating",
-            "price_c"
+            "price_c",
+            "bidder"
           ],
           "highlight": [],
           "sortable": false,
@@ -256,8 +328,8 @@
             "ids": [
               0
             ],
-            "query": "q=*%3A*&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&wt=json&rows=5000",
-            "basic_query": "q=*%3A*&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]"
+            "query": "q=shotgun&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&wt=json&rows=5000",
+            "basic_query": "q=shotgun&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]"
           },
           "field_list": true,
           "status": "Stable",
@@ -320,7 +392,7 @@
             "ids": [
               0
             ],
-            "query": "q=*%3A*&wt=json&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&rows=0&facet=true&facet.field=state&facet.limit=200",
+            "query": "q=shotgun&wt=json&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&rows=0&facet=true&facet.field=state&facet.limit=200",
             "custom": ""
           },
           "mode": "count",
@@ -350,7 +422,7 @@
             "ids": [
               0
             ],
-            "query": "q=*%3A*&wt=json&rows=0&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.range=startTime&facet.range.start=2015-01-01T00:00:00.000Z/SECOND&facet.range.end=NOW&facet.range.gap=%2B1DAY\n",
+            "query": "q=shotgun&wt=json&rows=0&fq=startTime:[2015-01-01T00:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.range=startTime&facet.range.start=2015-01-01T00:00:00.000Z/SECOND&facet.range.end=NOW&facet.range.gap=%2B1DAY\n",
             "custom": ""
           },
           "max_rows": 100000,

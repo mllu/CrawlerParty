@@ -24,44 +24,26 @@
     },
     "filter": {
       "idQueue": [
+        1,
+        2,
         3
       ],
       "list": {
         "0": {
-          "from": "2015-10-22T07:00:00.000Z/SECOND",
+          "from": "2015-10-13T07:00:00.000Z/SECOND",
           "to": "*",
           "field": "startTime",
           "type": "time",
-          "fromDateObj": "2015-10-22T07:00:00.000Z",
-          "toDateObj": "2015-12-05T23:23:15.220Z",
+          "fromDateObj": "2015-10-13T07:00:00.000Z",
+          "toDateObj": "2015-12-07T05:01:09.197Z",
           "mandate": "must",
           "active": true,
           "alias": "",
           "id": 0
-        },
-        "1": {
-          "type": "terms",
-          "field": "state",
-          "value": "PA",
-          "mandate": "must",
-          "active": true,
-          "alias": "",
-          "id": 1
-        },
-        "2": {
-          "type": "terms",
-          "field": "startTime",
-          "value": "2015-10-22T21%3A00%3A00Z",
-          "mandate": "must",
-          "active": true,
-          "alias": "",
-          "id": 2
         }
       },
       "ids": [
-        0,
-        1,
-        2
+        0
       ]
     }
   },
@@ -121,8 +103,8 @@
           "filter_id": 0,
           "title": "Time Window",
           "time": {
-            "from": "10/22/2015 00:00:00",
-            "to": "12/05/2015 15:23:15"
+            "from": "10/13/2015 00:00:00",
+            "to": "12/06/2015 21:01:09"
           }
         },
         {
@@ -135,7 +117,7 @@
             "ids": [
               0
             ],
-            "query": "q=shotgun&fq=startTime:[2015-10-22T07:00:00.000Z/SECOND%20TO%20*]&fq=state:\"PA\"&fq=startTime:\"2015-10-22T21%3A00%3A00Z\"&wt=json&rows=0\n",
+            "query": "q=shotgun&fq=startTime:[2015-10-13T07:00:00.000Z/SECOND%20TO%20*]&wt=json&rows=0\n",
             "basic_query": "",
             "custom": ""
           },
@@ -182,8 +164,8 @@
             "ids": [
               0
             ],
-            "query": "q=shotgun&fq=startTime:[2015-10-22T07:00:00.000Z/SECOND%20TO%20*]&fq=state:\"PA\"&fq=startTime:\"2015-10-22T21%3A00%3A00Z\"&facet=true&facet.field=state&wt=json",
-            "basic_query": "q=shotgun&fq=startTime:[2015-10-22T07:00:00.000Z/SECOND%20TO%20*]&fq=state:\"PA\"&fq=startTime:\"2015-10-22T21%3A00%3A00Z\"&facet=true&facet.field=state",
+            "query": "q=shotgun&fq=startTime:[2015-10-13T07:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=state&wt=json",
+            "basic_query": "q=shotgun&fq=startTime:[2015-10-13T07:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=state",
             "custom": ""
           },
           "group": "default",
@@ -216,8 +198,8 @@
             "ids": [
               0
             ],
-            "query": "q=shotgun&fq=startTime:[2015-10-22T07:00:00.000Z/SECOND%20TO%20*]&fq=state:\"PA\"&fq=startTime:\"2015-10-22T21%3A00%3A00Z\"&facet=true&facet.field=startTime&wt=json",
-            "basic_query": "q=shotgun&fq=startTime:[2015-10-22T07:00:00.000Z/SECOND%20TO%20*]&fq=state:\"PA\"&fq=startTime:\"2015-10-22T21%3A00%3A00Z\"&facet=true&facet.field=startTime",
+            "query": "q=shotgun&fq=startTime:[2015-10-13T07:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=startTime&wt=json",
+            "basic_query": "q=shotgun&fq=startTime:[2015-10-13T07:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=startTime",
             "custom": ""
           },
           "group": "default",
@@ -250,8 +232,8 @@
             "ids": [
               0
             ],
-            "query": "q=shotgun&fq=startTime:[2015-10-22T07:00:00.000Z/SECOND%20TO%20*]&fq=state:\"PA\"&fq=startTime:\"2015-10-22T21%3A00%3A00Z\"&facet=true&facet.field=seller&wt=json",
-            "basic_query": "q=shotgun&fq=startTime:[2015-10-22T07:00:00.000Z/SECOND%20TO%20*]&fq=state:\"PA\"&fq=startTime:\"2015-10-22T21%3A00%3A00Z\"&facet=true&facet.field=seller",
+            "query": "q=shotgun&fq=startTime:[2015-10-13T07:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=seller&wt=json",
+            "basic_query": "q=shotgun&fq=startTime:[2015-10-13T07:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=seller",
             "custom": ""
           },
           "group": "default",
@@ -284,8 +266,8 @@
             "ids": [
               0
             ],
-            "query": "q=shotgun&fq=startTime:[2015-10-22T07:00:00.000Z/SECOND%20TO%20*]&fq=state:\"PA\"&fq=startTime:\"2015-10-22T21%3A00%3A00Z\"&facet=true&facet.field=sellerRating&wt=json",
-            "basic_query": "q=shotgun&fq=startTime:[2015-10-22T07:00:00.000Z/SECOND%20TO%20*]&fq=state:\"PA\"&fq=startTime:\"2015-10-22T21%3A00%3A00Z\"&facet=true&facet.field=sellerRating",
+            "query": "q=shotgun&fq=startTime:[2015-10-13T07:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=sellerRating&wt=json",
+            "basic_query": "q=shotgun&fq=startTime:[2015-10-13T07:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=sellerRating",
             "custom": ""
           },
           "group": "default",
@@ -318,8 +300,8 @@
             "ids": [
               0
             ],
-            "query": "q=shotgun&fq=startTime:[2015-10-22T07:00:00.000Z/SECOND%20TO%20*]&fq=state:\"PA\"&fq=startTime:\"2015-10-22T21%3A00%3A00Z\"&facet=true&facet.field=bidder&wt=json",
-            "basic_query": "q=shotgun&fq=startTime:[2015-10-22T07:00:00.000Z/SECOND%20TO%20*]&fq=state:\"PA\"&fq=startTime:\"2015-10-22T21%3A00%3A00Z\"&facet=true&facet.field=bidder",
+            "query": "q=shotgun&fq=startTime:[2015-10-13T07:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=bidder&wt=json",
+            "basic_query": "q=shotgun&fq=startTime:[2015-10-13T07:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.field=bidder",
             "custom": ""
           },
           "group": "default",
@@ -380,8 +362,8 @@
             "ids": [
               0
             ],
-            "query": "q=shotgun&fq=startTime:[2015-10-22T07:00:00.000Z/SECOND%20TO%20*]&fq=state:\"PA\"&fq=startTime:\"2015-10-22T21%3A00%3A00Z\"&wt=json&rows=5000",
-            "basic_query": "q=shotgun&fq=startTime:[2015-10-22T07:00:00.000Z/SECOND%20TO%20*]&fq=state:\"PA\"&fq=startTime:\"2015-10-22T21%3A00%3A00Z\""
+            "query": "q=shotgun&fq=startTime:[2015-10-13T07:00:00.000Z/SECOND%20TO%20*]&wt=json&rows=5000",
+            "basic_query": "q=shotgun&fq=startTime:[2015-10-13T07:00:00.000Z/SECOND%20TO%20*]"
           },
           "field_list": true,
           "status": "Stable",
@@ -444,7 +426,7 @@
             "ids": [
               0
             ],
-            "query": "q=shotgun&wt=json&fq=startTime:[2015-10-22T07:00:00.000Z/SECOND%20TO%20*]&fq=state:\"PA\"&fq=startTime:\"2015-10-22T21%3A00%3A00Z\"&rows=0&facet=true&facet.field=state&facet.limit=200",
+            "query": "q=shotgun&wt=json&fq=startTime:[2015-10-13T07:00:00.000Z/SECOND%20TO%20*]&rows=0&facet=true&facet.field=state&facet.limit=200",
             "custom": ""
           },
           "mode": "count",
@@ -474,7 +456,7 @@
             "ids": [
               0
             ],
-            "query": "q=shotgun&wt=json&rows=0&fq=startTime:[2015-10-22T07:00:00.000Z/SECOND%20TO%20*]&fq=state:\"PA\"&fq=startTime:\"2015-10-22T21%3A00%3A00Z\"&facet=true&facet.range=startTime&facet.range.start=2015-10-22T07:00:00.000Z/SECOND&facet.range.end=NOW&facet.range.gap=%2B1DAY\n",
+            "query": "q=shotgun&wt=json&rows=0&fq=startTime:[2015-10-13T07:00:00.000Z/SECOND%20TO%20*]&facet=true&facet.range=startTime&facet.range.start=2015-10-13T07:00:00.000Z/SECOND&facet.range.end=NOW&facet.range.gap=%2B1DAY\n",
             "custom": ""
           },
           "max_rows": 100000,
